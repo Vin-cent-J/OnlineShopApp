@@ -2,6 +2,8 @@
 require_once "connect.php";
 
 extract($_POST);
+
+$password = hash('sha256', $password);
 $perans_id = 1;
 $sql = "insert into penggunas(perans_id, nama, nomor_hp, password, alamat) values(?,?,?,?,?)";
 $stmt = $conn->prepare($sql);
