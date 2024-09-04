@@ -7,14 +7,14 @@ $sql = "select * from penggunas where nomor_hp = ? and password = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $nomor_hp, $password);
 $stmt->execute();
-$result = $stmt->get_result();
+$hasil = $stmt->get_result();
 
 $arr = [];
-if($row = $result->fetch_assoc()){
-    $arr = ["result"=>"success", "data"=>$row["nama"]];
+if($row = $hasil->fetch_assoc()){
+    $arr = ["hasil"=>"success", "data"=>$row["nama"]];
 }
 else{
-    $arr = ["result"=> "err","data"=> "Pengguna tidak ditemukan."];
+    $arr = ["hasil"=> "err","data"=> "Pengguna tidak ditemukan."];
 }
 echo json_encode($arr);
 $stmt->close();
