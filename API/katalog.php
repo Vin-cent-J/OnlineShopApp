@@ -31,8 +31,12 @@ $stmt->execute();
 $hasil = $stmt->get_result();
 
 $arr = [];
+$barang = [];
 if($row = $hasil->fetch_assoc()){
-    $arr = ["hasil"=>"success", "data"=>$row["nama"]];
+    while($row = $hasil->fetch_assoc()){
+        $barang[] = $row;
+    }
+    $arr = ["hasil"=>"success", "data"=>$barang];
 }
 else{
     $arr = ["hasil"=> "err","data"=> "Barang tidak ditermukan."];
