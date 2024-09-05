@@ -12,7 +12,7 @@ if(isset($penggunas_id)) {
     $orders_id = $conn->insert_id;
 
     $sql2 = "select k.barangs_id as id, k.jumlah as jumlah, b.harga as harga from keranjangs k inner join barangs b on k.barangs_id = b.id where penggunas_id = $penggunas_id";
-    $row = $conn->query($sql2);
+    $res = $conn->query($sql2);
 
     $sql3 = "insert into detail_orders values(?, ?, ?, ?)";
     $stmt3 = $conn->prepare($sql3);
