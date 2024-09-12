@@ -3,10 +3,9 @@ require_once "connect.php";
 
 extract($_POST);
 if(isset($id)) {
-    $tgl = date("Y-m-d");
-    $sql = "update barangs set tgl_hapus = ? where id = ?";
+    $sql = "delete from barangs where id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $tgl, $id);
+    $stmt->bind_param("i", $id);
     $stmt->execute();
 
     $arr = [];
