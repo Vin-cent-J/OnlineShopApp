@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class KatalogServiceService {
   
-  katalog(){
+  katalog(): Observable<any>{
     return this.http.get("127.0.0.1/API/katalog.php");
   }
 
-  cariBarang(p_cari: string | undefined | null, p_merek: number | undefined | null, p_kategori: number | undefined | null, p_min: number = 0, p_max: number = 100000000){
+  cariBarang(p_cari: string | undefined | null, p_merek: number | undefined | null, p_kategori: number | undefined | null, p_min: number = 0, p_max: number = 100000000): Observable<any>{
     let url = "127.0.0.1/API/katalog.php?minHarga=" + p_min +  " & maxHarga=" + p_max;
     if(p_cari != null){
       url = url + " & cari=" + p_cari;
@@ -66,7 +66,7 @@ export class KatalogServiceService {
     );
   }
 
-  detailBarang(p_id: number){
+  detailBarang(p_id: number): Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     const data = body.toString();
