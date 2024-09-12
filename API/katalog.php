@@ -5,7 +5,8 @@ extract($_GET);
 
 $sql = "select b.* from barangs b 
 inner join mereks m on b.mereks_id = m.id 
-inner join kategoris k on b.kategoris_id = k.id where b.nama like '%?%' and m.nama like ? and k.nama like ? and b.harga >= ? and b.harga <= ?";
+inner join kategoris k on b.kategoris_id = k.id 
+where b.nama like '%?%' and m.nama like ? and k.nama like ? and b.harga >= ? and b.harga <= ?";
 
 if(!isset($cari)){
     $cari = "";
@@ -20,7 +21,7 @@ if(!isset($minHarga)){
     $minHarga = 0;
 }
 if(!isset($maxHarga)){
-    $maxHarga = 10000000;
+    $maxHarga = 100000000;
 }
 
 
