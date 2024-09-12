@@ -3,7 +3,7 @@ require_once "connect.php";
 
 extract($_GET);
 
-$sql = "select b.* from barangs b 
+$sql = "select b.*, m.nama, k.nama from barangs b 
 inner join mereks m on b.mereks_id = m.id 
 inner join kategoris k on b.kategoris_id = k.id 
 where b.nama like '%?%' and m.nama like ? and k.nama like ? and b.harga >= ? and b.harga <= ?";
