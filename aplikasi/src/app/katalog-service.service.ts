@@ -6,6 +6,24 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class KatalogServiceService {
+  
+  katalog(){
+    return this.http.get("127.0.0.1/API/katalog.php");
+  }
+
+  cariBarang(p_cari: string | undefined | null, p_merek: number | undefined | null, p_kategori: number | undefined | null, p_min: number = 0, p_max: number = 100000000){
+    let url = "127.0.0.1/API/katalog.php?minHarga=" + p_min +  " & maxHarga=" + p_max;
+    if(p_cari != null){
+      url = url + " & cari=" + p_cari;
+    }
+    if(p_merek != null){
+      url = url + " & merek=" + p_merek; 
+    }
+    if(p_kategori != null){
+      url = url + " & kategori=" + p_kategori;
+    }
+    return this.http.get(url);
+  }
 
   tambahBarang(p_nama: string, p_stok: number, p_harga: number, p_foto: string, p_mereks_id: number, p_kategoris_id: number){
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
@@ -41,6 +59,7 @@ export class KatalogServiceService {
   hapusBarang(p_id: number){
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
+    body.set('id', p_id.toString());
     const data = body.toString();
     return this.http.post(
       "127.0.0.1/API/hapusBarang.php", data, {headers}
