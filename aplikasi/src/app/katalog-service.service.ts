@@ -40,7 +40,7 @@ export class KatalogServiceService {
     );
   }
 
-  ubahData(p_nama: string, p_stok: number, p_harga: number, p_foto: string, p_mereks_id: number, p_kategoris_id: number, p_id: number){
+  ubahDataBarang(p_nama: string, p_stok: number, p_harga: number, p_foto: string, p_mereks_id: number, p_kategoris_id: number, p_id: number){
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('nama', p_nama);
@@ -73,51 +73,6 @@ export class KatalogServiceService {
     const data = body.toString();
     return this.http.post(
       "127.0.0.1/API/detailBarang.php", data, {headers}
-    );
-  }
-
-  tambahKeranjang(p_pid: number, p_bid: number, p_jumlah: number){
-    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
-    const body = new URLSearchParams();
-    body.set('penggunas_id', p_pid.toString());
-    body.set('barangs_id', p_bid.toString());
-    body.set('jumlah', p_jumlah.toString());
-    const data = body.toString();
-    return this.http.post(
-      "127.0.0.1/API/tambahKeranjang.php", data, {headers}
-    );
-  }
-
-  ubahKeranjang(p_pid: number, p_bid: number, p_jumlah: number){
-    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
-    const body = new URLSearchParams();
-    body.set('penggunas_id', p_pid.toString());
-    body.set('barangs_id', p_bid.toString());
-    body.set('jumlah', p_jumlah.toString());
-    const data = body.toString();
-    return this.http.post(
-      "127.0.0.1/API/tambahKeranjang.php", data, {headers}
-    );
-  }
-
-  hapusKeranjang(p_pid: number, p_bid: number){
-    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
-    const body = new URLSearchParams();
-    body.set('penggunas_id', p_pid.toString());
-    body.set('barangs_id', p_bid.toString());
-    const data = body.toString();
-    return this.http.post(
-      "127.0.0.1/API/tambahKeranjang.php", data, {headers}
-    );
-  }
-
-  beli(p_pid: number){
-    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
-    const body = new URLSearchParams();
-    body.set('penggunas_id', p_pid.toString());
-    const data = body.toString();
-    return this.http.post(
-      "127.0.0.1/API/beli.php", data, {headers}
     );
   }
 
