@@ -6,7 +6,7 @@ extract($_GET);
 if(isset($id)) {
     $sql = "select b.*, m.nama, k.nama from barangs b 
     inner join mereks m on b.mereks_id = m.id 
-    inner join kategoris k on b.kategoris_id = k.id where id = ?";
+    inner join kategoris k on b.kategoris_id = k.id where b.id = ?";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
