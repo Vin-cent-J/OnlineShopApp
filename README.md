@@ -8,4 +8,4 @@
 
 **Technologies:**
 - Frontend Framework: Ionic
-- Backend: PHP
+- API: PHP
