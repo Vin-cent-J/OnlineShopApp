@@ -1,4 +1,4 @@
-# OnlineShopApp
+# Online Shop App
 **Features:**
 - User authentication (sign up, login, logout)
 - Product catalog with search and filter functionality
