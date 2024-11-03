@@ -6,22 +6,73 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="connect.php">
+    <form action="API/connect.php">
         <input type="submit" value="submit">
     </form>
     <h3>Register</h3>
-    <form action="register.php" method="post">
+    <form action="API/register.php" method="post">
         nama: <input type="text" name="nama"><br>
         no hp: <input type="text" name="nomor_hp"><br>
         pass: <input type="text" name="password"><br>
         alamat: <input type="text" name="alamat"><br>
         <input type="submit" value="submit">
     </form>
-<br>
-<h3>Login</h3>
-    <form action="login.php" method="post">
+    <br>
+    <h3>Login</h3>
+    <form action="API/login.php" method="post">
         no hp: <input type="text" name="nomor_hp" id=""> <br>
         pass: <input type="text" name="password" id=""> <br>
+        <input type="submit" value="submit">
+    </form>
+    <h3>Katalog</h3>
+    <form action="API/katalog.php" method="get">
+        Cari: <input type="text" name="cari"><br>
+        Merk: <input type="text" name="merek"><br>
+        Kategori: <input type="text" name="kategori"><br>
+        minHarga: <input type="text" name="minHarga"><br>
+        maxHarga: <input type="text" name="maxHarga"><br>
+        <input type="submit" value="submit">
+    </form>
+    <h3>Keranjang</h3>
+    <form action="API/keranjang.php" method="post">
+        <input type="text" name="penggunas_id">
+        <input type="submit" value="submit">
+    </form>
+    <h3>Riwayat</h3>
+    <form action="API/riwayat.php" method="post">
+        <input type="text" name="penggunas_id">
+        <input type="submit" value="submit">
+    </form>
+    <h3>Detail barang</h3>
+    <form action="API/detailBarang.php">
+        <input type="text" name="id">
+        <input type="submit" value="submit">
+    </form>
+    <h3>Tambah barang</h3>
+    <form action="API/tambahBarang.php" method="post">
+        Nama: <input type="text" name="nama"><br>
+        Stok: <input type="text" name="stok"><br>
+        Harga:<input type="text" name="harga"><br>
+        Foto: <input type="text" name="foto"><br>
+        MId:  <input type="text" name="mereks_id"><br>
+        KId:  <input type="text" name="kategoris_id"><br>
+        <input type="submit" value="submit">
+    </form>
+    <h3>Tambah kategori</h3>
+    <form action="API/tambahKategori.php" method="post">
+        <input type="text" name="nama">
+        <input type="submit" value="submit">
+    </form>
+    <h3>Tambah merek</h3>
+    <form action="API/tambahMerek.php" method="post">
+        <input type="text" name="nama">
+        <input type="submit" value="submit">
+    </form>
+    <h3>Tambah keranjang</h3>
+    <form action="API/tambahKeranjang.php" method="post">
+        <input type="text" name="penggunas_id"><br>
+        <input type="text" name="barangs_id"><br>
+        <input type="text" name="jumlah"><br>
         <input type="submit" value="submit">
     </form>
 </body>
