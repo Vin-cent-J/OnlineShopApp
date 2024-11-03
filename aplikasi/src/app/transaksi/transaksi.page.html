@@ -10,4 +10,23 @@
       <ion-title size="large">transaksi</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div>
+    <ion-list>
+      <ion-item *ngFor="let transaksi of transaksi">
+        
+        <ion-avatar slot="start">
+          <ion-icon size="large"></ion-icon>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{transaksi.id}}</h2><ion-badge slot="end" [color]="warnaStatus(transaksi.status)">{{ transaksi.status | titlecase }}</ion-badge>
+          <p>{{transaksi.date}}</p>
+          <p>Total: Rp. {{transaksi.total}}</p>
+        </ion-label>
+        <ion-button routerLink="/detailtransaksi/{{transaksi.id}}" routerLinkActive="router-link-active" size="medium">
+          Detail
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
