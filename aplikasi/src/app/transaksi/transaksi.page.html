@@ -16,7 +16,7 @@
       <ion-item *ngFor="let transaksi of transaksi">
         
         <ion-avatar slot="start">
-          <ion-icon size="large"></ion-icon>
+          <ion-icon [name]="icon(transaksi.status)" [color]="warnaStatus(transaksi.status)" size="large"></ion-icon>
         </ion-avatar>
         <ion-label>
           <h2>{{transaksi.id}}</h2><ion-badge slot="end" [color]="warnaStatus(transaksi.status)">{{ transaksi.status | titlecase }}</ion-badge>

@@ -12,7 +12,7 @@ export class TransaksiService {
     body.set('penggunas_id', p_pid.toString());
     const data = body.toString();
     return this.http.post(
-      "127.0.0.1/API/beli.php", data, {headers}
+      "http://localhost/OnlineShopApp/API/beli.php", data, {headers}
     );
   }
 
@@ -22,7 +22,7 @@ export class TransaksiService {
     body.set('penggunas_id', p_pid.toString());
     const data = body.toString();
     return this.http.post(
-      "127.0.0.1/API/riwayat.php", data, {headers}
+      "http://localhost/OnlineShopApp/API/riwayat.php", data, {headers}
     );
   }
 
@@ -34,7 +34,7 @@ export class TransaksiService {
     body.set('jumlah', p_jumlah.toString());
     const data = body.toString();
     return this.http.post(
-      "127.0.0.1/API/tambahKeranjang.php", data, {headers}
+      "http://localhost/OnlineShopApp/API/tambahKeranjang.php", data, {headers}
     );
   }
 
@@ -46,7 +46,7 @@ export class TransaksiService {
     body.set('jumlah', p_jumlah.toString());
     const data = body.toString();
     return this.http.post(
-      "127.0.0.1/API/ubahKeranjang.php", data, {headers}
+      "http://localhost/OnlineShopApp/API/ubahKeranjang.php", data, {headers}
     );
   }
 
@@ -57,7 +57,7 @@ export class TransaksiService {
     body.set('barangs_id', p_bid.toString());
     const data = body.toString();
     return this.http.post(
-      "127.0.0.1/API/hapusKeranjang.php", data, {headers}
+      "http://localhost/OnlineShopApp/API/hapusKeranjang.php", data, {headers}
     );
   }
 

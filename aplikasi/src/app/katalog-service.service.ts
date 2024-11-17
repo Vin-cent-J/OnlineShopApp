@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 export class KatalogServiceService {
   
   katalog(): Observable<any>{
-    return this.http.get("127.0.0.1/API/katalog.php");
+    return this.http.get("http://localhost/OnlineShopApp/API/katalog.php");
   }
 
   cariBarang(p_cari: string | undefined | null, p_merek: number | undefined | null, p_kategori: number | undefined | null, p_min: number = 0, p_max: number = 100000000): Observable<any>{
-    let url = "127.0.0.1/API/katalog.php?minHarga=" + p_min +  " & maxHarga=" + p_max;
+    let url = "http://localhost/OnlineShopApp/API/katalog.php?minHarga=" + p_min +  " & maxHarga=" + p_max;
     if(p_cari != null){
       url = url + " & cari=" + p_cari;
     }
@@ -36,7 +36,7 @@ export class KatalogServiceService {
     body.set('kategoris_id', p_kategoris_id.toString());
     const data = body.toString();
     return this.http.post(
-      "127.0.0.1/API/tambahBarang.php", data, {headers}
+      "http://localhost/OnlineShopApp/API/tambahBarang.php", data, {headers}
     );
   }
 
@@ -52,7 +52,7 @@ export class KatalogServiceService {
     body.set('id', p_id.toString());
     const data = body.toString();
     return this.http.post(
-      "127.0.0.1/API/ubahDataBarang.php", data, {headers}
+      "http://localhost/OnlineShopApp/API/ubahDataBarang.php", data, {headers}
     );
   }
 
@@ -62,7 +62,7 @@ export class KatalogServiceService {
     body.set('id', p_id.toString());
     const data = body.toString();
     return this.http.post(
-      "127.0.0.1/API/hapusBarang.php", data, {headers}
+      "http://localhost/OnlineShopApp/API/hapusBarang.php", data, {headers}
     );
   }
 
@@ -72,7 +72,7 @@ export class KatalogServiceService {
     body.set('id', p_id.toString());
     const data = body.toString();
     return this.http.post(
-      "127.0.0.1/API/detailBarang.php", data, {headers}
+      "http://localhost/OnlineShopApp/API/detailBarang.php", data, {headers}
     );
   }
 

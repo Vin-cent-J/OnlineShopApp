@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-transaksi',
@@ -30,6 +32,19 @@ export class TransaksiPage implements OnInit {
         return 'danger';
       default:
         return 'medium';
+    }
+  }
+
+  icon(status: string) {
+    switch (status) {
+      case 'Terkirim':
+        return 'checkmark-circle';
+      case 'Batal':
+        return 'close-circle';
+      case 'Bayar':
+        return 'time';
+      default:
+        return 'help-circle';
     }
   }
 }

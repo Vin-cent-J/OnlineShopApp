@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'transaksi',
     loadChildren: () => import('./transaksi/transaksi.module').then( m => m.TransaksiPageModule)
   },
+  {
+    path: 'detailtransaksi/:id',
+    loadChildren: () => import('./detailtransaksi/detailtransaksi.module').then( m => m.DetailtransaksiPageModule)
+  },
 ];
 
 @NgModule({

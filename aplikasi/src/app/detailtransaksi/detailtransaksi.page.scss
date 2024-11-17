@@ -1,0 +1,17 @@
+.status-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  margin: 20px 0;
+}
+
+ion-card-title {
+  font-weight: bold;
+  color: #333;
+}
+
+ion-item {
+  --padding-start: 0;
+  --padding-end: 0;
+}
