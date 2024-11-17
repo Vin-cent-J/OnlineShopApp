@@ -11,17 +11,24 @@ export class KatalogServiceService {
     return this.http.get("http://localhost/OnlineShopApp/API/katalog.php");
   }
 
-  cariBarang(p_cari: string | undefined | null, p_merek: number | undefined | null, p_kategori: number | undefined | null, p_min: number = 0, p_max: number = 100000000): Observable<any>{
-    let url = "http://localhost/OnlineShopApp/API/katalog.php?minHarga=" + p_min +  " & maxHarga=" + p_max;
-    if(p_cari != null){
-      url = url + " & cari=" + p_cari;
+  cariBarang(p_cari: string | undefined | null, p_merek: number | undefined | null, p_kategori: number | undefined | null, p_min: number, p_max: number): Observable<any>{
+    if(!p_min){
+      p_min = 0
     }
-    if(p_merek != null){
-      url = url + " & merek=" + p_merek; 
+    if(!p_max){
+      p_max = 100000000
     }
-    if(p_kategori != null){
-      url = url + " & kategori=" + p_kategori;
+    let url = "http://localhost/OnlineShopApp/API/katalog.php?minHarga=" + p_min +  "&maxHarga=" + p_max;
+    if (p_cari) {
+      url += `&cari=${p_cari}`;
     }
+    if (p_merek) {
+      url += `&merek=${p_merek}`;
+    }
+    if (p_kategori) {
+      url += `&kategori=${p_kategori}`;
+    }
+    console.log(url);
     return this.http.get(url);
   }
 
@@ -73,6 +80,20 @@ export class KatalogServiceService {
     const data = body.toString();
     return this.http.post(
       "http://localhost/OnlineShopApp/API/detailBarang.php", data, {headers}
+    );
+  }
+
+  ambilMerek(): Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    return this.http.post(
+      "http://localhost/OnlineShopApp/API/ambilMerek.php", null, {headers}
+    );
+  }
+
+  ambilKategori(): Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    return this.http.post(
+      "http://localhost/OnlineShopApp/API/ambilKategori.php", null, {headers}
     );
   }
 

@@ -1,13 +1,45 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>keranjang</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>My Cart</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">keranjang</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let barang of keranjang">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="barang.foto"></ion-img>
+      </ion-thumbnail>
+
+      <ion-label>
+        <h2>{{ barang.nama }}</h2>
+        <p>{{ barang.harga | currency: 'IDR' }}</p>
+        <p>Quantity: {{ barang.jumlah }}</p>
+      </ion-label>
+
+      <ion-button color="danger" fill="outline">
+        <ion-icon name="trash" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Order</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item color="light">
+        <ion-label>Total</ion-label>
+        <ion-text>{{ getTotal() | currency: 'IDR' }}</ion-text>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Checkout Button -->
+  <div class="checkout-button">
+    <ion-button expand="block" color="success" (click)="checkout()">
+      <ion-icon name="cart" slot="start"></ion-icon>
+      Proceed to Checkout
+    </ion-button>
+  </div>
 </ion-content>

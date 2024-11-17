@@ -1,6 +1,16 @@
 ion-img{
-    border-radius: 4px;
+  width: 100%;
+  max-height: 200px;
+  display: block;
+  overflow: hidden;
 }
 ion-searchbar{
     width: 30%;
+}
+ion-card {
+  margin: 10px;  /* Ensures cards have consistent spacing */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Adds a subtle shadow for better separation */
+}
+ion-text{
+  display: block
 }

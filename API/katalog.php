@@ -10,7 +10,7 @@ extract($_GET);
 $sql = "select b.*, m.nama merek, k.nama kategori from barangs b 
 inner join mereks m on b.mereks_id = m.id 
 inner join kategoris k on b.kategoris_id = k.id 
-where b.nama like ? and m.nama like ? and k.nama like ? and b.harga>=? and b.harga<=?";
+where b.nama like ? and m.id like ? and k.id like ? and b.harga>=? and b.harga<=?";
 
 if(!isset($cari)){
     $cari = "%";
@@ -41,11 +41,8 @@ if($hasil->num_rows){
     while($row = $hasil->fetch_assoc()){
         $barang[] = $row;
     }
-    $arr = ["hasil"=>"success", "data"=>$barang];
 }
-else{
-    $arr = ["hasil"=> "err","data"=> "Barang tidak ditermukan."];
-}
+$arr = ["hasil"=>"success", "data"=>$barang];
 echo json_encode($arr);
 $stmt->close();
 $conn->close();

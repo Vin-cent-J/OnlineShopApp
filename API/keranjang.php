@@ -20,10 +20,10 @@ if(isset($penggunas_id)) {
 
     $arr = [];
     if(count($keranjang) >= 1){
-        $arr = ["hasil"=>"success", "data"=>$keranjang];
+        $arr = ["status"=>"success", "data"=>$keranjang];
     }
     else{
-        $arr = ["hasil"=> "err","data"=>"Keranjang kosong"];
+        $arr = ["status"=> "err","data"=>"Keranjang kosong"];
     }
    
 

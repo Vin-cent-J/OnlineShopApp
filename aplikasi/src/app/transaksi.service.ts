@@ -1,22 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransaksiService {
 
-  beli(p_pid: number){
+  beli(p_pid: string){
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
-    body.set('penggunas_id', p_pid.toString());
+    body.set('penggunas_id', p_pid);
     const data = body.toString();
     return this.http.post(
       "http://localhost/OnlineShopApp/API/beli.php", data, {headers}
     );
   }
 
-  riwayat(p_pid: number){
+  lihatKeranjang(p_pid: string): Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('penggunas_id', p_pid);
+    const data = body.toString();
+    return this.http.post(
+      "http://localhost/OnlineShopApp/API/keranjang.php", data, {headers}
+    );
+  }
+
+  riwayat(p_pid: number): Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('penggunas_id', p_pid.toString());

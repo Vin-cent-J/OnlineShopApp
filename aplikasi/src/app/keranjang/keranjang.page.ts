@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TransaksiService } from '../transaksi.service';
 
 @Component({
   selector: 'app-keranjang',
@@ -7,9 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KeranjangPage implements OnInit {
 
-  constructor() { }
+  constructor(private transaksi: TransaksiService) { }
+
+  keranjang: any = []
+  userId = localStorage.getItem('userId');
 
   ngOnInit() {
+    if(this.userId){
+      this.transaksi.lihatKeranjang(this.userId).subscribe((data)=>{
+        if(data.status != "error"){
+          this.keranjang = data.data
+        }
+      })
+    }
   }
 
+  getTotal(): number {
+    return this.keranjang.reduce((acc: number, barang: any) => acc + barang.price * barang.quantity, 0);
+  }
+
+  checkout() {
+    if(this.userId){
+      this.transaksi.beli(this.userId).subscribe((data)=>{
+        
+      })
+    }
+  }
 }

@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar >
     <ion-title slot="start">LOGO</ion-title>
-    <ion-searchbar slot="start" placeholder="Search..."></ion-searchbar>
+    <ion-searchbar [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
       <ion-title size="large">LOGO</ion-title>
     </ion-toolbar>
     <ion-toolbar>
-      <ion-searchbar placeholder="Search..."></ion-searchbar>
+      <ion-searchbar [(ngModel)]="cari" placeholder="Search..."></ion-searchbar>
     </ion-toolbar>
   </ion-header>
 
@@ -24,37 +24,26 @@
           <ion-list lines="none">
             <ion-list-header><h3>Filter</h3></ion-list-header>
             <ion-item>
-              <ion-select placeholder="Select a Fruit">
-                <div slot="label">Favorite Fruit</div>
-                <ion-select-option value="apple">Apple</ion-select-option>
-                <ion-select-option value="banana">Banana</ion-select-option>
-                <ion-select-option value="orange">Orange</ion-select-option>
+              <ion-input [(ngModel)]="minHarga" labelPlacement="stacked" label="Min Harga" type="number"></ion-input>
+              <ion-input [(ngModel)]="maxHarga" labelPlacement="stacked" label="Max Harga" type="number"></ion-input>
+            </ion-item> <br>
+            <ion-item>
+              <ion-select [(ngModel)]="kategoriPilihan" placeholder="Semua">
+                <div slot="label">Kategori</div>
+                <ion-select-option *ngFor="let i of kategori" [value]="i.id">{{i.nama}}</ion-select-option>
               </ion-select>
             </ion-item> <br>
             <ion-item>
-              <ion-select placeholder="Select a Fruit">
-                <div slot="label">Favorite Fruit</div>
-                <ion-select-option value="apple">Apple</ion-select-option>
-                <ion-select-option value="banana">Banana</ion-select-option>
-                <ion-select-option value="orange">Orange</ion-select-option>
-              </ion-select>
-            </ion-item> <br>
-            <ion-item>
-              <ion-select placeholder="Select a Fruit">
-                <div slot="label">Favorite Fruit</div>
-                <ion-select-option value="apple">Apple</ion-select-option>
-                <ion-select-option value="banana">Banana</ion-select-option>
-                <ion-select-option value="orange">Orange</ion-select-option>
-              </ion-select>
-            </ion-item> <br>
-            <ion-item>
-              <ion-select placeholder="Select a Fruit">
-                <div slot="label">Favorite Fruit</div>
-                <ion-select-option value="apple">Apple</ion-select-option>
-                <ion-select-option value="banana">Banana</ion-select-option>
-                <ion-select-option value="orange">Orange</ion-select-option>
+              <ion-select [(ngModel)]="merekPilihan" placeholder="Semua">
+                <div slot="label">Merek</div>
+                <ion-select-option *ngFor="let i of merek" [value]="i.id">{{i.nama}}</ion-select-option>
               </ion-select>
             </ion-item><br>
+            <ion-item>
+              <ion-button slot="end" (click)="filter()">
+                <ion-icon name="funnel"></ion-icon> Filter
+              </ion-button>
+            </ion-item>
           </ion-list>
   
         </ion-col> 
@@ -62,15 +51,24 @@
         <ion-col>
           <ion-grid>
             <ion-row>
-              <ion-col size="4" size-md="4" size-lg="3" *ngFor="let num of numbers;">
+              <ion-col size="12" size-sm="6" size-md="4" size-lg="3" *ngFor="let barang of barangs;">
   
-                <ion-card color="light" >
+                <ion-card color="light" *ngIf="barang.stok > 0">
                   <ion-card-header>
-                    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+                    <ion-img [src]="barang.foto"></ion-img>
                   </ion-card-header>
                   <ion-card-content> 
-                    <ion-img src="https://picsum.photos/200/100"></ion-img>
-                    Card Content {{num}}
+                    <ion-item color="light">
+                      {{barang.nama}}
+                    </ion-item>
+                    <ion-item color="light">
+                      <b>{{barang.harga | currency:'Rp. ':'symbol':'1.0-0':'en-US' }}</b>
+                    </ion-item>
+                    <ion-item color="light">
+                      <ion-button class="add-to-cart-btn" slot="end">
+                        <ion-icon name="cart" slot="start"></ion-icon> + Keranjang
+                      </ion-button>
+                    </ion-item>
                   </ion-card-content>
                 </ion-card>
   
