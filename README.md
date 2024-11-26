@@ -1,10 +1,10 @@
 # Online Shop App
 **Features:**
-- User authentication (sign up, login, logout)
-- Product catalog with search and filter functionality
-- Checkout process
-- Admin dashboard for product management
-- Order history tracking
+- User authentication (sign up, login, logout) (TODO)
+- Product catalog with search and filter functionality 
+- Checkout process (TODO)
+- Admin dashboard for product management (TODO)
+- Order history tracking (TODO)
 
 **Technologies:**
 - Frontend Framework: Ionic
