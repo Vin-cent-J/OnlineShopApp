@@ -11,7 +11,7 @@ $hasil = $stmt->get_result();
 
 $arr = [];
 if($row = $hasil->fetch_assoc()){
-    $arr = ["hasil"=>"success", "data"=>$row["nama"]];
+    $arr = ["hasil"=>"success", "data"=>["id"=>$row["id"], "nama"=>$row["nama"]]];
 }
 else{
     $arr = ["hasil"=> "err","data"=> "Pengguna tidak ditemukan."];

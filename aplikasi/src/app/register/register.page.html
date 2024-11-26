@@ -10,4 +10,40 @@
       <ion-title size="large">register</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Register</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Nama</ion-label>
+        <ion-input [(ngModel)]="nama" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">No Handphone</ion-label>
+        <ion-input [(ngModel)]="nohp" type="tel" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Alamat</ion-label>
+        <ion-input [(ngModel)]="alamat" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input [(ngModel)]="password" type="password" required></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" (click)="register()">
+        Register
+      </ion-button>
+
+      <ion-text color="danger" *ngIf="registerError">
+        <p>{{registerError}}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -22,11 +22,11 @@ export class DetailtransaksiPage implements OnInit {
       this.id = params['id'];
       this.transaksi.riwayat(this.id).subscribe(
         (data)=>{
-          this.detail = data
+          this.detail = data.data
         }
       )
     });
-  }  
+  }
 
   warnaStatus(status: string) {
     switch (status) {

@@ -1,8 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Toko ATK
     </ion-title>
+    <ion-text slot="end">
+      {{user.nama}}
+    </ion-text>
+    <ion-button *ngIf="user.id" (click)="logout()" slot="end">
+      Log Out
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
