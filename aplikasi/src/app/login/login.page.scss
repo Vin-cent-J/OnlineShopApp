@@ -1,0 +1,202 @@
+/* Center the Content */
+.login-content {
+    background: #fef8f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+  
+  /* Container with Min and Max Widths */
+  .login-container {
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+    padding: 16px;
+  }
+  
+  /* Login Card Styling */
+  .login-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+  
+  /* Header Styling */
+  .card-header {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  
+  .card-header h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #1f2937;
+  }
+  
+  .card-header p {
+    font-size: 1rem;
+    color: #6b7280;
+  }
+  
+  /* Input Container Styling */
+  .input-container {
+    position: relative;
+    margin-bottom: 24px;
+  }
+  
+  /* Above Label Styling - Make Labels Bold and Black */
+  .above-label {
+    font-size: 1rem;
+    font-weight: 700; /* Set to bold for better visibility */
+    color: #000000; /* Set label color to black */
+    margin-bottom: 8px;
+    display: block;
+    padding-left: 16px; /* Match padding with input field for alignment */
+    transition: color 0.3s ease-in-out;
+  }
+  
+  /* Input Item Styling */
+  .input-item {
+    --background: transparent;
+    --highlight-background: #ffffff;
+    border: none; /* Remove underline completely */
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  /* Input Fields */
+  .input-item ion-input {
+    background-color: #ffffff;
+    border: 1px solid #d1d5db; /* Add a border around the input field */
+    border-radius: 8px;
+    padding: 16px;
+    padding-left: 16px; /* Consistent padding to align with label */
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: #1f2937;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  /* Input Focus Styling */
+  .input-item ion-input:focus {
+    border-color: #fbbf24; /* Highlight border on focus */
+    box-shadow: 0 0 4px rgba(251, 191, 36, 0.3); /* Add a subtle shadow to indicate focus */
+  }
+  
+  /* Placeholder Styling for Better Visibility */
+  .input-item ion-input::placeholder {
+    color: #9ca3af; /* Softer color for placeholder text */
+    font-size: 0.95rem;
+    opacity: 1; /* Ensure the placeholder is visible enough */
+  }
+  
+  /* Styling for Show/Hide Password Button */
+  .input-item ion-button {
+    color: #007bff; /* Adjust color for better visibility */
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  
+  /* Input Container Focus Effect */
+  .input-container ion-input:focus ~ .above-label {
+    color: #fbbf24; /* Change label color on focus for enhanced UI */
+  }
+  
+  /* Modern Warning Message Styling */
+  .error-message {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #e63946;
+    background-color: #ffeef0; /* Softer background color for contrast */
+    border-radius: 8px;
+    padding: 8px;
+    margin-left: 0; /* Aligned with the input container */
+    margin-top: 8px;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  
+  .error-message ion-icon {
+    margin-right: 8px; /* Add some space between icon and text */
+    font-size: 1.2rem;
+    color: #e63946; /* Use the same color as the text for consistency */
+  }
+  
+  /* Login Button Styling */
+  .login-button {
+    --background: #fbbf24;
+    font-weight: bold;
+    margin-top: 16px;
+  }
+  
+  /* Account Button Styling */
+  .create-account-button {
+    --border-color: #fbbf24;
+    --color: #fbbf24;
+    font-weight: bold;
+    margin-top: 12px;
+  }
+  
+  /* Forgot Password Styling */
+  .help-text {
+    font-size: 0.9rem;
+    color: #6b7280;
+    text-align: center;
+    margin-top: 16px;
+  }
+  
+  .forgot-password-button {
+    --border-color: #d1d5db;
+    --color: #1f2937;
+    font-weight: bold;
+    margin-top: 8px;
+  }
+  
+  /* Media Queries for Responsive Scaling */
+  @media (min-width: 768px) {
+    .login-container {
+      width: 70%;
+      max-width: 500px;
+    }
+  
+    .card-header h2 {
+      font-size: 2rem;
+    }
+  
+    .login-button {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .login-container {
+      width: 50%;
+      max-width: 600px;
+    }
+  
+    .login-card {
+      padding: 3rem;
+    }
+  
+    .card-header h2 {
+      font-size: 2.2rem;
+    }
+  
+    .input-item ion-input {
+      font-size: 1.1rem;
+      padding: 16px;
+    }
+  
+    .login-button {
+      font-size: 1.1rem;
+      padding: 12px;
+    }
+  }
+  

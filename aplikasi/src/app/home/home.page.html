@@ -1,29 +1,81 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Toko ATK
-    </ion-title>
-    <ion-text slot="end">
-      {{user.nama}}
-    </ion-text>
-    <ion-button *ngIf="user.id" (click)="logout()" slot="end">
-      Log Out
-    </ion-button>
+    <ion-title>Welcome</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">Logout</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="home-content">
+  <div class="welcome-container">
+    <ion-card class="welcome-card">
+      <div class="card-header">
+        <h2>Welcome, {{ user.nama }}!</h2>
+        <p>We're glad to have you back.</p>
+      </div>
+    </ion-card>
 
-  <div id="container">
-    <swiper-container>  
-      <swiper-slide><img src="https://picsum.photos/2000/250"></swiper-slide>
-      <swiper-slide><img src="https://picsum.photos/2000/250"></swiper-slide>
-      <swiper-slide><img src="https://picsum.photos/2000/250"></swiper-slide>
+    <!-- Search Bar -->
+    <ion-item class="search-bar">
+      <ion-icon name="search-outline" slot="start"></ion-icon>
+      <ion-input [(ngModel)]="searchTerm" (ionInput)="searchItems($event)" placeholder="Search for products"></ion-input>
+      <ion-icon name="search-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <!-- Category Filter -->
+    <div class="category-container">
+      <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterByCategory($event.detail.value?.toString() || 'All')">
+        <ion-segment-button value="All">All</ion-segment-button>
+        <ion-segment-button value="Ballpoint">Ballpoint</ion-segment-button>
+        <ion-segment-button value="Whiteboard Marker">Whiteboard Marker</ion-segment-button>
+        <ion-segment-button value="Permanent Marker">Permanent Marker</ion-segment-button>
+        <ion-segment-button value="Spidol Marker">Spidol Marker</ion-segment-button>
+        <ion-segment-button value="Pencil & Crayon">Pencil & Crayon</ion-segment-button>
+        <ion-segment-button value="Aneka Stationery">Aneka Stationery</ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <!-- Banner Swiper Section -->
+    <swiper-container [pagination]="{ clickable: true }" [navigation]="true" loop="true" class="swiper-banner">
+      <swiper-slide>
+        <img src="assets/images/banner1.jpg" alt="Banner 1" />
+      </swiper-slide>
+      <swiper-slide>
+        <img src="assets/images/banner2.jpg" alt="Banner 2" />
+      </swiper-slide>
+      <swiper-slide>
+        <img src="assets/images/banner3.jpg" alt="Banner 3" />
+      </swiper-slide>
+      <swiper-slide>
+        <img src="assets/images/banner4.jpg" alt="Banner 4" />
+      </swiper-slide>
+      <swiper-slide>
+        <img src="assets/images/banner5.jpg" alt="Banner 5" />
+      </swiper-slide>
+      <swiper-slide>
+        <img src="assets/images/banner6.jpg" alt="Banner 6" />
+      </swiper-slide>
     </swiper-container>
+
+    <!-- Catalog Section -->
+    <div class="catalog-container">
+      <h3 class="catalog-title">Latest Items</h3>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" *ngFor="let item of filteredItems">
+            <ion-card class="catalog-card">
+              <img [src]="item.foto" alt="{{ item.nama }}" />
+              <ion-card-content>
+                <h3>{{ item.nama }}</h3>
+                <p>{{ item.deskripsi }}</p>
+                <p *ngIf="item.discount" class="discount">-{{ item.discount }}</p>
+                <p><strong>Price: </strong>{{ item.harga }}</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </div>
 </ion-content>
