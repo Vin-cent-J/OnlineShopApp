@@ -31,7 +31,7 @@ export class RegisterPage implements OnInit {
     }
 
     this.pengguna.register(this.nohp, this.password, this.nama, this.alamat).subscribe((data)=>{
-      if(data.status === "err"){
+      if(data.hasil === "err"){
         this.registerError = data.data
       }
       else{

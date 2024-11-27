@@ -32,7 +32,7 @@ export class KatalogServiceService {
     return this.http.get(url);
   }
 
-  tambahBarang(p_nama: string, p_stok: number, p_harga: number, p_foto: string, p_mereks_id: number, p_kategoris_id: number){
+  tambahBarang(p_nama: string, p_stok: number, p_harga: number, p_foto: string, p_mereks_id: number, p_kategoris_id: number):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('nama', p_nama);
@@ -47,7 +47,7 @@ export class KatalogServiceService {
     );
   }
 
-  ubahDataBarang(p_nama: string, p_stok: number, p_harga: number, p_foto: string, p_mereks_id: number, p_kategoris_id: number, p_id: number){
+  ubahDataBarang(p_nama: string, p_stok: number, p_harga: number, p_foto: string, p_mereks_id: number, p_kategoris_id: number, p_id: number):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('nama', p_nama);
@@ -63,7 +63,7 @@ export class KatalogServiceService {
     );
   }
 
-  hapusBarang(p_id: number){
+  hapusBarang(p_id: number):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('id', p_id.toString());

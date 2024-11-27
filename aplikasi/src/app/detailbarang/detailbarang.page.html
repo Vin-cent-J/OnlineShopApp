@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>detailbarang</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">detailbarang</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <img [src]="barang.gambar" alt="Gambar barang" />
+    <ion-card-header>
+      <ion-card-title>{{ barang.nama }}</ion-card-title>
+      <ion-card-subtitle>{{ barang.harga | currency:'Rp. ':'symbol':'1.0-0':'en-US' }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-input [(ngModel)]="jumlah" type="number"></ion-input>
+      <ion-button expand="full" (click)="tambahKeranjang(barang.id)">Add to Cart</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
