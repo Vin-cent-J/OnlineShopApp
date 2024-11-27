@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
+
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
@@ -48,12 +49,14 @@ const routes: Routes = [
     path: 'detailbarang/:id',
     loadChildren: () => import('./detailbarang/detailbarang.module').then( m => m.DetailbarangPageModule)
   },
+  { 
+    path: '**', 
+    redirectTo: 'home' 
+  }, 
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
