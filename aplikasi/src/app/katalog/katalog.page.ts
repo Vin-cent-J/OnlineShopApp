@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { KatalogServiceService } from '../katalog-service.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { TransaksiService } from '../transaksi.service';
+import { PenggunaService } from '../pengguna.service';
 
 @Component({
   selector: 'app-katalog',
@@ -20,7 +22,10 @@ export class KatalogPage implements OnInit {
   minHarga: any = null
   maxHarga: any = null
 
-  constructor(private katalog: KatalogServiceService, private cdr: ChangeDetectorRef) { }
+  constructor(private katalog: KatalogServiceService, private cdr: ChangeDetectorRef, private transaksi: TransaksiService, private pengguna: PenggunaService) { }
+
+  user = this.pengguna.ambilPengguna()
+  jumlah = 0
 
   ngOnInit() {
     this.katalog.katalog().subscribe((data)=>{
@@ -48,5 +53,11 @@ export class KatalogPage implements OnInit {
         this.cdr.detectChanges();
       }
     });
+  }
+
+  tambahKeranjang(idBarang: number){
+    this.transaksi.tambahKeranjang(this.user.id, idBarang, this.jumlah).subscribe((data)=>{
+
+    })
   }
 }

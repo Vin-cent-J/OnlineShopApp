@@ -5,7 +5,7 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
-extract($_GET);
+extract($_POST);
 
 if(isset($id)) {
     $sql = "select b.*, m.nama merek, k.nama kategori from barangs b 
@@ -17,12 +17,9 @@ if(isset($id)) {
     $stmt->execute();
     $hasil = $stmt->get_result();
     $arr = [];
-    $barang = [];
     if($hasil->num_rows){
-        while($row = $hasil->fetch_assoc()){
-            $barang[] = $row;
-        }
-        $arr = ["hasil"=>"success", "data"=>$barang];
+      $row = $hasil->fetch_assoc();
+      $arr = ["hasil"=>"success", "data"=>$row];
     }
     else{
         $arr = ["hasil"=> "err","data"=> "Barang tidak ditermukan."];

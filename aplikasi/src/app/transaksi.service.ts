@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class TransaksiService {
 
-  beli(p_pid: string){
+  beli(p_pid: string):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('penggunas_id', p_pid);
@@ -37,7 +37,7 @@ export class TransaksiService {
     );
   }
 
-  tambahKeranjang(p_pid: number, p_bid: number, p_jumlah: number){
+  tambahKeranjang(p_pid: number, p_bid: number, p_jumlah: number):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('penggunas_id', p_pid.toString());
@@ -49,7 +49,7 @@ export class TransaksiService {
     );
   }
 
-  ubahKeranjang(p_pid: number, p_bid: number, p_jumlah: number){
+  ubahKeranjang(p_pid: number, p_bid: number, p_jumlah: number):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('penggunas_id', p_pid.toString());
@@ -61,7 +61,7 @@ export class TransaksiService {
     );
   }
 
-  hapusKeranjang(p_pid: number, p_bid: number){
+  hapusKeranjang(p_pid: number, p_bid: number):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('penggunas_id', p_pid.toString());

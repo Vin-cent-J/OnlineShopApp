@@ -12,11 +12,12 @@ export class KeranjangPage implements OnInit {
 
   keranjang: any = []
   userId = localStorage.getItem('userId');
+  error: string = ""
 
   ngOnInit() {
     if(this.userId){
       this.transaksi.lihatKeranjang(this.userId).subscribe((data)=>{
-        if(data.status != "error"){
+        if(data.hasil != "error"){
           this.keranjang = data.data
         }
       })
@@ -30,7 +31,10 @@ export class KeranjangPage implements OnInit {
   checkout() {
     if(this.userId){
       this.transaksi.beli(this.userId).subscribe((data)=>{
-        
+        if(data.hasil == "err"){
+          this.error = data.data
+          return
+        }
       })
     }
   }
