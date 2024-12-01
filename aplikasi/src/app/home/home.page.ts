@@ -16,7 +16,7 @@ export class HomePage implements OnInit {
   user: any = { id: 0, nama: '' };
   catalogItems: any[] = [];
   filteredItems: any[] = [];
-  searchTerm: string = '';
+  cari: string = '';
   selectedCategory: string = 'All';
 
   ngOnInit() {
@@ -47,7 +47,7 @@ export class HomePage implements OnInit {
 
   filterByCategory(category: string) {
     this.selectedCategory = category;
-    this.filterCatalogItems(this.searchTerm, category);
+    this.filterCatalogItems(this.cari, category);
   }
 
   filterCatalogItems(searchTerm: string, category: string) {

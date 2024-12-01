@@ -1,6 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Welcome</ion-title>
+    <ion-title slot="start">Welcome</ion-title>
+    <ion-searchbar (ionInput)="searchItems($event)" [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
     <ion-buttons slot="end">
       <ion-button (click)="logout()">Logout</ion-button>
     </ion-buttons>
@@ -9,34 +10,12 @@
 
 <ion-content [fullscreen]="true" class="home-content">
   <div class="welcome-container">
-    <ion-card class="welcome-card">
+    <ion-card class="welcome-card" *ngIf="user.id>0">
       <div class="card-header">
-        <h2>Welcome, {{ user.nama }}!</h2>
-        <p>We're glad to have you back.</p>
+        <h2>Selamat datang, {{ user.nama }}!</h2>
       </div>
     </ion-card>
 
-    <!-- Search Bar -->
-    <ion-item class="search-bar">
-      <ion-icon name="search-outline" slot="start"></ion-icon>
-      <ion-input [(ngModel)]="searchTerm" (ionInput)="searchItems($event)" placeholder="Search for products"></ion-input>
-      <ion-icon name="search-outline" slot="end"></ion-icon>
-    </ion-item>
-
-    <!-- Category Filter -->
-    <div class="category-container">
-      <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterByCategory($event.detail.value?.toString() || 'All')">
-        <ion-segment-button value="All">All</ion-segment-button>
-        <ion-segment-button value="Ballpoint">Ballpoint</ion-segment-button>
-        <ion-segment-button value="Whiteboard Marker">Whiteboard Marker</ion-segment-button>
-        <ion-segment-button value="Permanent Marker">Permanent Marker</ion-segment-button>
-        <ion-segment-button value="Spidol Marker">Spidol Marker</ion-segment-button>
-        <ion-segment-button value="Pencil & Crayon">Pencil & Crayon</ion-segment-button>
-        <ion-segment-button value="Aneka Stationery">Aneka Stationery</ion-segment-button>
-      </ion-segment>
-    </div>
-
-    <!-- Banner Swiper Section -->
     <swiper-container [pagination]="{ clickable: true }" [navigation]="true" loop="true" class="swiper-banner">
       <swiper-slide>
         <img src="assets/images/banner1.jpg" alt="Banner 1" />
@@ -58,7 +37,18 @@
       </swiper-slide>
     </swiper-container>
 
-    <!-- Catalog Section -->
+    <div class="category-container">
+      <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterByCategory($event.detail.value?.toString() || 'All')">
+        <ion-segment-button value="All">All</ion-segment-button>
+        <ion-segment-button value="Ballpoint">Ballpoint</ion-segment-button>
+        <ion-segment-button value="Whiteboard Marker">Whiteboard Marker</ion-segment-button>
+        <ion-segment-button value="Permanent Marker">Permanent Marker</ion-segment-button>
+        <ion-segment-button value="Spidol Marker">Spidol Marker</ion-segment-button>
+        <ion-segment-button value="Pencil & Crayon">Pencil & Crayon</ion-segment-button>
+        <ion-segment-button value="Aneka Stationery">Aneka Stationery</ion-segment-button>
+      </ion-segment>
+    </div>
+
     <div class="catalog-container">
       <h3 class="catalog-title">Latest Items</h3>
       <ion-grid>
