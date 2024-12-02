@@ -3,6 +3,7 @@ import { KatalogServiceService } from '../katalog-service.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { TransaksiService } from '../transaksi.service';
 import { PenggunaService } from '../pengguna.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-katalog',
@@ -16,21 +17,34 @@ export class KatalogPage implements OnInit {
   merek:any = [];
   index = 0;
 
-  cari: string = ""
-  kategoriPilihan: any = null
-  merekPilihan: any = null
-  minHarga: any = null
-  maxHarga: any = null
+  halaman = 1;
+  total = 1;
 
-  constructor(private katalog: KatalogServiceService, private cdr: ChangeDetectorRef, private transaksi: TransaksiService, private pengguna: PenggunaService) { }
+  cari: string = "";
+  kategoriPilihan: any = null;
+  merekPilihan: any = null;
+  minHarga: any = null;
+  maxHarga: any = null;
 
-  user = this.pengguna.ambilPengguna()
-  jumlah = 0
+  constructor(private katalog: KatalogServiceService, private cdr: ChangeDetectorRef, private transaksi: TransaksiService, private pengguna: PenggunaService, private route: ActivatedRoute) { }
+
+  user = this.pengguna.ambilPengguna();
+  jumlah = 0;
+
+  get range(): number[] {
+    return Array.from({ length: this.total }, (_, i) => i + 1);
+  }
 
   ngOnInit() {
-    this.katalog.katalog().subscribe((data)=>{
+    this.route.params.subscribe((params)=>{
+      if(params["halaman"] != null || params["halaman"] > 0){
+        this.halaman = params["halaman"];
+      }
+    })
+    this.katalog.katalog(this.halaman).subscribe((data)=>{
       if (data.status != "err"){
         this.barangs = data.data;
+        this.total = data.total;
       }
     });
     this.katalog.ambilKategori().subscribe((data)=>{
@@ -47,7 +61,7 @@ export class KatalogPage implements OnInit {
 
   filter() {
     console.log([this.cari, this.merekPilihan, this.kategoriPilihan, this.minHarga, this.maxHarga])
-    this.katalog.cariBarang(this.cari, this.merekPilihan, this.kategoriPilihan, this.minHarga, this.maxHarga).subscribe((data)=>{
+    this.katalog.cariBarang(this.cari, this.merekPilihan, this.kategoriPilihan, this.minHarga, this.maxHarga, this.halaman).subscribe((data)=>{
       if(data.status != "err"){
         this.barangs = data.data
         this.cdr.detectChanges();

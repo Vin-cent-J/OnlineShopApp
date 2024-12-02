@@ -26,6 +26,10 @@ const routes: Routes = [
     loadChildren: () => import('./katalog/katalog.module').then( m => m.KatalogPageModule)
   },
   {
+    path: 'katalog/:halaman',
+    loadChildren: () => import('./katalog/katalog.module').then( m => m.KatalogPageModule)
+  },
+  {
     path: 'keranjang',
     canActivate: [authGuard],
     loadChildren: () => import('./keranjang/keranjang.module').then( m => m.KeranjangPageModule)

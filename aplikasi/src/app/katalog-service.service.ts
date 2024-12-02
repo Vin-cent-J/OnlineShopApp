@@ -7,18 +7,18 @@ import { Observable } from 'rxjs';
 })
 export class KatalogServiceService {
   
-  katalog(): Observable<any>{
-    return this.http.get("http://localhost/OnlineShopApp/API/katalog.php");
+  katalog(halaman: number): Observable<any>{
+    return this.http.get("http://localhost/OnlineShopApp/API/katalog.php?halaman=" + halaman);
   }
 
-  cariBarang(p_cari: string | undefined | null, p_merek: number | undefined | null, p_kategori: number | undefined | null, p_min: number, p_max: number): Observable<any>{
+  cariBarang(p_cari: string | undefined | null, p_merek: number | undefined | null, p_kategori: number | undefined | null, p_min: number, p_max: number, halaman: number): Observable<any>{
     if(!p_min){
       p_min = 0
     }
     if(!p_max){
       p_max = 100000000
     }
-    let url = "http://localhost/OnlineShopApp/API/katalog.php?minHarga=" + p_min +  "&maxHarga=" + p_max;
+    let url = "http://localhost/OnlineShopApp/API/katalog.php?halaman=" + halaman + "&minHarga=" + p_min +  "&maxHarga=" + p_max;
     if (p_cari) {
       url += `&cari=${p_cari}`;
     }

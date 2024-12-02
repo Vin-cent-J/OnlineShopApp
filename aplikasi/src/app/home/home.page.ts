@@ -29,7 +29,7 @@ export class HomePage implements OnInit {
   }
 
   loadCatalogItems() {
-    this.katalogService.katalog().subscribe(
+    this.katalogService.katalog(1).subscribe(
       (data) => {
         this.catalogItems = data;
         this.filteredItems = this.catalogItems;

@@ -7,42 +7,74 @@ error_reporting(E_ALL);
 
 extract($_GET);
 
+if(!isset($halaman) || $halaman <= 1){
+  $halaman = 1;
+}
+$jumlah = 20;
+$mulai = ($halaman - 1) * $jumlah;
+
+$hasil = $conn->query("select COUNT(*) total from barangs");
+$data = $hasil->fetch_assoc();
+$total = $data['total'];
+
+$jumlahHalaman = ceil($total / $jumlah);
+
 $sql = "select b.*, m.nama merek, k.nama kategori from barangs b 
 inner join mereks m on b.mereks_id = m.id 
 inner join kategoris k on b.kategoris_id = k.id 
-where b.nama like ? and m.id like ? and k.id like ? and b.harga>=? and b.harga<=?";
+where b.nama like ? ";
 
 if(!isset($cari)){
-    $cari = "%";
+  $cari = "%";
 } else {
-    $cari = "%".$cari."%";
-}
-if(!isset($merek)){
-    $merek = "%";
-}
-if(!isset($kategori)){
-    $kategori = "%";
-}
-if(!isset($minHarga)){
-    $minHarga = 0;
-}
-if(!isset($maxHarga)){
-    $maxHarga = 100000000;
+  $cari = "%".$cari."%";
 }
 
+$parameter = [$cari];
+$tipe = "s";
+
+if(isset($merek)){
+  $sql .= "and m.id=? ";
+  $parameter[] = $merek;
+  $tipe
+ .= "i";
+}
+if(isset($kategori)){
+  $sql .= "and k.id=? ";
+  $parameter[] = $kategori;
+  $tipe
+ .= "i";
+}
+if(isset($minHarga)){
+  $sql .= "and b.harga>=? ";
+  $parameter[] = $minHarga;
+  $tipe
+ .= "i";
+}
+if(isset($maxHarga)){
+  $sql .= "and b.harga<=? ";
+  $parameter[] = $maxHarga;
+  $tipe
+ .= "i";
+}
+
+$sql.="LIMIT ?, ?";
+array_push($parameter, $mulai, $jumlah);
+$tipe .= "ii";
+
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssii", $cari, $merek, $kategori, $minHarga, $maxHarga);
+$stmt->bind_param($tipe, ...$parameter);
 $stmt->execute();
 $hasil = $stmt->get_result();
 
 $arr = [];
 $barang = [];
 if($hasil->num_rows){
-    while($row = $hasil->fetch_assoc()){
-        $barang[] = $row;
-    }
+  while($row = $hasil->fetch_assoc()){
+    $barang[] = $row;
+  }
 }
-$arr = ["hasil"=>"success", "data"=>$barang];
+$arr = ["hasil"=>"success", "data"=>$barang, "total"=>$jumlahHalaman];
 echo json_encode($arr);
 $stmt->close();
 $conn->close();

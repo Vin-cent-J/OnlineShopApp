@@ -13,7 +13,7 @@ export class DetailbarangPage implements OnInit {
 
   constructor(private katalog: KatalogServiceService, private route: ActivatedRoute, private router: Router, private pengguna: PenggunaService, private transaksi: TransaksiService) { }
 
-  barang: any
+  barang: any = {}
   id: number = 0
   error = ""
 
