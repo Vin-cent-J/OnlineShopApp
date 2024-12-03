@@ -1,8 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title slot="start">Welcome</ion-title>
-    <ion-searchbar (ionInput)="searchItems($event)" [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
+    <ion-searchbar (search)="cariBarang($event)" [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
     <ion-buttons slot="end">
+      <ion-button [routerLink]="['/keranjang']" fill="clear" slot="end">
+        <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
+      </ion-button>
       <ion-button (click)="logout()">Logout</ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -32,40 +35,36 @@
       <swiper-slide>
         <img src="assets/images/banner5.jpg" alt="Banner 5" />
       </swiper-slide>
-      <swiper-slide>
-        <img src="assets/images/banner6.jpg" alt="Banner 6" />
-      </swiper-slide>
     </swiper-container>
 
     <div class="category-container">
-      <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterByCategory($event.detail.value?.toString() || 'All')">
-        <ion-segment-button value="All">All</ion-segment-button>
-        <ion-segment-button value="Ballpoint">Ballpoint</ion-segment-button>
-        <ion-segment-button value="Whiteboard Marker">Whiteboard Marker</ion-segment-button>
-        <ion-segment-button value="Permanent Marker">Permanent Marker</ion-segment-button>
-        <ion-segment-button value="Spidol Marker">Spidol Marker</ion-segment-button>
-        <ion-segment-button value="Pencil & Crayon">Pencil & Crayon</ion-segment-button>
-        <ion-segment-button value="Aneka Stationery">Aneka Stationery</ion-segment-button>
+      <ion-segment [(ngModel)]="kategoriPilihan" (ionChange)="filterByCategory($event.detail.value?.toString() || 'All')">
+        <ion-segment-button value="">All</ion-segment-button>
+        <ion-segment-button *ngFor="let i of merek" [value]="i.id">{{i.nama}}</ion-segment-button>
       </ion-segment>
     </div>
 
     <div class="catalog-container">
-      <h3 class="catalog-title">Latest Items</h3>
+      
       <ion-grid>
         <ion-row>
-          <ion-col size="6" *ngFor="let item of filteredItems">
+          <ion-col size="4" *ngFor="let item of filteredItems">
             <ion-card class="catalog-card">
               <img [src]="item.foto" alt="{{ item.nama }}" />
               <ion-card-content>
                 <h3>{{ item.nama }}</h3>
                 <p>{{ item.deskripsi }}</p>
                 <p *ngIf="item.discount" class="discount">-{{ item.discount }}</p>
-                <p><strong>Price: </strong>{{ item.harga }}</p>
+                <p><strong>Harga: </strong>{{ item.harga }}</p>
               </ion-card-content>
             </ion-card>
           </ion-col>
         </ion-row>
       </ion-grid>
+      <div class="catalog-footer">
+        <ion-button class="catalog-title" fill="clear" [routerLink]="['/katalog']" color="primary">Semua barang</ion-button>
+      </div>
+      
     </div>
   </div>
 </ion-content>

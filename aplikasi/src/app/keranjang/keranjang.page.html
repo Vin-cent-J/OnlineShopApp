@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>My Cart</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Keranjang</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -35,11 +38,10 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- Checkout Button -->
   <div class="checkout-button">
     <ion-button expand="block" color="success" (click)="checkout()">
       <ion-icon name="cart" slot="start"></ion-icon>
-      Proceed to Checkout
+      Checkout
     </ion-button>
   </div>
 </ion-content>

@@ -43,6 +43,7 @@ export class DetailbarangPage implements OnInit {
       return
     }
     this.transaksi.tambahKeranjang(this.user.id, idBarang, this.jumlah).subscribe((data)=>{
+      console.log(data)
       if(data.hasil != "err"){
         this.router.navigate(["/katalog"])
       }

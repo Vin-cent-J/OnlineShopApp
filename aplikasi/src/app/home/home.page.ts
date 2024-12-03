@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { PenggunaService } from '../pengguna.service';
 import { KatalogServiceService } from '../katalog-service.service';
+import { Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 
 register();
 
@@ -11,47 +13,79 @@ register();
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  constructor(private pengguna: PenggunaService, private katalogService: KatalogServiceService) {}
+  constructor(private pengguna: PenggunaService, private katalog: KatalogServiceService, private router: Router, private cdr: ChangeDetectorRef) {}
 
   user: any = { id: 0, nama: '' };
-  catalogItems: any[] = [];
+  barangs: any[] = [];
   filteredItems: any[] = [];
   cari: string = '';
-  selectedCategory: string = 'All';
+
+  kategori: any[] = [];
+  merek: any[] = [];
+
+  kategoriPilihan: any = null;
+  merekPilihan: any = null;
+  minHarga: any = null;
+  maxHarga: any = null;
 
   ngOnInit() {
     this.user = this.pengguna.ambilPengguna();
-    this.loadCatalogItems();
+    this.loadbarangs();
+    this.katalog.ambilKategori().subscribe((data)=>{
+      if (data.status != "err"){
+        this.kategori = data.data;
+      }
+    });
+    this.katalog.ambilMerek().subscribe((data)=>{
+      if (data.status != "err"){
+        this.merek = data.data;
+      }
+    });
   }
+
+  filter() {
+    console.log([this.cari, this.merekPilihan, this.kategoriPilihan, this.minHarga, this.maxHarga])
+    this.katalog.cariBarang(this.cari, this.merekPilihan, this.kategoriPilihan, this.minHarga, this.maxHarga, 1).subscribe((data)=>{
+      if(data.status != "err"){
+        this.barangs = data.data
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
 
   logout() {
     this.pengguna.logout();
   }
 
-  loadCatalogItems() {
-    this.katalogService.katalog(1).subscribe(
+  loadbarangs() {
+    this.katalog.katalog(1).subscribe(
       (data) => {
-        this.catalogItems = data;
-        this.filteredItems = this.catalogItems;
-      },
-      (error) => {
-        console.error('Error loading catalog items', error);
+        this.barangs = data.data;
+        this.filteredItems = this.barangs;
       }
     );
   }
 
+  cariBarang(event: any) {
+    console.log('Navigating to katalog with search query:', this.cari);
+    if (event.key === 'Enter') {
+      this.router.navigate(['/katalog'], { queryParams: { q: this.cari } });
+    }
+  }
+
   searchItems(event: any) {
     const searchTerm = event.target.value.toLowerCase();
-    this.filterCatalogItems(searchTerm, this.selectedCategory.toString());
+    this.filterbarangs(searchTerm, this.kategoriPilihan.toString());
   }
 
   filterByCategory(category: string) {
-    this.selectedCategory = category;
-    this.filterCatalogItems(this.cari, category);
+    this.kategoriPilihan = category;
+    this.filterbarangs(this.cari, category);
   }
 
-  filterCatalogItems(searchTerm: string, category: string) {
-    this.filteredItems = this.catalogItems.filter(item => {
+  filterbarangs(searchTerm: string, category: string) {
+    this.filteredItems = this.barangs.filter(item => {
       const matchesSearchTerm = item.nama.toLowerCase().includes(searchTerm) ||
         item.deskripsi.toLowerCase().includes(searchTerm);
       const matchesCategory = category === 'All' || item.kategori === category;

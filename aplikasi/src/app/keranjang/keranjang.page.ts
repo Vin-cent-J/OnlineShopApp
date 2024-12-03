@@ -11,16 +11,17 @@ export class KeranjangPage implements OnInit {
   constructor(private transaksi: TransaksiService) { }
 
   keranjang: any = []
-  userId = localStorage.getItem('userId');
+  user: any = localStorage.getItem('pengguna');
   error: string = ""
 
   ngOnInit() {
-    if(this.userId){
-      this.transaksi.lihatKeranjang(this.userId).subscribe((data)=>{
-        if(data.hasil != "error"){
+    if(this.user != null){
+      this.user = JSON.parse(this.user);
+      this.transaksi.lihatKeranjang(this.user.id).subscribe((data)=>{
+        if(data.hasil != "err"){
           this.keranjang = data.data
         }
-      })
+      });
     }
   }
 
@@ -29,12 +30,13 @@ export class KeranjangPage implements OnInit {
   }
 
   checkout() {
-    if(this.userId){
-      this.transaksi.beli(this.userId).subscribe((data)=>{
+    if(this.user){
+      this.transaksi.beli(this.user.id).subscribe((data)=>{
         if(data.hasil == "err"){
-          this.error = data.data
+          this.error = data.data;
           return
         }
+        this.keranjang = []
       })
     }
   }

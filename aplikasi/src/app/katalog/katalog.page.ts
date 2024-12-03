@@ -71,7 +71,7 @@ export class KatalogPage implements OnInit {
 
   tambahKeranjang(idBarang: number){
     this.transaksi.tambahKeranjang(this.user.id, idBarang, this.jumlah).subscribe((data)=>{
-
+      console.log(data)
     })
   }
 }

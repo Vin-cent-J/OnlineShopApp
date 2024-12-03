@@ -1,8 +1,5 @@
 .home-content {
   background: #fef8f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   padding: 16px;
   box-sizing: border-box;
@@ -20,6 +17,12 @@ ion-searchbar{
   padding: 16px;
 }
 
+.catalog-footer {
+  text-align: center; /* Center-aligns the content */
+  margin-bottom: 32px; /* Adds space above and centers horizontally */
+  width: 100%; /* Ensures the button container spans the available width */
+}
+
 /* Welcome Card Styling */
 .welcome-card {
   background-color: #ffffff;
@@ -35,12 +38,10 @@ ion-searchbar{
 .card-header h2 {
   font-size: 2rem;
   font-weight: bold;
-  color: #1f2937;
 }
 
 .card-header p {
   font-size: 1rem;
-  color: #6b7280;
 }
 
 /* Swiper Banner Styling */
@@ -66,11 +67,12 @@ ion-searchbar{
 }
 
 .catalog-title {
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   font-weight: bold;
+  display: inline-block;
+  padding: 8px 16px;
   color: #1f2937;
-  margin-bottom: 16px;
-  text-align: center;
+  text-decoration: none;
 }
 
 .catalog-card {
@@ -91,13 +93,11 @@ ion-searchbar{
 .catalog-card h3 {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #1f2937;
   margin: 8px 0;
 }
 
 .catalog-card p {
   font-size: 1rem;
-  color: #6b7280;
   margin: 4px 0;
 }
 
@@ -106,19 +106,6 @@ ion-searchbar{
   font-weight: bold;
   font-size: 1rem;
   margin-bottom: 8px;
-}
-
-/* Search Bar Styling */
-.search-bar {
-  margin-bottom: 24px;
-  --background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.search-bar ion-input {
-  padding-left: 16px;
-  font-size: 1rem;
 }
 
 /* Category Filter Styling */
