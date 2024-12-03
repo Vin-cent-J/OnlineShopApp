@@ -2,10 +2,10 @@
 require_once "connect.php";
 
 extract($_POST);
-if(isset($penggunas_id, $barangs_id, $jumlah)) {
-    $sql = "insert into keranjangs values(?, ?, ?)";
+if(isset($penggunas_id) && isset($barangs_id) && isset($jumlah)) {
+    $sql = "insert into keranjangs values(?, ?, ?) ON DUPLICATE KEY UPDATE jumlah = jumlah + ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iii", $penggunas_id, $barangs_id, $jumlah);
+    $stmt->bind_param("iiii", $penggunas_id, $barangs_id, $jumlah, $jumlah);
     $stmt->execute();
 
     $arr = [];
