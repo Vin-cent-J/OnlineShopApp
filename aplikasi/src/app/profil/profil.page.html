@@ -1,13 +1,35 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
     <ion-title>profil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="profile-page">
+    <ion-avatar class="profile-avatar">
+      <img src="https://via.placeholder.com/150" alt="Profile Picture" />
+    </ion-avatar>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Nama</ion-label>
+        <ion-note slot="end">{{profil.nama}}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>No. handphone</ion-label>
+        <ion-note slot="end">{{profil.nomor_hp}}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Alamat</ion-label>
+        <ion-note slot="end">{{profil.alamat}}</ion-note>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" color="primary" routerLink="/update-profile">
+      Update Profile
+    </ion-button>
+  </div>
 </ion-content>

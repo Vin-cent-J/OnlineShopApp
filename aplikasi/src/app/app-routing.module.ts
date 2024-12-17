@@ -56,7 +56,11 @@ const routes: Routes = [
   { 
     path: '**', 
     redirectTo: 'home' 
-  }, 
+  },   {
+    path: 'update-profile',
+    loadChildren: () => import('./update-profile/update-profile.module').then( m => m.UpdateProfilePageModule)
+  },
+
 ];
 
 @NgModule({

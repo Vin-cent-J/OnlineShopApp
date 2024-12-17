@@ -9,7 +9,7 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "mydb";
+$dbname = "tokoBuku";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

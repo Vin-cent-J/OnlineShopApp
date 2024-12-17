@@ -3,8 +3,11 @@
     <ion-title slot="start">Welcome</ion-title>
     <ion-searchbar (search)="cariBarang($event)" [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/keranjang']" fill="clear" slot="end">
+      <ion-button [routerLink]="['/keranjang']" slot="end">
         <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/profil']">
+        <ion-icon name="person-outline"></ion-icon>
       </ion-button>
       <ion-button (click)="logout()">Logout</ion-button>
     </ion-buttons>
@@ -13,7 +16,7 @@
 
 <ion-content [fullscreen]="true" class="home-content">
   <div class="welcome-container">
-    <ion-card class="welcome-card" *ngIf="user.id>0">
+    <ion-card class="welcome-card" *ngIf="user.id.length>30">
       <div class="card-header">
         <h2>Selamat datang, {{ user.nama }}!</h2>
       </div>
@@ -45,17 +48,18 @@
     </div>
 
     <div class="catalog-container">
-      
       <ion-grid>
         <ion-row>
-          <ion-col size="4" *ngFor="let item of filteredItems">
-            <ion-card class="catalog-card">
-              <img [src]="item.foto" alt="{{ item.nama }}" />
+          <ion-col size="4" *ngFor="let  barang of filteredItems">
+            <ion-card class="catalog-card" routerLink="/detailbarang/{{barang.id}}">
+              <div class="card-image">
+                <img [src]=" barang.foto" alt="{{  barang.nama }}" />
+              </div>
               <ion-card-content>
-                <h3>{{ item.nama }}</h3>
-                <p>{{ item.deskripsi }}</p>
-                <p *ngIf="item.discount" class="discount">-{{ item.discount }}</p>
-                <p><strong>Harga: </strong>{{ item.harga }}</p>
+                <h3>{{  barang.nama }}</h3>
+                <p>{{  barang.deskripsi }}</p>
+                <p *ngIf=" barang.discount" class="discount">-{{  barang.discount }}</p>
+                <p><strong>Harga: </strong>{{  barang.harga }}</p>
               </ion-card-content>
             </ion-card>
           </ion-col>
@@ -64,7 +68,6 @@
       <div class="catalog-footer">
         <ion-button class="catalog-title" fill="clear" [routerLink]="['/katalog']" color="primary">Semua barang</ion-button>
       </div>
-      
     </div>
   </div>
 </ion-content>

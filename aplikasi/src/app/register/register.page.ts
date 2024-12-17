@@ -3,6 +3,7 @@ import { PenggunaService } from '../pengguna.service';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,7 @@ export class RegisterPage implements OnInit {
   password: string = "";
   alamat: string = "";
   loading: boolean = false;
+  uuid: any
 
   passwordType: string = 'password';
 
@@ -45,6 +47,7 @@ export class RegisterPage implements OnInit {
     this.phoneError = null;
     this.passwordError = null;
     this.addressError = null;
+    this.uuid = uuidv4();
 
     if (this.nama.trim().length === 0) {
       this.nameError = "Nama tidak boleh kosong.";
@@ -72,7 +75,7 @@ export class RegisterPage implements OnInit {
 
     this.loading = true;
 
-    this.pengguna.register(this.nohp, this.password, this.nama, this.alamat).subscribe((data)=>{
+    this.pengguna.register(this.uuid, this.nohp, this.password, this.nama, this.alamat).subscribe((data)=>{
       if(data.hasil === "err"){
         this.registerError = data.data
       }

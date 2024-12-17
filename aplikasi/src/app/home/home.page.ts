@@ -30,6 +30,10 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.user = this.pengguna.ambilPengguna();
+    if(this.user === null){
+      this.user = { id: 0, nama: '' };
+    }
+    console.log(this.user.id.length)
     this.loadbarangs();
     this.katalog.ambilKategori().subscribe((data)=>{
       if (data.status != "err"){
@@ -56,6 +60,7 @@ export class HomePage implements OnInit {
 
   logout() {
     this.pengguna.logout();
+    this.router.navigate(['/login'])
   }
 
   loadbarangs() {

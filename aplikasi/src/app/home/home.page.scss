@@ -78,7 +78,6 @@ ion-searchbar{
 .catalog-card {
   border-radius: 16px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
 }
 
 .catalog-card img {
@@ -114,6 +113,22 @@ ion-searchbar{
   justify-content: center;
   margin-bottom: 24px;
 }
+
+.card-image{
+  min-height: 250px;
+  max-height: 250px;
+}
+
+ion-card-content {
+  color: #fff;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    color: #000;
+  }
+}
+
 
 ion-segment {
   --background: #ffffff;

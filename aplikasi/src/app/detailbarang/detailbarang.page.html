@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/katalog"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -14,14 +14,24 @@
   </ion-header>
 
   <ion-card>
-    <img [src]="barang.gambar" alt="Gambar barang" />
-    <ion-card-header>
-      <ion-card-title>{{ barang.nama }}</ion-card-title>
-      <ion-card-subtitle>{{ barang.harga | currency:'Rp. ':'symbol':'1.0-0':'en-US' }}</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-input [(ngModel)]="jumlah" type="number"></ion-input>
-      <ion-button expand="full" (click)="tambahKeranjang(barang.id)">Add to Cart</ion-button>
-    </ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <img [src]="barang.gambar" alt="Gambar barang" />
+        </ion-col>
+        <ion-col size="8">
+          <div class="item-card">
+            <ion-card-header>
+              <ion-card-title>{{ barang.nama }}</ion-card-title>
+              <ion-card-subtitle>{{ barang.harga | currency:'Rp. ':'symbol':'1.0-0':'en-US' }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-input [(ngModel)]="jumlah" type="number"></ion-input>
+              <ion-button expand="full" (click)="tambahKeranjang(barang.id)">Add to Cart</ion-button>
+            </ion-card-content>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card>
 </ion-content>

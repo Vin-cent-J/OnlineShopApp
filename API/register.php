@@ -3,11 +3,11 @@ require_once "connect.php";
 
 extract($_POST);
 if(isset($nama, $nomor_hp, $password, $alamat)) {
-    $perans_id = 1;
+    $perans_id = 2;
     $password = hash("sha256", $password);
-    $sql = "insert into penggunas(perans_id, nama, nomor_hp, password, alamat) values(?,?,?,?,?)";
+    $sql = "insert into penggunas(id, perans_id, nama, nomor_hp, password, alamat) values(?,?,?,?,?,?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("issss", $perans_id, $nama, $nomor_hp, $password, $alamat);
+    $stmt->bind_param("sissss", $id, $perans_id, $nama, $nomor_hp, $password, $alamat);
     $stmt->execute();
 
     $arr = [];
