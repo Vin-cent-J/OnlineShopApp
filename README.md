@@ -2,9 +2,9 @@
 **Features:**
 - User authentication (sign up, login, logout)
 - Product catalog with search and filter functionality 
-- Checkout process (TODO)
+- Checkout process
 - Admin dashboard for product and order management (TODO)
-- Order history tracking (TODO)
+- Order history tracking
 
 **Technologies:**
 - Frontend Framework: Ionic
