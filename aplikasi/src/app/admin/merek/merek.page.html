@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Merek</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-button (click)="bukaModalTambah()" fill="clear">
+    <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+    Tambah Merek
+  </ion-button>
+  <ion-list>
+      <ion-item *ngFor="let merek of mereks">
+        <ion-label>{{ merek.nama }}</ion-label>
+        <ion-button fill="clear" (click)="bukaModalEdit(merek)">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="danger" (click)="hapusMerek(merek.id)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+  </ion-list>
+
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="tutupModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ isEditMode ? 'Ubah Merek' : 'Tambah Merek' }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="tutupModal()">Tutup</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input label="Nama Merek" labelPlacement="stacked" [(ngModel)]="nama"></ion-input>
+        </ion-item>
+        <ion-button expand="full" (click)="simpanMerek()" [disabled]="!nama">
+          {{ isEditMode ? 'Update' : 'Add' }} Category
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

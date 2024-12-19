@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>orderan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">orderan</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Detail</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Order ID:</strong> {{ order.id }}</p>
+      <p><strong>Customer Name:</strong> {{ order.customerName }}</p>
+      <p><strong>Product:</strong> {{ order.product }}</p>
+      <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+      <p><strong>Current Status:</strong> {{ order.status }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item>
+    <ion-label>Status</ion-label>
+    <ion-select [(ngModel)]="selectedStatus">
+      <ion-select-option *ngFor="let status of statusOptions" [value]="status">
+        {{ status }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="full" (click)="updateStatus()">Update Status</ion-button>
+</ion-content>
+
+<ion-content *ngIf="!order">
+  <p>Tidak ada order.</p>
+</ion-content>

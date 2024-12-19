@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Kategori Barang</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button (click)="bukaModalTambah()" fill="clear">
+    <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+    Tambah Kategori
+  </ion-button>
+  <ion-list>
+      <ion-item *ngFor="let kategori of kategoris">
+        <ion-label>{{ kategori.nama }}</ion-label>
+        <ion-button fill="clear" (click)="bukaModalEdit(kategori)">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="danger" (click)="hapusKategori(kategori.id)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+  </ion-list>
+
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="tutupModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ isEditMode ? 'Ubah Kategori' : 'Tambah Kategori' }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="tutupModal()">Tutup</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input label="Nama kategori" labelPlacement="stacked" [(ngModel)]="nama"></ion-input>
+        </ion-item>
+        <ion-button expand="full" (click)="simpanKategori()" [disabled]="!nama">
+          {{ isEditMode ? 'Update' : 'Add' }} Category
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

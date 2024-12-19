@@ -1,0 +1,96 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Barang</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/admin']">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-button (click)="bukaModalTambah()" fill="clear">
+    <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+    Tambah Barang
+  </ion-button>
+  <ion-list>
+    <ion-item *ngFor="let barang of barangs">
+      <ion-label>{{ barang.nama }}</ion-label>
+      <ion-button fill="clear" (click)="bukaModalEdit(barang)">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="hapusBarang(barang.id)">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <div class="button-group">
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col>
+        <ion-button class="page-buttons" expand="block" color="primary" [routerLink]="'/admin/barang/' + (halaman - 1)" [disabled]="halaman <= 1">
+          Previous
+        </ion-button>
+      </ion-col>
+      <ion-col *ngFor="let i of range">
+        <ion-button 
+          size="small" 
+          [routerLink]="['/admin/barang', i]" 
+          [color]="i === halaman ? 'tertiary' : 'light'">
+          {{ i }}
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button class="page-buttons" expand="block" color="secondary" [routerLink]="'/admin/barang/' + (halaman + 1)" [disabled]="halaman >= total">
+          Next
+        </ion-button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </div>
+
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="tutupModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ isEditMode ? 'Ubah Barang' : 'Tambah Barang' }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="tutupModal()">Tutup</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input label="Nama barang" labelPlacement="stacked" [(ngModel)]="nama"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Harga" labelPlacement="stacked" [(ngModel)]="harga"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Stok" labelPlacement="stacked" [(ngModel)]="stok"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Foto" labelPlacement="stacked" [(ngModel)]="foto"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-select [(ngModel)]="kategoriPilihan" [placeholder]="namaKategori">
+            <div slot="label">Kategori</div>
+            <ion-select-option *ngFor="let i of kategori" [value]="i.id">{{i.nama}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-select [(ngModel)]="merekPilihan" [placeholder]="namaMerek">
+            <div slot="label">Merek</div>
+            <ion-select-option *ngFor="let i of merek" [value]="i.id">{{i.nama}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button expand="full" (click)="simpanBarang()" [disabled]="!nama">
+          {{ isEditMode ? 'Update' : 'Add' }} Barang
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

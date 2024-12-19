@@ -14,6 +14,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
+  },
+  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
@@ -60,6 +64,7 @@ const routes: Routes = [
     path: 'update-profile',
     loadChildren: () => import('./update-profile/update-profile.module').then( m => m.UpdateProfilePageModule)
   },
+
 
 ];
 

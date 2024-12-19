@@ -90,10 +90,72 @@ export class KatalogServiceService {
     );
   }
 
+  hapusMerek(p_id: number): Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('id', p_id.toString());
+    const data = body.toString();
+    return this.http.post(
+      "http://localhost/OnlineShopApp/API/hapusMerek.php", data, {headers}
+    );
+  }
+
+  ubahMerek(p_id: number, p_nama: string): Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('id', p_id.toString());
+    body.set('nama', p_nama);
+    const data = body.toString();
+    return this.http.post(
+      "http://localhost/OnlineShopApp/API/ubahMerek.php", data, {headers}
+    );
+  }
+
+  tambahMerek(p_nama: string): Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('nama', p_nama);
+    const data = body.toString();
+    return this.http.post(
+      "http://localhost/OnlineShopApp/API/tambahMerek.php", data, {headers}
+    );
+  }
+
   ambilKategori(): Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     return this.http.post(
       "http://localhost/OnlineShopApp/API/ambilKategori.php", null, {headers}
+    );
+  }
+
+  ubahKategori(p_id: number, p_nama: string): Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('id', p_id.toString());
+    body.set('nama', p_nama);
+    const data = body.toString();
+    return this.http.post(
+      "http://localhost/OnlineShopApp/API/ubahKategori.php", data, {headers}
+    );
+  }
+  
+  hapusKategori(p_id: number): Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('id', p_id.toString());
+    const data = body.toString();
+    return this.http.post(
+      "http://localhost/OnlineShopApp/API/hapusKategori.php", data, {headers}
+    );
+  }
+
+  tambahKategori(p_nama: string): Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('nama', p_nama);
+    const data = body.toString();
+    return this.http.post(
+      "http://localhost/OnlineShopApp/API/tambahKategori.php", data, {headers}
     );
   }
 

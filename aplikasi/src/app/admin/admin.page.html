@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>admin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">admin</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="4">
+        <ion-card routerLink="/admin/barang">
+          <ion-card-header>
+            <ion-card-title>Barang</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Kelola barang Anda, tambahkan barang baru, atau perbarui barang yang sudah ada.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="4">
+        <ion-card routerLink="/admin/kategori">
+          <ion-card-header>
+            <ion-card-title>Kategori Barang</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Tambahkan kategori baru atau perbarui kategori barang anda.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="4">
+        <ion-card routerLink="/admin/merek">
+          <ion-card-header>
+            <ion-card-title>Merek</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Tambahkan merek baru atau perbarui merek barang anda.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="4">
+        <ion-card routerLink="/admin/orderan">
+          <ion-card-header>
+            <ion-card-title>Orderan</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Proses orderan pembeli.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
