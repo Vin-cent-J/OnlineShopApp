@@ -2,7 +2,7 @@
 require_once "connect.php";
 
 extract($_POST);
-$sql = "SELECT id, nama FROM mereks";
+$sql = "SELECT id, nama FROM mereks WHERE tgl_hapus IS NULL";
 
 $arr = [];
 $merek = [];

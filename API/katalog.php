@@ -13,7 +13,7 @@ if(!isset($halaman) || $halaman <= 1){
 $jumlah = 20;
 $mulai = ($halaman - 1) * $jumlah;
 
-$hasil = $conn->query("select COUNT(*) total from barangs");
+$hasil = $conn->query("select COUNT(*) total from barangs where tgl_hapus is null");
 $data = $hasil->fetch_assoc();
 $total = $data['total'];
 
@@ -22,7 +22,7 @@ $jumlahHalaman = ceil($total / $jumlah);
 $sql = "select b.*, m.nama merek, k.nama kategori from barangs b 
 inner join mereks m on b.mereks_id = m.id 
 inner join kategoris k on b.kategoris_id = k.id 
-where b.nama like ? ";
+where b.nama like ? and b.tgl_hapus is null ";
 
 if(!isset($cari)){
   $cari = "%";

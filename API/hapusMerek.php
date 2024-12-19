@@ -3,7 +3,7 @@ require_once "connect.php";
 
 extract($_POST);
 if(isset($id)) {
-    $tgl = date("Y-m-d");
+    $tgl = date("Y-m-d H:i:s");
     $sql = "update mereks set tgl_hapus = ? where id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $tgl ,$id);
