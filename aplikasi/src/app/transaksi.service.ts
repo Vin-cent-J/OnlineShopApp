@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransaksiService {
+
+  baseUrl = environment.apiUrl
 
   beli(p_pid: string):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
@@ -13,7 +16,7 @@ export class TransaksiService {
     body.set('penggunas_id', p_pid);
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/beli.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/beli.php", data, {headers}
     );
   }
 
@@ -23,7 +26,7 @@ export class TransaksiService {
     body.set('penggunas_id', p_pid);
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/keranjang.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/keranjang.php", data, {headers}
     );
   }
 
@@ -33,7 +36,7 @@ export class TransaksiService {
     body.set('penggunas_id', p_pid.toString());
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/riwayat.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/riwayat.php", data, {headers}
     );
   }
 
@@ -45,7 +48,7 @@ export class TransaksiService {
     body.set('jumlah', p_jumlah.toString());
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/tambahKeranjang.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/tambahKeranjang.php", data, {headers}
     );
   }
 
@@ -57,7 +60,7 @@ export class TransaksiService {
     body.set('jumlah', p_jumlah.toString());
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/ubahKeranjang.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/ubahKeranjang.php", data, {headers}
     );
   }
 
@@ -68,7 +71,14 @@ export class TransaksiService {
     body.set('barangs_id', p_bid.toString());
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/hapusKeranjang.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/hapusKeranjang.php", data, {headers}
+    );
+  }
+
+  ambilOrder():Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    return this.http.get(
+      this.baseUrl+"OnlineShopApp/API/ambilOrder.php", {headers}
     );
   }
 

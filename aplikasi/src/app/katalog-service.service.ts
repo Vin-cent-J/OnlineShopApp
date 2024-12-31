@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class KatalogServiceService {
+  baseUrl = environment.apiUrl;
   
   katalog(halaman: number): Observable<any>{
-    return this.http.get("http://localhost/OnlineShopApp/API/katalog.php?halaman=" + halaman);
+    return this.http.get(this.baseUrl+"OnlineShopApp/API/katalog.php?halaman=" + halaman);
   }
 
   cariBarang(p_cari: string | undefined | null, p_merek: number | undefined | null, p_kategori: number | undefined | null, p_min: number, p_max: number, halaman: number): Observable<any>{
@@ -18,7 +20,7 @@ export class KatalogServiceService {
     if(!p_max){
       p_max = 100000000
     }
-    let url = "http://localhost/OnlineShopApp/API/katalog.php?halaman=" + halaman + "&minHarga=" + p_min +  "&maxHarga=" + p_max;
+    let url = this.baseUrl+"OnlineShopApp/API/katalog.php?halaman=" + halaman + "&minHarga=" + p_min +  "&maxHarga=" + p_max;
     if (p_cari) {
       url += `&cari=${p_cari}`;
     }
@@ -43,7 +45,7 @@ export class KatalogServiceService {
     body.set('kategoris_id', p_kategoris_id.toString());
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/tambahBarang.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/tambahBarang.php", data, {headers}
     );
   }
 
@@ -59,7 +61,7 @@ export class KatalogServiceService {
     body.set('id', p_id.toString());
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/ubahDataBarang.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/ubahDataBarang.php", data, {headers}
     );
   }
 
@@ -69,7 +71,7 @@ export class KatalogServiceService {
     body.set('id', p_id.toString());
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/hapusBarang.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/hapusBarang.php", data, {headers}
     );
   }
 
@@ -79,14 +81,14 @@ export class KatalogServiceService {
     body.set('id', p_id.toString());
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/detailBarang.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/detailBarang.php", data, {headers}
     );
   }
 
   ambilMerek(): Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/ambilMerek.php", null, {headers}
+      this.baseUrl+"OnlineShopApp/API/ambilMerek.php", null, {headers}
     );
   }
 
@@ -96,7 +98,7 @@ export class KatalogServiceService {
     body.set('id', p_id.toString());
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/hapusMerek.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/hapusMerek.php", data, {headers}
     );
   }
 
@@ -107,7 +109,7 @@ export class KatalogServiceService {
     body.set('nama', p_nama);
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/ubahMerek.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/ubahMerek.php", data, {headers}
     );
   }
 
@@ -117,14 +119,14 @@ export class KatalogServiceService {
     body.set('nama', p_nama);
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/tambahMerek.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/tambahMerek.php", data, {headers}
     );
   }
 
   ambilKategori(): Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/ambilKategori.php", null, {headers}
+      this.baseUrl+"OnlineShopApp/API/ambilKategori.php", null, {headers}
     );
   }
 
@@ -135,7 +137,7 @@ export class KatalogServiceService {
     body.set('nama', p_nama);
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/ubahKategori.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/ubahKategori.php", data, {headers}
     );
   }
   
@@ -145,7 +147,7 @@ export class KatalogServiceService {
     body.set('id', p_id.toString());
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/hapusKategori.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/hapusKategori.php", data, {headers}
     );
   }
 
@@ -155,7 +157,7 @@ export class KatalogServiceService {
     body.set('nama', p_nama);
     const data = body.toString();
     return this.http.post(
-      "http://localhost/OnlineShopApp/API/tambahKategori.php", data, {headers}
+      this.baseUrl+"OnlineShopApp/API/tambahKategori.php", data, {headers}
     );
   }
 
