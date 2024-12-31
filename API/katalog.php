@@ -10,7 +10,7 @@ extract($_GET);
 if(!isset($halaman) || $halaman <= 1){
   $halaman = 1;
 }
-$jumlah = 20;
+$jumlah = 16;
 $mulai = ($halaman - 1) * $jumlah;
 
 $hasil = $conn->query("select COUNT(*) total from barangs where tgl_hapus is null");

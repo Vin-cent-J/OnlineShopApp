@@ -18,5 +18,4 @@ else{
 }
 echo json_encode($arr);
 $stmt->close();
-$conn->close();
 ?>
