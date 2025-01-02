@@ -5,7 +5,7 @@ extract($_POST);
 if(isset($penggunas_id) && isset($barangs_id) && isset($jumlah)) {
     $sql = "insert into keranjangs values(?, ?, ?) ON DUPLICATE KEY UPDATE jumlah = jumlah + ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iiii", $penggunas_id, $barangs_id, $jumlah, $jumlah);
+    $stmt->bind_param("siii", $penggunas_id, $barangs_id, $jumlah, $jumlah);
     $stmt->execute();
 
     $arr = [];

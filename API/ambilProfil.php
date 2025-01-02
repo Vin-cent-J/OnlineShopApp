@@ -5,7 +5,7 @@ extract($_POST);
 $password = hash("sha256", $password);
 $sql = "select * from penggunas where id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
+$stmt->bind_param("s", $id);
 $stmt->execute();
 $hasil = $stmt->get_result();
 

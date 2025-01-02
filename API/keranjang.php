@@ -7,9 +7,9 @@ error_reporting(E_ALL);
 
 extract($_POST);
 if(isset($penggunas_id)) {
-  $sql2 = "select k.barangs_id as id, b.nama as nama, k.jumlah as jumlah, b.harga as harga from keranjangs k inner join barangs b on k.barangs_id = b.id where penggunas_id = ?";
+  $sql2 = "select k.barangs_id as id, b.nama as nama, k.jumlah as jumlah, b.harga as harga, b.foto as foto from keranjangs k inner join barangs b on k.barangs_id = b.id where penggunas_id = ?";
   $stmt = $conn->prepare($sql2);
-  $stmt->bind_param("i", $penggunas_id);
+  $stmt->bind_param("s", $penggunas_id);
   $stmt->execute();
   $hasil = $stmt->get_result();
 
