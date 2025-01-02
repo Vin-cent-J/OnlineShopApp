@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
     <ion-title>Keranjang</ion-title>
   </ion-toolbar>
@@ -11,12 +11,12 @@
   <ion-list>
     <ion-item *ngFor="let barang of keranjang">
       <ion-thumbnail slot="start">
-        <ion-img [src]="barang.foto"></ion-img>
+        <ion-img src="{{baseUrl}}/OnlineShopApp/asset/{{barang.foto}}"></ion-img>
       </ion-thumbnail>
 
       <ion-label>
         <h2>{{ barang.nama }}</h2>
-        <p>{{ barang.harga | currency: 'IDR' }}</p>
+        <p>{{ barang.harga | currency:'Rp. ':'symbol':'1.0-0':'en-US' }}</p>
         <p>Quantity: {{ barang.jumlah }}</p>
       </ion-label>
 
@@ -33,7 +33,7 @@
     <ion-card-content>
       <ion-item color="light">
         <ion-label>Total</ion-label>
-        <ion-text>{{ getTotal() | currency: 'IDR' }}</ion-text>
+        <ion-text>{{ getTotal() | currency:'Rp. ':'symbol':'1.0-0':'en-US' }}</ion-text>
       </ion-item>
     </ion-card-content>
   </ion-card>

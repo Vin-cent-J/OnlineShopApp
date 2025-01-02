@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { KatalogServiceService } from 'src/app/katalog-service.service';
 import { ActivatedRoute, Route } from '@angular/router';
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+import { FotoService } from 'src/app/foto.service';
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-barang',
   templateUrl: './barang.page.html',
   styleUrls: ['./barang.page.scss'],
 })
 export class BarangPage implements OnInit {
+
+  baseUrl = environment.apiUrl;
 
   barangs: any[] = [];
   kategori: any[] = [];
@@ -16,9 +22,11 @@ export class BarangPage implements OnInit {
   idBarang : number = 0
 
   nama = '';
+  namaFile = '';
   harga = 0;
   stok = 0;
-  foto = '';
+  foto : string = "";
+  blob : Blob | null = null;
   total = 0;
 
   kategoriPilihan = 1;
@@ -32,7 +40,7 @@ export class BarangPage implements OnInit {
     return Array.from({ length: this.total }, (_, i) => i + 1);
   }
 
-  constructor(private katalog: KatalogServiceService, private route: ActivatedRoute) { }
+  constructor(private katalog: KatalogServiceService, private route: ActivatedRoute, private fotos: FotoService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params)=>{
@@ -49,7 +57,7 @@ export class BarangPage implements OnInit {
   private Kategori(){
     this.katalog.ambilKategori().subscribe(data=>{
       if(data.hasil === "success"){
-        this.kategori = data.data
+        this.kategori = data.data;
       }
     })
   }
@@ -66,7 +74,7 @@ export class BarangPage implements OnInit {
   private Merek(){
     this.katalog.ambilMerek().subscribe(data => {
       if(data.hasil === "success"){
-        this.merek = data.data
+        this.merek = data.data;
       }
     })
   }
@@ -77,7 +85,7 @@ export class BarangPage implements OnInit {
     this.nama = '';
     this.harga = 0;
     this.stok = 0;
-    this.foto = '';
+    this.foto = "";
     this.merekPilihan = 1;
     this.kategoriPilihan = 1;
     this.namaKategori = "";
@@ -114,14 +122,14 @@ export class BarangPage implements OnInit {
 
   simpanBarang(){
     if(this.isEditMode){
-      this.katalog.ubahDataBarang(this.nama, this.stok, this.harga, this.foto, this.merekPilihan, this.kategoriPilihan, this.idBarang).subscribe(data => {
+      this.katalog.ubahDataBarang(this.nama, this.stok, this.harga, this.namaFile+".jpg", this.merekPilihan, this.kategoriPilihan, this.idBarang).subscribe(data => {
         if(data.hasil === "success"){
           this.isModalOpen = false;
           this.Barang();
         }
       });
     } else {
-      this.katalog.tambahBarang(this.nama, this.stok, this.harga, this.foto, this.merekPilihan, this.kategoriPilihan,).subscribe(data => {
+      this.katalog.tambahBarang(this.nama, this.stok, this.harga, this.namaFile+".jpg", this.merekPilihan, this.kategoriPilihan,).subscribe(data => {
         if(data.hasil === "success"){
           this.isModalOpen = false;
           this.Barang();
@@ -130,4 +138,29 @@ export class BarangPage implements OnInit {
     }
   }
 
+  previewFoto: string | null = null;
+
+  async ambilFoto(source: 'camera' | 'gallery'): Promise<void> {
+    try {
+      const image: Photo = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: source === 'camera' ? CameraSource.Camera : CameraSource.Photos
+      });
+
+      if (image && image.dataUrl) {
+        this.previewFoto = image.dataUrl;
+        const blob = this.fotos.dataURLToBlob(image.dataUrl);
+        this.namaFile = this.nama + "_" + Date.now();
+
+        this.fotos.uploadFoto(blob, this.namaFile);
+      } else {
+        console.warn('Tidak ada foto');
+        return 
+      }
+    } catch (error) {
+      console.error('Error saat mengammbil foto', error);
+    }
+  }
 }

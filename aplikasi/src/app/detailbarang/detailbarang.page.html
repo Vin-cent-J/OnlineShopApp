@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">detailbarang</ion-title>
+      <ion-title size="large">Detail</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -17,7 +17,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <img [src]="barang.gambar" alt="Gambar barang" />
+          <img src="{{baseUrl}}/OnlineShopApp/asset/{{barang.foto}}" alt="Gambar barang" />
         </ion-col>
         <ion-col size="8">
           <div class="item-card">
@@ -27,7 +27,7 @@
             </ion-card-header>
             <ion-card-content>
               <ion-input [(ngModel)]="jumlah" type="number"></ion-input>
-              <ion-button expand="full" (click)="tambahKeranjang(barang.id)">Add to Cart</ion-button>
+              <ion-button expand="full" (click)="tambahKeranjang(barang.id)">+ keranjang</ion-button>
             </ion-card-content>
           </div>
         </ion-col>

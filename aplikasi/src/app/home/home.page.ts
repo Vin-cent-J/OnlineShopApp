@@ -4,7 +4,7 @@ import { PenggunaService } from '../pengguna.service';
 import { KatalogServiceService } from '../katalog-service.service';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
-
+import { environment } from 'src/environments/environment';
 register();
 
 @Component({
@@ -13,6 +13,9 @@ register();
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+
+  baseUrl = environment.apiUrl;
+
   constructor(private pengguna: PenggunaService, private katalog: KatalogServiceService, private router: Router, private cdr: ChangeDetectorRef) {}
 
   user: any = { id: 0, nama: '' };
@@ -57,17 +60,12 @@ export class HomePage implements OnInit {
     });
   }
 
-
-  logout() {
-    this.pengguna.logout();
-    this.router.navigate(['/login'])
-  }
-
   loadbarangs() {
     this.katalog.katalog(1).subscribe(
       (data) => {
         this.barangs = data.data;
         this.filteredItems = this.barangs;
+        console.log(this.filteredItems);
       }
     );
   }

@@ -4,6 +4,8 @@ import { ChangeDetectorRef } from '@angular/core';
 import { TransaksiService } from '../transaksi.service';
 import { PenggunaService } from '../pengguna.service';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-katalog',
@@ -12,12 +14,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class KatalogPage implements OnInit {
 
+  baseUrl = environment.apiUrl;
+
   barangs:any = [];
   kategori:any = [];
   merek:any = [];
   index = 0;
 
-  halaman = 1;
+  halaman: number = 1;
   total = 1;
 
   cari: string = "";
@@ -74,4 +78,5 @@ export class KatalogPage implements OnInit {
       console.log(data)
     })
   }
+
 }

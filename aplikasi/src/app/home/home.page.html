@@ -1,7 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title slot="start">Welcome</ion-title>
-    <ion-searchbar (search)="cariBarang($event)" [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
+    <img class="logo" src="{{baseUrl}}/OnlineShopApp/asset/logo.png" slot="start">
+    <ion-title slot="start"></ion-title>
+    <ion-searchbar class="desktop" (search)="cariBarang($event)" [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
     <ion-buttons slot="end">
       <ion-button [routerLink]="['/keranjang']" slot="end">
         <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
@@ -9,12 +10,12 @@
       <ion-button [routerLink]="['/profil']">
         <ion-icon name="person-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="logout()">Logout</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="home-content">
+  <ion-searchbar class="mobile" (search)="cariBarang($event)" [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
   <div class="welcome-container">
     <ion-card class="welcome-card" *ngIf="user.id.length>30">
       <div class="card-header">
@@ -50,16 +51,15 @@
     <div class="catalog-container">
       <ion-grid>
         <ion-row>
-          <ion-col size="4" *ngFor="let  barang of filteredItems">
+          <ion-col size-md="3" size-xs="6" *ngFor="let barang of filteredItems">
             <ion-card class="catalog-card" routerLink="/detailbarang/{{barang.id}}">
               <div class="card-image">
-                <img [src]=" barang.foto" alt="{{  barang.nama }}" />
+                <img src="{{baseUrl}}/OnlineShopApp/asset/{{barang.foto}}"/>
               </div>
               <ion-card-content>
-                <h3>{{  barang.nama }}</h3>
-                <p>{{  barang.deskripsi }}</p>
-                <p *ngIf=" barang.discount" class="discount">-{{  barang.discount }}</p>
-                <p><strong>Harga: </strong>{{  barang.harga }}</p>
+                <h3>{{ barang.nama }}</h3>
+                <p *ngIf=" barang.discount" class="discount">-{{ barang.discount }}</p>
+                <p>{{ barang.harga | currency:'Rp. ':'symbol':'1.0-0':'en-US' }}</p>
               </ion-card-content>
             </ion-card>
           </ion-col>

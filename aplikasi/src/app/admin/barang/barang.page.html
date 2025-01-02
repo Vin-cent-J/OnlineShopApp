@@ -43,7 +43,7 @@
         </ion-button>
       </ion-col>
       <ion-col>
-        <ion-button class="page-buttons" expand="block" color="secondary" [routerLink]="'/admin/barang/' + (halaman + 1)" [disabled]="halaman >= total">
+        <ion-button class="page-buttons" expand="block" color="secondary" [routerLink]="'/admin/barang/' + (+halaman + 1)" [disabled]="halaman >= total">
           Next
         </ion-button>
       </ion-col>
@@ -73,7 +73,19 @@
           <ion-input label="Stok" labelPlacement="stacked" [(ngModel)]="stok"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="Foto" labelPlacement="stacked" [(ngModel)]="foto"></ion-input>
+          <ion-label position="stacked">Foto</ion-label>
+          <div class="photo-upload-container">
+            <ion-button expand="block" (click)="ambilFoto('gallery')" [disabled]="!nama">
+              <ion-icon name="image-outline"></ion-icon>
+              Ambil Foto
+            </ion-button>
+            <div *ngIf="previewFoto" class="photo-preview">
+              <img [src]="previewFoto" alt="Preview Foto">
+            </div>
+            <div>
+              <img src="{{baseUrl}}/OnlineShopApp/asset/{{foto}}" *ngIf="!previewFoto">
+            </div>
+          </div>
         </ion-item>
         <ion-item>
           <ion-select [(ngModel)]="kategoriPilihan" [placeholder]="namaKategori">

@@ -1,6 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title [routerLink]="['/home']" slot="start">LOGO</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/home']"><ion-icon slot="icon-only" name="arrow-back"></ion-icon></ion-button>
+    </ion-buttons>
+    <img class="logo" src="{{baseUrl}}/OnlineShopApp/asset/logo.png" slot="start">
+    <ion-title [routerLink]="['/home']" slot="start"></ion-title>
     <ion-searchbar [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
     <ion-button [routerLink]="['/keranjang']" fill="clear" slot="end">
       <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
@@ -11,7 +15,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">LOGO</ion-title>
+      <ion-title size="large"></ion-title>
     </ion-toolbar>
     <ion-toolbar>
       <ion-searchbar [(ngModel)]="cari" placeholder="Search..."></ion-searchbar>
@@ -63,10 +67,9 @@
           <ion-grid>
             <ion-row>
               <ion-col size="12" size-sm="6" size-md="4" size-lg="3" *ngFor="let barang of barangs;">
-  
-                <ion-card color="light" *ngIf="barang.stok > 0" routerLink="/detailbarang/{{barang.id}}">
+                <ion-card color="light" routerLink="/detailbarang/{{barang.id}}">
                   <ion-card-header>
-                    <ion-img [src]="barang.foto"></ion-img>
+                    <img src="{{baseUrl}}/OnlineShopApp/asset/{{barang.foto}}"/>
                   </ion-card-header>
                   <ion-card-content> 
                     <ion-item color="light">
@@ -106,7 +109,7 @@
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button class="page-buttons" expand="block" color="secondary" [routerLink]="'/katalog/' + (halaman + 1)" [disabled]="halaman >= total">
+          <ion-button class="page-buttons" expand="block" color="secondary" [routerLink]="'/katalog/' + (+halaman + 1)" [disabled]="halaman >= total">
             Next
           </ion-button>
         </ion-col>

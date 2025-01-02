@@ -9,27 +9,24 @@
 
 <ion-content [fullscreen]="true">
   <div class="profile-page">
-    <ion-avatar class="profile-avatar">
-      <img src="https://via.placeholder.com/150" alt="Profile Picture" />
-    </ion-avatar>
-
     <ion-list>
       <ion-item>
-        <ion-label>Nama</ion-label>
-        <ion-note slot="end">{{profil.nama}}</ion-note>
+        <ion-label>Nama: </ion-label>
+        <ion-text>{{profil.nama}}</ion-text>
       </ion-item>
       <ion-item>
-        <ion-label>No. handphone</ion-label>
-        <ion-note slot="end">{{profil.nomor_hp}}</ion-note>
+        <ion-label>No. handphone: </ion-label>
+        <ion-text>{{profil.nomor_hp}}</ion-text>
       </ion-item>
       <ion-item>
-        <ion-label>Alamat</ion-label>
-        <ion-note slot="end">{{profil.alamat}}</ion-note>
+        <ion-label>Alamat: </ion-label>
+        <ion-text>{{profil.alamat}}</ion-text>
       </ion-item>
     </ion-list>
 
     <ion-button expand="block" color="primary" routerLink="/update-profile">
       Update Profile
     </ion-button>
+    <ion-button (click)="logout()" color="danger">Logout</ion-button>
   </div>
 </ion-content>

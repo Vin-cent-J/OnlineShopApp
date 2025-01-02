@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PenggunaService } from '../pengguna.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profil',
@@ -8,7 +9,7 @@ import { PenggunaService } from '../pengguna.service';
 })
 export class ProfilPage implements OnInit {
 
-  constructor(private pengguna: PenggunaService) { }
+  constructor(private pengguna: PenggunaService, private router: Router) { }
 
   user = this.pengguna.ambilPengguna();
   profil: any = {id:0, nama:"", alamat:"", nomor_hp: ""}
@@ -21,6 +22,12 @@ export class ProfilPage implements OnInit {
         }
       })
     }
+  }
+
+
+  logout() {
+    this.pengguna.logout();
+    this.router.navigate(['/login'])
   }
 
 }

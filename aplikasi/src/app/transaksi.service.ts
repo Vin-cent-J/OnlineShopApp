@@ -13,7 +13,7 @@ export class TransaksiService {
   beli(p_pid: string):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
-    body.set('penggunas_id', p_pid);
+    body.set("penggunas_id", p_pid);
     const data = body.toString();
     return this.http.post(
       this.baseUrl+"OnlineShopApp/API/beli.php", data, {headers}
@@ -79,6 +79,17 @@ export class TransaksiService {
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     return this.http.get(
       this.baseUrl+"OnlineShopApp/API/ambilOrder.php", {headers}
+    );
+  }
+
+  ubahStatus(p_oid: number, p_status: string):Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('id', p_oid.toString());
+    body.set('status', p_status);
+    const data = body.toString();
+    return this.http.post(
+      this.baseUrl+"OnlineShopApp/API/ubahStatus.php", data, {headers}
     );
   }
 

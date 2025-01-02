@@ -3,6 +3,7 @@ import { KatalogServiceService } from '../katalog-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PenggunaService } from '../pengguna.service';
 import { TransaksiService } from '../transaksi.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-detailbarang',
@@ -10,6 +11,7 @@ import { TransaksiService } from '../transaksi.service';
   styleUrls: ['./detailbarang.page.scss'],
 })
 export class DetailbarangPage implements OnInit {
+  baseUrl = environment.apiUrl;
 
   constructor(private katalog: KatalogServiceService, private route: ActivatedRoute, private router: Router, private pengguna: PenggunaService, private transaksi: TransaksiService) { }
 

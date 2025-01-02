@@ -1,41 +1,69 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>orderan</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/admin']">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Orderan</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">orderan</ion-title>
+      <ion-title size="large">Orderan</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Detail</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p><strong>Order ID:</strong> {{ order.id }}</p>
-      <p><strong>Customer Name:</strong> {{ order.customerName }}</p>
-      <p><strong>Product:</strong> {{ order.product }}</p>
-      <p><strong>Quantity:</strong> {{ order.quantity }}</p>
-      <p><strong>Current Status:</strong> {{ order.status }}</p>
-    </ion-card-content>
-  </ion-card>
+  <div *ngFor="let order of orders">
+    <ion-card (click)="bukaModal(order)">
+      <ion-card-header>
+        <ion-card-title>Order {{order.id}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Nama Customer:</strong> {{ order.nama }}</p>
+        <p><strong>No Handphone:</strong> {{order.nomor_hp}}</p>
+        <p><strong>Alamat:</strong> {{order.alamat}}</p>
+        <p><strong>Status:</strong> {{ order.status }}</p>
+        <p><Strong>Tanggal:</Strong> {{ order.tanggal }}</p>
+        <p><strong>Barang:</strong></p>
+        <div *ngFor="let barang of order.detail">
+          <p>&nbsp; Nama Barang: {{barang.barang}}</p>
+          <p>&nbsp; Jumlah: {{barang.jumlah}}</p>
+          <p>&nbsp; Harga: {{barang.harga}}</p>
+        </div>
 
-  <ion-item>
-    <ion-label>Status</ion-label>
-    <ion-select [(ngModel)]="selectedStatus">
-      <ion-select-option *ngFor="let status of statusOptions" [value]="status">
-        {{ status }}
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
-  <ion-button expand="full" (click)="updateStatus()">Update Status</ion-button>
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="tutupModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Ubah Status</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="tutupModal()">Tutup</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-select label="Status" [(ngModel)]="status" [placeholder]="status">
+            <ion-select-option *ngFor="let status of pilihanStatus" [value]="status">
+              {{ status }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button expand="full" (click)="updateStatus()">Update Status</ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  
 </ion-content>
 
-<ion-content *ngIf="!order">
+<ion-content *ngIf="!orders">
   <p>Tidak ada order.</p>
 </ion-content>
