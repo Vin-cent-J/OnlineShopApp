@@ -55,8 +55,8 @@ export class RegisterPage implements OnInit {
 
     if (this.nohp.trim().length === 0) {
       this.phoneError = "Nomor handphone tidak boleh kosong.";
-    } else if (this.nohp.length < 10 || this.nohp.length > 12) {
-      this.phoneError = "Nomor handphone harus terdiri dari 10 hingga 12 angka.";
+    } else if (this.nohp.length < 10 || this.nohp.length > 14) {
+      this.phoneError = "Nomor handphone harus terdiri dari 10 hingga 14 angka.";
     }
 
     if (this.password.trim().length === 0) {

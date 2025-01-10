@@ -51,7 +51,6 @@ export class HomePage implements OnInit {
   }
 
   filter() {
-    console.log([this.cari, this.merekPilihan, this.kategoriPilihan, this.minHarga, this.maxHarga])
     this.katalog.cariBarang(this.cari, this.merekPilihan, this.kategoriPilihan, this.minHarga, this.maxHarga, 1).subscribe((data)=>{
       if(data.status != "err"){
         this.barangs = data.data
@@ -65,21 +64,14 @@ export class HomePage implements OnInit {
       (data) => {
         this.barangs = data.data;
         this.filteredItems = this.barangs;
-        console.log(this.filteredItems);
       }
     );
   }
 
   cariBarang(event: any) {
-    console.log('Navigating to katalog with search query:', this.cari);
     if (event.key === 'Enter') {
-      this.router.navigate(['/katalog'], { queryParams: { q: this.cari } });
+      this.router.navigate(['/katalog/'], { queryParams: { q: this.cari } });
     }
-  }
-
-  searchItems(event: any) {
-    const searchTerm = event.target.value.toLowerCase();
-    this.filterbarangs(searchTerm, this.kategoriPilihan.toString());
   }
 
   filterByCategory(category: string) {
@@ -93,6 +85,16 @@ export class HomePage implements OnInit {
         item.deskripsi.toLowerCase().includes(searchTerm);
       const matchesCategory = category === 'All' || item.kategori === category;
       return matchesSearchTerm && matchesCategory;
+    });
+  }
+
+  gantiMerek(event: any){
+    const id = event.detail.value 
+    this.katalog.cariBarang(null, id, null, this.minHarga, this.maxHarga, 1).subscribe(data =>{
+      console.log(id);
+      if(data.hasil != "err"){
+        this.filteredItems = data.data
+      }
     });
   }
 }

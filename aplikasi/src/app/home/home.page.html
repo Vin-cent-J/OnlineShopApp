@@ -2,7 +2,7 @@
   <ion-toolbar>
     <img class="logo" src="{{baseUrl}}/OnlineShopApp/asset/logo.png" slot="start">
     <ion-title slot="start"></ion-title>
-    <ion-searchbar class="desktop" (search)="cariBarang($event)" [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
+    <ion-searchbar class="desktop" (keyup)="cariBarang($event)" [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
     <ion-buttons slot="end">
       <ion-button [routerLink]="['/keranjang']" slot="end">
         <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
@@ -15,8 +15,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="home-content">
-  <ion-searchbar class="mobile" (search)="cariBarang($event)" [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
   <div class="welcome-container">
+    <ion-searchbar class="mobile" (keyup)="cariBarang($event)" [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
     <ion-card class="welcome-card" *ngIf="user.id.length>30">
       <div class="card-header">
         <h2>Selamat datang, {{ user.nama }}!</h2>
@@ -42,7 +42,7 @@
     </swiper-container>
 
     <div class="category-container">
-      <ion-segment [(ngModel)]="kategoriPilihan" (ionChange)="filterByCategory($event.detail.value?.toString() || 'All')">
+      <ion-segment [(ngModel)]="kategoriPilihan" (ionChange)="gantiMerek($event)">
         <ion-segment-button value="">All</ion-segment-button>
         <ion-segment-button *ngFor="let i of merek" [value]="i.id">{{i.nama}}</ion-segment-button>
       </ion-segment>
@@ -58,7 +58,6 @@
               </div>
               <ion-card-content>
                 <h3>{{ barang.nama }}</h3>
-                <p *ngIf=" barang.discount" class="discount">-{{ barang.discount }}</p>
                 <p>{{ barang.harga | currency:'Rp. ':'symbol':'1.0-0':'en-US' }}</p>
               </ion-card-content>
             </ion-card>

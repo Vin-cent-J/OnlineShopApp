@@ -5,8 +5,8 @@
     </ion-buttons>
     <img class="logo" src="{{baseUrl}}/OnlineShopApp/asset/logo.png" slot="start">
     <ion-title [routerLink]="['/home']" slot="start"></ion-title>
-    <ion-searchbar [(ngModel)]="cari" slot="start" placeholder="Search..."></ion-searchbar>
-    <ion-button [routerLink]="['/keranjang']" fill="clear" slot="end">
+    <ion-searchbar class="desktop" [(ngModel)]="cari" (keyup)="cariBarang($event)" slot="start" placeholder="Search..."></ion-searchbar>
+    <ion-button class="keranjang" [routerLink]="['/keranjang']" fill="clear" slot="end">
       <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -28,13 +28,13 @@
     </ion-toolbar>
   </ion-header>
 
-
   <div class="container">
+    <ion-searchbar class="mobile" [(ngModel)]="cari" (keyup)="cariBarang($event)" slot="start" placeholder="Search..."></ion-searchbar>
     <ion-grid>
       <ion-row>
-        <ion-col size="2"> <br>
-  
-          <ion-list lines="none">
+        <ion-col size="12" size-md="2"> <br>
+          <ion-button class="mobile" (click)="bukaFilter()"><ion-icon name="funnel"></ion-icon> Filter</ion-button>
+          <ion-list lines="none" *ngIf="isFilter">
             <ion-list-header><h3>Filter</h3></ion-list-header>
             <ion-item>
               <ion-input [(ngModel)]="minHarga" labelPlacement="stacked" label="Min Harga" type="number"></ion-input>
@@ -56,33 +56,23 @@
             </ion-item><br>
             <ion-item>
               <ion-button slot="end" (click)="filter()">
-                <ion-icon name="funnel"></ion-icon> Filter
+                <ion-icon name="search"></ion-icon> Cari
               </ion-button>
             </ion-item>
           </ion-list>
-  
         </ion-col> 
   
         <ion-col>
           <ion-grid>
             <ion-row>
-              <ion-col size="12" size-sm="6" size-md="4" size-lg="3" *ngFor="let barang of barangs;">
+              <ion-col size="12" size-md="4" size-lg="3" *ngFor="let barang of barangs;">
                 <ion-card color="light" routerLink="/detailbarang/{{barang.id}}">
-                  <ion-card-header>
+                  <div class="card-image">
                     <img src="{{baseUrl}}/OnlineShopApp/asset/{{barang.foto}}"/>
-                  </ion-card-header>
-                  <ion-card-content> 
-                    <ion-item color="light">
-                      {{barang.nama}}
-                    </ion-item>
-                    <ion-item color="light">
-                      <b>{{barang.harga | currency:'Rp. ':'symbol':'1.0-0':'en-US' }}</b>
-                    </ion-item>
-                    <ion-item color="light">
-                      <ion-button class="add-to-cart-btn" slot="end">
-                        <ion-icon name="cart" slot="start"></ion-icon> + Keranjang
-                      </ion-button>
-                    </ion-item>
+                  </div>
+                  <ion-card-content>
+                    <h3>{{ barang.nama }}</h3>
+                    <p>{{ barang.harga | currency:'Rp. ':'symbol':'1.0-0':'en-US' }}</p>
                   </ion-card-content>
                 </ion-card>
               </ion-col>

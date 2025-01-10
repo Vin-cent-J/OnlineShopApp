@@ -26,3 +26,54 @@ ion-text{
 .page-buttons{
   max-width: 100%;
 }
+
+@media (max-width: 768px) {
+
+  .mobile {
+    display: block;
+    width: 100%;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  ion-col[size="2"] {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .card-image{
+    min-height: 120px;
+    max-height: 120px;
+    margin-bottom: 20px;
+  }
+
+  ion-searchbar {
+    width: 100%;
+  }
+
+  ion-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile {
+    display: none;
+  }
+
+  .desktop {
+    display: block;
+  }
+  
+  ion-col[size="2"] {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+
+  ion-searchbar {
+    width: 30%;
+  }
+}

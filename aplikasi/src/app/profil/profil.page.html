@@ -11,20 +11,24 @@
   <div class="profile-page">
     <ion-list>
       <ion-item>
-        <ion-label>Nama: </ion-label>
-        <ion-text>{{profil.nama}}</ion-text>
+        <ion-text>Nomor Handphone: {{profil.nomor_hp}}</ion-text>
       </ion-item>
       <ion-item>
-        <ion-label>No. handphone: </ion-label>
-        <ion-text>{{profil.nomor_hp}}</ion-text>
+        <ion-input label="Nama:" [(ngModel)]="profil.nama" fill="outline" errorText="{{namaError}}" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Alamat: </ion-label>
-        <ion-text>{{profil.alamat}}</ion-text>
+        <ion-input label="Alamat:" [(ngModel)]="profil.alamat" fill="outline" errorText="{{alamatError}}" required></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-input label="Password Baru:" [(ngModel)]="passwordBaru" fill="outline" errorText="{{passwordError}}" type="password" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Password:" [(ngModel)]="password" fill="outline" errorText="{{konfirmasiError}}" type="password" required></ion-input>
+      </ion-item>
+      <ion-text *ngIf="error" color="danger">{{error}}</ion-text>
     </ion-list>
 
-    <ion-button expand="block" color="primary" routerLink="/update-profile">
+    <ion-button expand="block" color="primary" (click)="ubahProfil()">
       Update Profile
     </ion-button>
     <ion-button (click)="logout()" color="danger">Logout</ion-button>
