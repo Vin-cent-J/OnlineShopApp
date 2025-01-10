@@ -34,6 +34,27 @@ export class KatalogServiceService {
     return this.http.get(url);
   }
 
+  barangMerek(p_cari: string | undefined | null, p_merek: number | undefined | null, p_kategori: number | undefined | null, p_min: number, p_max: number, halaman: number): Observable<any>{
+    if(!p_min){
+      p_min = 0
+    }
+    if(!p_max){
+      p_max = 100000000
+    }
+    let url = this.baseUrl+"OnlineShopApp/API/barangMerek.php?halaman=" + halaman + "&minHarga=" + p_min +  "&maxHarga=" + p_max;
+    if (p_cari) {
+      url += `&cari=${p_cari}`;
+    }
+    if (p_merek) {
+      url += `&merek=${p_merek}`;
+    }
+    if (p_kategori) {
+      url += `&kategori=${p_kategori}`;
+    }
+    console.log(url);
+    return this.http.get(url);
+  }
+
   tambahBarang(p_nama: string, p_stok: number, p_harga: number, p_foto: string, p_mereks_id: number, p_kategoris_id: number):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
