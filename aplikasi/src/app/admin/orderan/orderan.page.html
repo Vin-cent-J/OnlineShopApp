@@ -27,11 +27,13 @@
         <p><strong>Alamat:</strong> {{order.alamat}}</p>
         <p><strong>Status:</strong> {{ order.status }}</p>
         <p><Strong>Tanggal:</Strong> {{ order.tanggal }}</p>
+        <p><strong>Total Semua:</strong> {{ getTotal(order.detail) | currency:'Rp. ':'symbol':'1.0-0':'id-ID' }}</p>
         <p><strong>Barang:</strong></p>
         <div *ngFor="let barang of order.detail">
           <p>&nbsp; Nama Barang: {{barang.barang}}</p>
           <p>&nbsp; Jumlah: {{barang.jumlah}}</p>
-          <p>&nbsp; Harga: {{barang.harga}}</p>
+          <p>&nbsp; Harga: {{barang.harga | currency:'Rp. ':'symbol':'1.0-0':'id-ID'}}</p>
+          <p>&nbsp; Total: {{barang.jumlah * barang.harga | currency:'Rp. ':'symbol':'1.0-0':'id-ID'}}</p>
           <p>--------</p>
         </div>
 
@@ -52,7 +54,7 @@
       
       <ion-content class="ion-padding">
         <ion-item>
-          <ion-select label="Status" [(ngModel)]="status" [placeholder]="status">
+          <ion-select label="Status" [(ngModel)]="status" [placeholder]="status" [disabled]="statuss == 'Dibatalkan'">
             <ion-select-option *ngFor="let status of pilihanStatus" [value]="status">
               {{ status }}
             </ion-select-option>
@@ -64,6 +66,7 @@
   </ion-modal>
   
 </ion-content>
+<!--TODO: Paging-->
 
 <ion-content *ngIf="!orders">
   <p>Tidak ada order.</p>

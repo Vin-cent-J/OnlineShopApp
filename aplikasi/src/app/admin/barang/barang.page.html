@@ -9,12 +9,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding" [fullscreen]="true">
   <ion-button (click)="bukaModalTambah()" fill="clear">
-    <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
-    Tambah Barang
+    <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>Tambah Barang
   </ion-button>
   <ion-list>
+    <ion-searchbar class="mobile" [(ngModel)]="cari" (keyup)="cariBarang()" slot="start" placeholder="Search..."></ion-searchbar>
     <ion-item *ngFor="let barang of barangs">
       <ion-label>{{ barang.nama }}</ion-label>
       <ion-button fill="clear" (click)="bukaModalEdit(barang)">

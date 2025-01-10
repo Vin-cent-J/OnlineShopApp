@@ -45,7 +45,7 @@ export class HomePage implements OnInit {
     });
     this.katalog.ambilMerek().subscribe((data)=>{
       if (data.status != "err"){
-        this.merek = data.data;
+        this.merek = data.data.slice(0,5);
       }
     });
   }
@@ -88,10 +88,8 @@ export class HomePage implements OnInit {
     });
   }
 
-  gantiMerek(event: any){
-    const id = event.detail.value 
-    this.katalog.cariBarang(null, id, null, this.minHarga, this.maxHarga, 1).subscribe(data =>{
-      console.log(id);
+  gantiMerek(){
+    this.katalog.cariBarang(null, this.merekPilihan, null, this.minHarga, this.maxHarga, 1).subscribe(data =>{
       if(data.hasil != "err"){
         this.filteredItems = data.data
       }

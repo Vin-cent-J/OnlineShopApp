@@ -9,11 +9,11 @@
 
 <ion-content class="ion-padding">
   <ion-button (click)="bukaModalTambah()" fill="clear">
-    <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
-    Tambah Kategori
+    <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>Tambah Kategori
   </ion-button>
   <ion-list>
-      <ion-item *ngFor="let kategori of kategoris">
+    <ion-searchbar (keyup)="cariKategori()" [(ngModel)]="cari" slot="start" placeholder="Cari..."></ion-searchbar>
+      <ion-item *ngFor="let kategori of filterKategori">
         <ion-label>{{ kategori.nama }}</ion-label>
         <ion-button fill="clear" (click)="bukaModalEdit(kategori)">
           <ion-icon slot="icon-only" name="create-outline"></ion-icon>

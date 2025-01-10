@@ -1,5 +1,6 @@
 import { Component, numberAttribute, OnInit } from '@angular/core';
 import { TransaksiService } from 'src/app/transaksi.service';
+
 @Component({
   selector: 'app-orderan',
   templateUrl: './orderan.page.html',
@@ -11,8 +12,10 @@ export class OrderanPage implements OnInit {
   isModalOpen = false;
   idOrder = 0;
   status = "";
+  statuss = "";
   pilihanStatus = [
     "Diproses",
+    "Dibatalkan",
     "Sedang Diantar",
     "Sudah Sampai Tujuan"
   ];
@@ -30,6 +33,10 @@ export class OrderanPage implements OnInit {
     });
   }
 
+  getTotal(detail: any): number {
+    return detail.reduce((acc: number, barang: any) => acc + barang.harga * barang.jumlah, 0);
+  }
+
   updateStatus(){
     this.transaksi.ubahStatus(this.idOrder, this.status).subscribe(data=>{
       if(data.hasil != "err"){
@@ -41,7 +48,8 @@ export class OrderanPage implements OnInit {
 
   bukaModal(order: any) {
     this.idOrder = order.id;
-    this.status = order.status
+    this.status = order.status;
+    this.statuss = order.status;
     this.isModalOpen = true;
   }
 

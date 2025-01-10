@@ -11,6 +11,11 @@ import { register } from 'swiper/element/bundle';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+import { registerLocaleData } from '@angular/common';
+import localeId from '@angular/common/locales/id';
+
+registerLocaleData(localeId, 'id-ID');
+
 register();
 
 @NgModule({

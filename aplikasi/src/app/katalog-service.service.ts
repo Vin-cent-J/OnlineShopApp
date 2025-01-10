@@ -13,12 +13,12 @@ export class KatalogServiceService {
     return this.http.get(this.baseUrl+"OnlineShopApp/API/katalog.php?halaman=" + halaman);
   }
 
-  cariBarang(p_cari: string | undefined | null, p_merek: number | undefined | null, p_kategori: number | undefined | null, p_min: number, p_max: number, halaman: number): Observable<any>{
+  cariBarang(p_cari: string | undefined | null, p_merek: number | undefined | null, p_kategori: number | undefined | null, p_min: number, p_max: number | undefined | null, halaman: number): Observable<any>{
     if(!p_min){
       p_min = 0
     }
-    if(!p_max){
-      p_max = 100000000
+    if(!p_max || p_max === null){
+      p_max = 1000000000
     }
     let url = this.baseUrl+"OnlineShopApp/API/katalog.php?halaman=" + halaman + "&minHarga=" + p_min +  "&maxHarga=" + p_max;
     if (p_cari) {

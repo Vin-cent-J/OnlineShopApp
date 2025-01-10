@@ -9,6 +9,8 @@ import { KatalogServiceService } from 'src/app/katalog-service.service';
 export class KategoriPage implements OnInit {
 
   kategoris: any[] = [];
+  filterKategori: any[] = [];
+  cari = "";
   kategori: any
   isModalOpen = false;
   isEditMode = false;
@@ -25,7 +27,8 @@ export class KategoriPage implements OnInit {
   private Kategori(){
     this.katalog.ambilKategori().subscribe(data=>{
       if(data.hasil === "success"){
-        this.kategoris = data.data
+        this.kategoris = data.data;
+        this.filterKategori = data.data;
       }
     })
   }
@@ -55,7 +58,11 @@ export class KategoriPage implements OnInit {
         this.Kategori();
       }
     });
-  } 
+  }
+
+  cariKategori() {
+    this.filterKategori = this.kategoris.filter(merek => merek.nama.toLowerCase().includes(this.cari.toLowerCase()));
+  }
 
   simpanKategori(){
     if(this.isEditMode){

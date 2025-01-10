@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KatalogServiceService } from 'src/app/katalog-service.service';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { FotoService } from 'src/app/foto.service';
 import { environment } from 'src/environments/environment';
@@ -20,6 +20,7 @@ export class BarangPage implements OnInit {
   isModalOpen = false;
   isEditMode = false;
   idBarang : number = 0
+  cari = "";
 
   nama = '';
   namaFile = '';
@@ -40,7 +41,7 @@ export class BarangPage implements OnInit {
     return Array.from({ length: this.total }, (_, i) => i + 1);
   }
 
-  constructor(private katalog: KatalogServiceService, private route: ActivatedRoute, private fotos: FotoService) { }
+  constructor(private katalog: KatalogServiceService, private route: ActivatedRoute, private fotos: FotoService, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe((params)=>{
@@ -77,6 +78,19 @@ export class BarangPage implements OnInit {
         this.merek = data.data;
       }
     })
+  }
+
+  cariBarang() {
+    this.filter();
+  }
+
+  filter() {
+    this.katalog.cariBarang(this.cari, null, null, 0, null, this.halaman).subscribe((data)=>{
+      console.log(data);
+      if(data.status != "err"){
+        this.barangs = data.data
+      }
+    });
   }
 
   bukaModalTambah() {

@@ -13,21 +13,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large"></ion-title>
-    </ion-toolbar>
-    <ion-toolbar>
-      <ion-searchbar [(ngModel)]="cari" placeholder="Search..."></ion-searchbar>
-    </ion-toolbar>
-    <ion-toolbar>
-      <ion-button color="primary" size="default" expand="block" [routerLink]="['/keranjang']">
-        <ion-icon slot="start" name="cart-outline"></ion-icon>
-      Go to Cart
-    </ion-button>
-    </ion-toolbar>
-  </ion-header>
-
   <div class="container">
     <ion-searchbar class="mobile" [(ngModel)]="cari" (keyup)="cariBarang($event)" slot="start" placeholder="Search..."></ion-searchbar>
     <ion-grid>
@@ -72,7 +57,7 @@
                   </div>
                   <ion-card-content>
                     <h3>{{ barang.nama }}</h3>
-                    <p>{{ barang.harga | currency:'Rp. ':'symbol':'1.0-0':'en-US' }}</p>
+                    <p>{{ barang.harga | currency:'Rp. ':'symbol':'1.0-0':'id-ID' }}</p>
                   </ion-card-content>
                 </ion-card>
               </ion-col>

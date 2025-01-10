@@ -9,6 +9,8 @@ import { KatalogServiceService } from 'src/app/katalog-service.service';
 export class MerekPage implements OnInit {
 
   mereks: any[] = [];
+  filterMerek: any[] = [];
+  cari = "";
   isModalOpen = false;
   isEditMode = false;
   idMerek : number = 0
@@ -24,9 +26,14 @@ export class MerekPage implements OnInit {
   private Merek(){
     this.katalog.ambilMerek().subscribe(data=>{
       if(data.hasil === "success"){
-        this.mereks = data.data
+        this.mereks = data.data;
+        this.filterMerek = data.data;
       }
     })
+  }
+
+  cariMerek() {
+    this.filterMerek = this.mereks.filter(merek => merek.nama.toLowerCase().includes(this.cari.toLowerCase()));
   }
 
   bukaModalTambah() {

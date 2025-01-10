@@ -41,7 +41,6 @@ export class KatalogPage implements OnInit {
   }
 
   bukaFilter(){
-    console.log("AAAA")
     if(!this.isFilter){
       this.isFilter=true;
     } else {
@@ -89,7 +88,6 @@ export class KatalogPage implements OnInit {
       console.log(data);
       if(data.status != "err"){
         this.barangs = data.data
-        this.cdr.detectChanges();
       }
     });
   }
