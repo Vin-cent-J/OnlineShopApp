@@ -71,21 +71,18 @@
       <ion-row>
         <ion-col></ion-col>
         <ion-col>
-          <ion-button class="page-buttons" expand="block" color="primary" [routerLink]="'/katalog/' + (halaman - 1)" [disabled]="halaman <= 1">
-            Previous
+          <ion-button class="page-buttons" expand="block" color="primary" [routerLink]="'/katalog/' + (+halaman - 1)" [queryParams]="{q : (cari), min : (minHarga), max : (maxHarga), merek : merekPilihan, kategori : kategoriPilihan}" [disabled]="halaman <= 1">
+            Sebelumnya
           </ion-button>
         </ion-col>
         <ion-col *ngFor="let i of range">
-          <ion-button 
-            size="small" 
-            [routerLink]="['/katalog', i]" 
-            [color]="i === halaman ? 'tertiary' : 'light'">
+          <ion-button size="small" [routerLink]="['/katalog', i]" [color]="i === halaman ? 'tertiary' : 'light'" [queryParams]="{q : (cari), min : (minHarga), max : (maxHarga), merek : merekPilihan, kategori : kategoriPilihan}">
             {{ i }}
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button class="page-buttons" expand="block" color="secondary" [routerLink]="'/katalog/' + (+halaman + 1)" [disabled]="halaman >= total">
-            Next
+          <ion-button class="page-buttons" expand="block" color="secondary" [routerLink]="'/katalog/' + (+halaman + 1)" [queryParams]="{q : (cari), min : (minHarga), max : (maxHarga), merek : merekPilihan, kategori : kategoriPilihan}" [disabled]="halaman >= total">
+            Selanjutnya
           </ion-button>
         </ion-col>
         <ion-col></ion-col>

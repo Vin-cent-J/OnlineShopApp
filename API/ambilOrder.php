@@ -1,7 +1,7 @@
 <?php
 require_once "connect.php";
 
-$sql = "SELECT o.id as id, o.tanggal, status, nama, nomor_hp, alamat FROM orders o left join statuss s on o.id = s.orders_id left join penggunas p on o.penggunas_id = p.id order by o.id desc";
+$sql = "SELECT o.id as id, o.tanggal, status, nama, nomor_hp, o.alamat FROM orders o left join statuss s on o.id = s.orders_id left join penggunas p on o.penggunas_id = p.id order by o.id desc";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $hasil = $stmt->get_result();

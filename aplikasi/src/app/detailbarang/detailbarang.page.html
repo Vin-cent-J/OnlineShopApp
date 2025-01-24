@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/katalog"></ion-back-button>
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -23,10 +23,13 @@
           <div class="item-card">
             <ion-card-header>
               <ion-card-title>{{ barang.nama }}</ion-card-title>
-              <ion-card-subtitle>{{ barang.harga | currency:'Rp. ':'symbol':'1.0-0':'en-US' }}</ion-card-subtitle>
+              <ion-text>{{ barang.harga | currency:'Rp. ':'symbol':'1.0-0':'en-US' }}</ion-text> <br>
+              <ion-text>Stok: {{ barang.stok }}</ion-text>
             </ion-card-header>
             <ion-card-content>
-              <ion-input [(ngModel)]="jumlah" type="number"></ion-input>
+              <ion-text>Deskripsi:</ion-text><br>
+              <ion-text>{{barang.deskripsi}}</ion-text>
+              <strong><ion-input label="Jumlah" [(ngModel)]="jumlah" type="number"></ion-input></strong>
               <ion-button expand="full" (click)="tambahKeranjang(barang.id)">+ keranjang</ion-button>
             </ion-card-content>
           </div>

@@ -55,12 +55,13 @@ export class KatalogServiceService {
     return this.http.get(url);
   }
 
-  tambahBarang(p_nama: string, p_stok: number, p_harga: number, p_foto: string, p_mereks_id: number, p_kategoris_id: number):Observable<any>{
+  tambahBarang(p_nama: string, p_stok: number, p_harga: number, p_deskripsi: string, p_foto: string, p_mereks_id: number, p_kategoris_id: number):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('nama', p_nama);
     body.set('stok', p_stok.toString());
     body.set('harga', p_harga.toString());
+    body.set('deskripsi', p_deskripsi);
     body.set('foto', p_foto);
     body.set('mereks_id', p_mereks_id.toString());
     body.set('kategoris_id', p_kategoris_id.toString());
@@ -70,12 +71,13 @@ export class KatalogServiceService {
     );
   }
 
-  ubahDataBarang(p_nama: string, p_stok: number, p_harga: number, p_foto: string, p_mereks_id: number, p_kategoris_id: number, p_id: number):Observable<any>{
+  ubahDataBarang(p_nama: string, p_stok: number, p_harga: number, p_deskripsi: string, p_foto: string, p_mereks_id: number, p_kategoris_id: number, p_id: number):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('nama', p_nama);
     body.set('stok', p_stok.toString());
     body.set('harga', p_harga.toString());
+    body.set('deskripsi', p_deskripsi);
     body.set('foto', p_foto);
     body.set('mereks_id', p_mereks_id.toString());
     body.set('kategoris_id', p_kategoris_id.toString());

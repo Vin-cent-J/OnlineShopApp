@@ -15,6 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivate: [authGuard],
     loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
   },
   {
@@ -64,7 +65,11 @@ const routes: Routes = [
     path: 'update-profile',
     loadChildren: () => import('./update-profile/update-profile.module').then( m => m.UpdateProfilePageModule)
   },
-
+  {
+    path: 'pembayaran',
+    loadChildren: () => import('./pembayaran/pembayaran.module').then( m => m.PembayaranPageModule)
+  },
+  
 
 ];
 

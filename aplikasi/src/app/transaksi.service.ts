@@ -10,10 +10,11 @@ export class TransaksiService {
 
   baseUrl = environment.apiUrl
 
-  beli(p_pid: string):Observable<any>{
+  beli(p_pid: string, p_alamat: string):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set("penggunas_id", p_pid);
+    body.set("alamat", p_alamat);
     const data = body.toString();
     return this.http.post(
       this.baseUrl+"OnlineShopApp/API/beli.php", data, {headers}
@@ -75,7 +76,10 @@ export class TransaksiService {
     );
   }
 
-  ambilOrder():Observable<any>{
+  ambilOrder(halaman: number | null):Observable<any>{
+    if(halaman === null){
+      halaman = 1;
+    }
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     return this.http.get(
       this.baseUrl+"OnlineShopApp/API/ambilOrder.php", {headers}

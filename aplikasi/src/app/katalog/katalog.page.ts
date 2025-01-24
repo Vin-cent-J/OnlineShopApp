@@ -5,6 +5,7 @@ import { TransaksiService } from '../transaksi.service';
 import { PenggunaService } from '../pengguna.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { max } from 'rxjs';
 
 @Component({
   selector: 'app-katalog',
@@ -15,7 +16,7 @@ export class KatalogPage implements OnInit {
 
   baseUrl = environment.apiUrl;
 
-  isFilter = false;
+  isFilter = true;
 
   barangs:any = [];
   kategori:any = [];
@@ -46,12 +47,15 @@ export class KatalogPage implements OnInit {
     } else {
       this.isFilter=false;
     }
-    
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params=>{
       this.cari = params["q"];
+      this.kategoriPilihan = params["kategori"];
+      this.merekPilihan = params["merek"];
+      this.minHarga = params["min"];
+      this.maxHarga = params["max"];
       this.filter();
     });
     this.route.params.subscribe((params)=>{
@@ -87,7 +91,8 @@ export class KatalogPage implements OnInit {
     this.katalog.cariBarang(this.cari, this.merekPilihan, this.kategoriPilihan, this.minHarga, this.maxHarga, this.halaman).subscribe((data)=>{
       console.log(data);
       if(data.status != "err"){
-        this.barangs = data.data
+        this.barangs = data.data;
+        this.total = data.total;
       }
     });
   }

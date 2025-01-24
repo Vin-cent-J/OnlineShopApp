@@ -18,12 +18,19 @@ export class KeranjangPage implements OnInit {
   user: any = this.pengguna.ambilPengguna();
   error: string = ""
 
+  alamats: any[]= [];
+  alamat = "";
+
   ngOnInit() {
     if(this.user != null){
       this.transaksi.lihatKeranjang(this.user.id).subscribe((data)=>{
         if(data.hasil != "err"){
-          this.keranjang = data.data
-          console.log(this.user.id);
+          this.keranjang = data.data;
+        }
+      });
+      this.pengguna.ambilAlamat(this.user.id).subscribe(data=>{
+        if(data.hasil !== "err"){
+          this.alamats = data.data;
         }
       });
     }
@@ -35,7 +42,7 @@ export class KeranjangPage implements OnInit {
 
   checkout() {
     if(this.user){
-      this.transaksi.beli(this.user.id).subscribe((data)=>{
+      this.transaksi.beli(this.user.id, this.alamat).subscribe((data)=>{
         if(data.hasil == "err"){
           this.error = data.data;
           return;

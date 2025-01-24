@@ -22,8 +22,9 @@ export class BarangPage implements OnInit {
   idBarang : number = 0
   cari = "";
 
-  nama = '';
-  namaFile = '';
+  nama = "";
+  namaFile = "";
+  deskripsi = "";
   harga = 0;
   stok = 0;
   foto : string = "";
@@ -136,14 +137,14 @@ export class BarangPage implements OnInit {
 
   simpanBarang(){
     if(this.isEditMode){
-      this.katalog.ubahDataBarang(this.nama, this.stok, this.harga, this.namaFile+".jpg", this.merekPilihan, this.kategoriPilihan, this.idBarang).subscribe(data => {
+      this.katalog.ubahDataBarang(this.nama, this.stok, this.harga, this.deskripsi, this.namaFile+".jpg", this.merekPilihan, this.kategoriPilihan, this.idBarang).subscribe(data => {
         if(data.hasil === "success"){
           this.isModalOpen = false;
           this.Barang();
         }
       });
     } else {
-      this.katalog.tambahBarang(this.nama, this.stok, this.harga, this.namaFile+".jpg", this.merekPilihan, this.kategoriPilihan,).subscribe(data => {
+      this.katalog.tambahBarang(this.nama, this.stok, this.harga, this.deskripsi, this.namaFile+".jpg", this.merekPilihan, this.kategoriPilihan,).subscribe(data => {
         if(data.hasil === "success"){
           this.isModalOpen = false;
           this.Barang();

@@ -18,7 +18,6 @@ if(isset($penggunas_id)) {
   if($stmt->execute()){
     $hasil = $stmt->get_result();
     while($row = $hasil->fetch_assoc()){
-
       $sql2 = "select jumlah, harga from detail_orders where orders_id=?";
       $stmt2 = $conn->prepare($sql2);
       $stmt2->bind_param("i", $row["id"]);
@@ -30,6 +29,19 @@ if(isset($penggunas_id)) {
           $barang[] = $row2;
       }
       $row["barang"] = $barang;
+
+      $sql3 = "select * from statuss where orders_id = ?";
+      $stmt3 = $conn->prepare($sql3);
+      $stmt3->bind_param("i", $row["id"]);
+      $stmt3->execute();
+      $hasil3 = $stmt3->get_result();
+
+      $status = [];
+      while($row3 = $hasil3->fetch_assoc()){
+        $status[] = $row3;
+      }
+      $row["status"] = $status;
+
       $transaksi[] = $row;
     }
     $arr = ["hasil"=>"success", "data"=>$order];

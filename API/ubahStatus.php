@@ -4,9 +4,9 @@ require_once "connect.php";
 extract($_POST);
 if(isset($status, $id )) {
   $tanggal = date('Y-m-d H:i:s');
-  $sql = "update statuss set status=?, tanggal=? where orders_id=?";
+  $sql = "insert into statuss(orders_id, tanggal, status) values(?,?,?)";
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param("ssi", $status, $tanggal, $id);
+  $stmt->bind_param("ssi", $id, $tanggal, $status);
   $stmt->execute();
 
   $arr = [];

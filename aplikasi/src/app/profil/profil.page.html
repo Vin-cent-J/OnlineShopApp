@@ -11,26 +11,61 @@
   <div class="profile-page">
     <ion-list>
       <ion-item>
-        <ion-text>Nomor Handphone: {{profil.nomor_hp}}</ion-text>
+        <ion-input label="Nomor Handphone:" [(ngModel)]="profil.nomor_hp" fill="outline" errorText="{{noHpError}}" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-input label="Nama:" [(ngModel)]="profil.nama" fill="outline" errorText="{{namaError}}" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input label="Alamat:" [(ngModel)]="profil.alamat" fill="outline" errorText="{{alamatError}}" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input label="Password Baru:" [(ngModel)]="passwordBaru" fill="outline" errorText="{{passwordError}}" type="password" required></ion-input>
+        <ion-input label="Password Baru:" [(ngModel)]="passwordBaru" fill="outline" errorText="{{passwordError}}" type="password"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input label="Password:" [(ngModel)]="password" fill="outline" errorText="{{konfirmasiError}}" type="password" required></ion-input>
       </ion-item>
       <ion-text *ngIf="error" color="danger">{{error}}</ion-text>
+      <ion-text *ngIf="success" color="success">{{success}}</ion-text>
     </ion-list>
+
+    <ion-card color="light">
+      <ion-button (click)="bukaModalTambah()">+ Alamat</ion-button>
+      <ion-card-header>
+        <ion-card-title>Alamat:</ion-card-title>
+      </ion-card-header>
+      <ion-list>
+        <ion-item *ngFor="let i of alamats">
+          {{i.alamat}} 
+          <ion-button (click)="bukaModalUpdate(i)">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card>
 
     <ion-button expand="block" color="primary" (click)="ubahProfil()">
       Update Profile
     </ion-button>
     <ion-button (click)="logout()" color="danger">Logout</ion-button>
   </div>
+
+  <ion-modal [isOpen]="isOpen" (didDismiss)="tutupModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ isEditMode ? 'Ubah Alamat' : 'Tambah Alamat' }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="tutupModal()">Tutup</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input label="Alamat" labelPlacement="stacked" [(ngModel)]="alamat"></ion-input>
+        </ion-item>
+        <ion-button expand="full" (click)="simpanAlamat()" [disabled]="!alamat">
+          {{ isEditMode ? 'Ubah' : 'Tambah' }} Alamat
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

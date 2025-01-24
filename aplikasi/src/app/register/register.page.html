@@ -1,22 +1,16 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" class="register-content">
   <div class="register-container">
     <ion-card class="register-card">
       <div class="card-header">
         <h2>Register</h2>
-        <p>Fill in the details to create your account</p>
+        <p>Isi detail pengguna untuk membuat akun</p>
       </div>
 
       <!-- Name Field -->
       <div class="input-container">
         <ion-label class="above-label">Nama</ion-label>
         <ion-item class="input-item">
-          <ion-input [(ngModel)]="nama" type="text" required placeholder="Enter your name"></ion-input>
+          <ion-input [(ngModel)]="nama" type="text" required placeholder="Masukkan nama"></ion-input>
         </ion-item>
       </div>
       <ion-text *ngIf="nameError" color="danger" class="error-message">
@@ -29,7 +23,7 @@
         <ion-label class="above-label">No Handphone</ion-label>
         <ion-item class="input-item">
           <ion-input [(ngModel)]="nohp" type="tel" inputmode="numeric" (ngModelChange)="validatePhoneNumber()"
-            required placeholder="Enter your phone number"></ion-input>
+            required placeholder="Masukkan nomor handphone"></ion-input>
         </ion-item>
       </div>
       <ion-text *ngIf="phoneError" color="danger" class="error-message">
@@ -37,11 +31,10 @@
         {{ phoneError }}
       </ion-text>
 
-      <!-- Address Field -->
       <div class="input-container">
         <ion-label class="above-label">Alamat</ion-label>
         <ion-item class="input-item">
-          <ion-input [(ngModel)]="alamat" type="text" required placeholder="Enter your address"></ion-input>
+          <ion-input [(ngModel)]="alamat" type="text" required placeholder="Masukkan alamat pengiriman"></ion-input>
         </ion-item>
       </div>
       <ion-text *ngIf="addressError" color="danger" class="error-message">
@@ -53,7 +46,7 @@
       <div class="input-container">
         <ion-label class="above-label">Password</ion-label>
         <ion-item class="input-item">
-          <ion-input [(ngModel)]="password" [type]="passwordType" required placeholder="Enter your password"></ion-input>
+          <ion-input [(ngModel)]="password" [type]="passwordType" required placeholder="Masukkan password"></ion-input>
           <ion-button fill="clear" size="small" slot="end" (click)="togglePasswordVisibility()">
             {{ passwordType === 'password' ? 'Show' : 'Hide' }}
           </ion-button>
@@ -67,7 +60,7 @@
       <!-- Register Button -->
       <ion-button expand="block" class="register-button" (click)="register()" [disabled]="loading">
         <ion-spinner *ngIf="loading" slot="start"></ion-spinner>
-        {{ loading ? 'Registering...' : 'Register' }}
+        {{ loading ? 'Mendaftarkan...' : 'Daftar' }}
       </ion-button>
 
       <ion-text *ngIf="registerError" color="danger" class="error-message">

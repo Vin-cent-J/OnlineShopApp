@@ -2,10 +2,10 @@
 require_once "connect.php";
 
 extract($_POST);
-if(isset($id, $nama, $harga, $foto, $mereks_id, $kategoris_id)) {
-    $sql = "update barangs set nama=?, stok=?, harga=?, foto=?, mereks_id=?, kategoris_id=? where id=?";
+if(isset($id, $nama, $harga, $deskripsi, $foto, $mereks_id, $kategoris_id)) {
+    $sql = "update barangs set nama=?, stok=?, harga=?, deskripsi=?, foto=?, mereks_id=?, kategoris_id=? where id=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sidsiii", $nama, $stok, $harga, $foto, $mereks_id, $kategoris_id, $id);
+    $stmt->bind_param("sidssiii", $nama, $stok, $harga, $deskripsi, $foto, $mereks_id, $kategoris_id, $id);
     $stmt->execute();
 
     $arr = [];

@@ -22,13 +22,14 @@ export class TransaksiPage implements OnInit {
 
   ngOnInit() {
     this.user = this.pengguna.ambilPengguna()
-    if(this.user.id > 0){
+    if(this.user.id){
       this.transaksi.riwayat(this.user.id).subscribe((data)=>{
+        console.log(data);
         if(data.hasil=="err"){
-          this.error = data.data
-          return
+          this.error = data.data;
+          return;
         }
-        this.transaksis = data.data
+        this.transaksis = data.data;
       })
     }
     

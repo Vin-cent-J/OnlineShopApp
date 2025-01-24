@@ -13,11 +13,14 @@ if(!isset($halaman) || $halaman <= 1){
 $jumlah = 16;
 $mulai = ($halaman - 1) * $jumlah;
 
-$hasil = $conn->query("select COUNT(*) total from barangs where tgl_hapus is null");
-$data = $hasil->fetch_assoc();
-$total = $data['total'];
+// $hasil = $conn->query("select COUNT(*) total from barangs where tgl_hapus is null"); //TODO FIX
+// $data = $hasil->fetch_assoc();
+// $total = $data['total'];
 
-$jumlahHalaman = ceil($total / $jumlah);
+$sql1 = "select COUNT(*) total from barangs b 
+inner join mereks m on b.mereks_id = m.id 
+inner join kategoris k on b.kategoris_id = k.id 
+where b.nama like ? and b.tgl_hapus is null ";
 
 $sql = "select b.*, m.nama merek, k.nama kategori from barangs b 
 inner join mereks m on b.mereks_id = m.id 
@@ -35,28 +38,42 @@ $tipe = "s";
 
 if(isset($merek)){
   $sql .= "and m.id=? ";
+  $sql1 .= "and m.id=? ";
   $parameter[] = $merek;
   $tipe
  .= "i";
 }
 if(isset($kategori)){
   $sql .= "and k.id=? ";
+  $sql1 .= "and k.id=? ";
   $parameter[] = $kategori;
   $tipe
  .= "i";
 }
 if(isset($minHarga)){
   $sql .= "and b.harga>=? ";
+  $sql1 .= "and b.harga>=? ";
   $parameter[] = $minHarga;
   $tipe
  .= "i";
 }
 if(isset($maxHarga)){
   $sql .= "and b.harga<=? ";
+  $sql1 .= "and b.harga<=? ";
   $parameter[] = $maxHarga;
   $tipe
  .= "i";
 }
+
+$stmt1 = $conn->prepare($sql1);
+$stmt1->bind_param($tipe, ...$parameter);
+if($stmt1->execute()){
+  $hasil1 = $stmt1->get_result();
+  $row = $hasil1->fetch_assoc();
+  $total = $row['total'];
+}
+
+$jumlahHalaman = ceil($total / $jumlah);
 
 $sql.="LIMIT ?, ?";
 array_push($parameter, $mulai, $jumlah);

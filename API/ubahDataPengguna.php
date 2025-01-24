@@ -2,18 +2,20 @@
 require_once "connect.php";
 
 extract($_POST);
-if(isset($no_hp, $nama, $alamat, $password)) {
+if(isset($id, $no_hp, $nama, $password)) {
+  $password = hash("sha256", $password);
   $type = "ssss";
-  $parameter = [$nama, $alamat];
-  $sql = "update penggunas set nama=?, alamat=?";
+  $parameter = [$nama, $no_hp];
+  $sql = "update penggunas set nama=?, nomor_hp=?";
   if(isset($passwordBaru)){
+    $passwordBaru = hash("sha256", $passwordBaru);
     $sql .= ", password=?";
     $passwordBaru = hash("sha256", $passwordBaru);
     $type .= "s";
     $parameter[] = $passwordBaru;
   }
-  array_push($parameter, $no_hp, $password);
-  $sql .= " where nomor_hp=? and password= ?";
+  array_push($parameter, $id, $password);
+  $sql .= " where id=? and password=?";
 
   $stmt = $conn->prepare($sql);
   $stmt->bind_param($type, ...$parameter);

@@ -11,82 +11,67 @@ import { of } from 'rxjs';
 })
 export class LoginPage implements OnInit {
 
-  nohp: string = ""; // Phone number input
-  password: string = ""; // Password input
-  loginError: string = ""; // General error message display
-  phoneError: string | null = null; // Specific error message for phone number
-  passwordError: string | null = null; // Specific error message for password
-  passwordType: string = 'password'; // Password visibility toggle
-  loading: boolean = false; // Loading spinner indicator
+  nohp: string = ""; 
+  password: string = ""; 
+  loginError: string = ""; 
+  phoneError: string | null = null; 
+  passwordError: string | null = null; 
+  passwordType: string = 'password'; 
+  loading: boolean = false; 
 
   constructor(private pengguna: PenggunaService, private route: Router) { }
 
   ngOnInit() { }
 
-  // Method to toggle password visibility
   togglePasswordVisibility() {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
   }
 
-  // Method to validate phone number input
   validatePhoneNumber() {
     const phoneRegex = /^[0-9]*$/;
 
-    // Check if the input contains only numbers
     if (!phoneRegex.test(this.nohp)) {
       this.phoneError = "Nomor handphone hanya boleh berisi angka.";
     } 
-    // Check if the input length is between 10 and 12
-    else if (this.nohp.length < 10 || this.nohp.length > 12) {
-      this.phoneError = "Nomor handphone harus terdiri dari 10 hingga 12 angka.";
+    else if (this.nohp.length < 10 || this.nohp.length > 14) {
+      this.phoneError = "Nomor handphone harus terdiri dari 10 hingga 14 angka.";
     } 
     else {
-      this.phoneError = null; // Clear error if valid
+      this.phoneError = null;
     }
   }
 
   login() {
-    // Clear previous error messages
     this.loginError = "";
     this.phoneError = null;
     this.passwordError = null;
 
-    // Basic validation for phone and password fields
-    if (!this.nohp || this.nohp.length < 10 || this.nohp.length > 12 || !/^[0-9]*$/.test(this.nohp)) {
+    if (!this.nohp || this.nohp.length < 10 || this.nohp.length > 14 || !/^[0-9]*$/.test(this.nohp)) {
       this.phoneError = "Nomor handphone tidak sesuai.";
     }
     if (this.password.length < 6) {
       this.passwordError = "Password terlalu pendek.";
     }
 
-    // Stop if there are validation errors
     if (this.phoneError || this.passwordError) {
       return;
     }
 
-    this.loading = true; // Start the loading spinner
+    this.loading = true;
 
-    this.pengguna.login(this.nohp, this.password).pipe(
-      catchError((err) => {
-        this.loading = false; // Stop loading spinner
-        this.loginError = err.error?.message || "Gagal masuk. Silakan coba lagi.";
-        return of(null); // Handle the error safely
-      })
-    ).subscribe((data) => {
-      this.loading = false; // Stop the spinner
-      if (data) {
-        this.pengguna.simpanPengguna(data.data); // Save user data
-        this.route.navigate(["/"]); // Redirect to home
+    this.pengguna.login(this.nohp, this.password).subscribe(data => {
+      this.loading = false; 
+      if (data.hasil !== "err") {
+        this.pengguna.simpanPengguna(data.data); 
+        this.route.navigate(["/"]); 
+      } else {
+        this.loading = false;
+        this.loginError = "Gagal masuk. Silakan coba lagi.";
+        return;
       }
     });
   }
 
-  // Navigate to Forgot Password Page
-  navigateToForgotPassword() {
-    this.route.navigate(["/lupapassword"]);
-  }
-
-  // Navigate to Sign-Up Page
   navigateToSignUp() {
     this.route.navigate(["/register"]);
   }

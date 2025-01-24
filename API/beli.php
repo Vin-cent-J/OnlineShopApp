@@ -2,11 +2,11 @@
 require_once "connect.php";
 
 extract($_POST);
-if(isset($penggunas_id)) {
+if(isset($penggunas_id, $alamat)) {
   $tgl = date("Y-m-d H:i:s");
-  $sql = "insert into orders(tanggal, penggunas_id) values(?,?)";
+  $sql = "insert into orders(tanggal, penggunas_id, alamat) values(?,?,?)";
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param("ss", $tgl, $penggunas_id);
+  $stmt->bind_param("sss", $tgl, $penggunas_id, $alamat);
   $stmt->execute();
 
   $orders_id = $conn->insert_id;
@@ -37,7 +37,7 @@ if(isset($penggunas_id)) {
   }
 
   $sql5 = "INSERT INTO statuss(orders_id, status) VALUES(?, ?)";
-  $status = "Diproses";
+  $status = "Menunggu Pembayaran";
   $stmt5 = $conn->prepare($sql5);
   $stmt5->bind_param("is", $orders_id, $status);
   $stmt5->execute();

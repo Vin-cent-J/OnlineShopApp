@@ -38,6 +38,10 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-select>
+    <ion-select-option *ngFor="let i of alamats" [(ngModel)]="alamat">{{i.alamat}}</ion-select-option>
+  </ion-select>
+
   <div class="checkout-button">
     <ion-button expand="block" color="success" (click)="checkout()">
       <ion-icon name="cart" slot="start"></ion-icon>

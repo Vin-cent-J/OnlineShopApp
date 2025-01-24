@@ -1,22 +1,15 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" class="login-content">
   <div class="login-container">
     <ion-card class="login-card">
       <div class="card-header">
         <h2>Login</h2>
-        <p>Hey, enter your details to sign in to your account</p>
+        <p>Masukan datamu untuk login</p>
       </div>
 
-      <!-- Phone Number Field -->
       <div class="input-container">
         <ion-label class="above-label">Nomor Handphone</ion-label>
         <ion-item class="input-item">
-          <ion-input [(ngModel)]="nohp" type="tel" inputmode="numeric" (ngModelChange)="validatePhoneNumber()" required placeholder="Enter your phone number"></ion-input>
+          <ion-input [(ngModel)]="nohp" type="tel" inputmode="numeric" (ngModelChange)="validatePhoneNumber()" required placeholder="Masukan nomor handphone"></ion-input>
         </ion-item>
       </div>
       <ion-text *ngIf="phoneError" color="danger" class="error-message">
@@ -24,11 +17,10 @@
         {{ phoneError }}
       </ion-text>
 
-      <!-- Password Field -->
       <div class="input-container">
         <ion-label class="above-label">Password</ion-label>
         <ion-item class="input-item">
-          <ion-input [(ngModel)]="password" [type]="passwordType" required placeholder="Enter your password"></ion-input>
+          <ion-input [(ngModel)]="password" [type]="passwordType" required placeholder="Masukkan password"></ion-input>
           <ion-button fill="clear" size="small" slot="end" (click)="togglePasswordVisibility()">
             {{ passwordType === 'password' ? 'Show' : 'Hide' }}
           </ion-button>
@@ -39,20 +31,17 @@
         {{ passwordError }}
       </ion-text>
 
-      <!-- Login Button -->
+      <ion-text *ngIf="loginError">
+        {{loginError}}
+      </ion-text>
+
       <ion-button expand="block" class="login-button" (click)="login()" [disabled]="loading">
         <ion-spinner *ngIf="loading" slot="start"></ion-spinner>
-        {{ loading ? 'Logging in...' : 'Sign in' }}
+        {{ loading ? 'Logging in...' : 'Login' }}
       </ion-button>
 
       <ion-button expand="block" fill="outline" class="create-account-button" (click)="navigateToSignUp()">
-        Create Account
-      </ion-button>
-
-      <p class="help-text">Having trouble signing in?</p>
-
-      <ion-button expand="block" fill="outline" class="forgot-password-button" (click)="navigateToForgotPassword()">
-        Forgot Password
+        Buat akun
       </ion-button>
     </ion-card>
   </div>
