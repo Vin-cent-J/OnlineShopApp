@@ -8,19 +8,19 @@ error_reporting(E_ALL);
 extract($_POST);
 
 if(isset($penggunas_id)) {
-  $sql="select o.* from orders o left join statuss s on o.id = s.orders_id where o.penggunas_id=? group by o.id order by s.id desc";
+  $sql="select o.* from orders o inner join statuss s on o.id = s.orders_id where o.penggunas_id=? order by s.id desc";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("s", $penggunas_id); 
   
   $arr = [];
-  $order = [];
+  $transaksi = [];
 
   if($stmt->execute()){
     $hasil = $stmt->get_result();
     while($row = $hasil->fetch_assoc()){
-      $sql2 = "select jumlah, harga from detail_orders where orders_id=?";
+      $sql2 = "SELECT b.nama, od.jumlah, od.harga from detail_orders od inner join barangs b on od.barangs_id = b.id where orders_id=?";
       $stmt2 = $conn->prepare($sql2);
-      $stmt2->bind_param("i", $row["id"]);
+      $stmt2->bind_param("s", $row["id"]);
       $stmt2->execute();
       $hasil2 = $stmt2->get_result();
 
@@ -44,7 +44,7 @@ if(isset($penggunas_id)) {
 
       $transaksi[] = $row;
     }
-    $arr = ["hasil"=>"success", "data"=>$order];
+    $arr = ["hasil"=>"success", "data"=>$transaksi];
   }
   else{
     $arr = ["hasil"=> "err","data"=> "Tidak ada riwayat transaksi."];

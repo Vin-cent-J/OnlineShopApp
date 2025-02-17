@@ -19,12 +19,12 @@
       <ion-item *ngFor="let transaksi of transaksis">
         
         <ion-avatar slot="start">
-          <ion-icon [name]="icon(transaksi.status)" [color]="warnaStatus(transaksi.status)" size="large"></ion-icon>
+          <ion-icon [name]="icon(transaksi.status[0].status)" [color]="warnaStatus(transaksi.status[0].status)" size="large"></ion-icon>
         </ion-avatar>
         <ion-label>
-          <h2>{{transaksi.id}}</h2><ion-badge slot="end" [color]="warnaStatus(transaksi.status)">{{ transaksi.status | titlecase }}</ion-badge>
+          <h2>Id Order: {{transaksi.id}}</h2><ion-badge slot="end" [color]="warnaStatus(transaksi.status[0].status)">{{ transaksi.status[0].status | titlecase }}</ion-badge>
           <p>{{transaksi.date}}</p>
-          <p>Total: Rp. {{transaksi.total}}</p>
+          <p>Total: Rp. {{ getTotal(transaksi.barang) | currency:'Rp. ':'symbol':'1.0-0':'id-ID' }}</p>
         </ion-label>
         <ion-button routerLink="/detailtransaksi/{{transaksi.id}}" routerLinkActive="router-link-active" size="medium">
           Detail
