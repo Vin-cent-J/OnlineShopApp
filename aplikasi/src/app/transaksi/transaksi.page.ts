@@ -11,14 +11,20 @@ export class TransaksiPage implements OnInit {
 
   constructor(private transaksi: TransaksiService, private pengguna: PenggunaService) { }
 
-  user: any = null
+  user: any = null;
   transaksis: any[] = [
     { id: '123456789', total: 99.99, date: 'November 3, 2024', status: 'Terkirim'},
     { id: '987654321', total: 49.99, date: 'November 1, 2024', status: 'Menunggu pengiriman' },
     { id: '456789123', total: 199.99, date: 'October 30, 2024', status: 'Menunggu pembayaran' },
     { id: '456789122', total: 199.99, date: 'October 30, 2024', status: 'Batal' },
   ];
-  error: string = ""
+  error: string = "";
+
+  isModalOpen = false;
+  idOrder = 0;
+  alamat = "";
+  statuss: any[] = [];
+  barangs: any[] = [];
 
   ngOnInit() {
     this.user = this.pengguna.ambilPengguna()
@@ -68,5 +74,17 @@ export class TransaksiPage implements OnInit {
       default:
         return 'help-circle';
     }
+  }
+
+  bukaModal(order: any) {
+    this.idOrder = order.id;
+    this.statuss = order.status;
+    this.alamat = order.alamat;
+    this.barangs = order.barang;
+    this.isModalOpen = true;
+  }
+
+  tutupModal() {
+    this.isModalOpen = false;
   }
 }
