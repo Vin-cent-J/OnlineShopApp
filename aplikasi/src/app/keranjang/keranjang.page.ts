@@ -14,26 +14,33 @@ export class KeranjangPage implements OnInit {
 
   constructor(private transaksi: TransaksiService, private pengguna: PenggunaService, private router: Router) { }
 
-  keranjang: any = []
+  keranjang: any[] = []
   user: any = this.pengguna.ambilPengguna();
   error: string = ""
 
   alamats: any[]= [];
-  alamat = "";
+  alamat : any = null;
 
   ngOnInit() {
     if(this.user != null){
-      this.transaksi.lihatKeranjang(this.user.id).subscribe((data)=>{
-        if(data.hasil != "err"){
-          this.keranjang = data.data;
-        }
-      });
+      this.getKeranjang();
       this.pengguna.ambilAlamat(this.user.id).subscribe(data=>{
         if(data.hasil !== "err"){
           this.alamats = data.data;
+          if (this.alamats.length > 0) {
+            this.alamat = this.alamats[0].alamat;
+          }
         }
       });
     }
+  }
+
+  getKeranjang(){
+    this.transaksi.lihatKeranjang(this.user.id).subscribe((data)=>{
+      if(data.hasil != "err"){
+        this.keranjang = data.data;
+      }
+    });
   }
 
   getTotal(): number {
@@ -51,5 +58,13 @@ export class KeranjangPage implements OnInit {
         this.router.navigate(["/home"])
       })
     }
+  }
+
+  hapusBarang(bid: number){
+    this.transaksi.hapusKeranjang(this.user.id, bid).subscribe(data=>{
+      if(data.hasil !== "err"){
+        this.getKeranjang();
+      }
+    });
   }
 }

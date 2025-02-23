@@ -31,7 +31,7 @@ export class TransaksiService {
     );
   }
 
-  riwayat(p_pid: number): Observable<any>{
+  riwayat(p_pid: string): Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('penggunas_id', p_pid.toString());
@@ -41,7 +41,7 @@ export class TransaksiService {
     );
   }
 
-  tambahKeranjang(p_pid: number, p_bid: number, p_jumlah: number):Observable<any>{
+  tambahKeranjang(p_pid: string, p_bid: number, p_jumlah: number):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('penggunas_id', p_pid.toString());
@@ -53,7 +53,7 @@ export class TransaksiService {
     );
   }
 
-  ubahKeranjang(p_pid: number, p_bid: number, p_jumlah: number):Observable<any>{
+  ubahKeranjang(p_pid: string, p_bid: number, p_jumlah: number):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('penggunas_id', p_pid.toString());
@@ -65,7 +65,7 @@ export class TransaksiService {
     );
   }
 
-  hapusKeranjang(p_pid: number, p_bid: number):Observable<any>{
+  hapusKeranjang(p_pid: string, p_bid: number):Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('penggunas_id', p_pid.toString());

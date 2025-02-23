@@ -50,11 +50,6 @@ const routes: Routes = [
     loadChildren: () => import('./transaksi/transaksi.module').then( m => m.TransaksiPageModule)
   },
   {
-    path: 'detailtransaksi/:id',
-    canActivate: [authGuard],
-    loadChildren: () => import('./detailtransaksi/detailtransaksi.module').then( m => m.DetailtransaksiPageModule)
-  },
-  {
     path: 'detailbarang/:id',
     loadChildren: () => import('./detailbarang/detailbarang.module').then( m => m.DetailbarangPageModule)
   },

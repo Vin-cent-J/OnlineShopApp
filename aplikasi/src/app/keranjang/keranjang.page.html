@@ -20,7 +20,7 @@
         <p>Quantity: {{ barang.jumlah }}</p>
       </ion-label>
 
-      <ion-button color="danger" fill="outline">
+      <ion-button color="danger" fill="outline" (click)="hapusBarang(barang.id)">
         <ion-icon name="trash" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-item>
@@ -35,15 +35,14 @@
         <ion-label>Total</ion-label>
         <ion-text>{{ getTotal() | currency:'Rp. ':'symbol':'1.0-0':'id-ID' }}</ion-text>
       </ion-item>
+      <ion-select label="Alamat:" [(ngModel)]="alamat">
+        <ion-select-option *ngFor="let i of alamats" >{{i.alamat}}</ion-select-option>
+      </ion-select>
     </ion-card-content>
   </ion-card>
 
-  <ion-select>
-    <ion-select-option *ngFor="let i of alamats" [(ngModel)]="alamat">{{i.alamat}}</ion-select-option>
-  </ion-select>
-
   <div class="checkout-button">
-    <ion-button expand="block" color="success" (click)="checkout()">
+    <ion-button expand="block" color="success" (click)="checkout()" [disabled]="keranjang.length===0">
       <ion-icon name="cart" slot="start"></ion-icon>
       Checkout
     </ion-button>
