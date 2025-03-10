@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Banner</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/admin']">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col *ngFor="let num of [].constructor(5); let i = index">
+      <ion-card >
+        <div class="photo-upload-container">
+          <ion-button expand="block" (click)="ambilFoto(1)">
+            <ion-icon name="image-outline"></ion-icon>
+            Ambil Foto
+          </ion-button>
+          <div>
+            <img src="{{baseUrl}}/OnlineShopApp/asset/Banner_{{i+1}}.jpg" style="min-height: 36vh;">
+          </div>
+        </div>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

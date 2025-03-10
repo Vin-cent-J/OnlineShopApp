@@ -21,6 +21,14 @@ export class PenggunaService {
     return this.http.post(this.baseUrl+"OnlineShopApp/API/login.php", data, {headers});
   }
 
+  admin(uid: string): Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('id', uid);
+    const data = body.toString();
+    return this.http.post(this.baseUrl+"OnlineShopApp/API/auth.php", data, {headers});
+  }
+
   register(p_id: string,p_no_hp: string, p_pass: string, p_nama: string, p_alamat: string): Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();

@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'orderan',
     loadChildren: () => import('./orderan/orderan.module').then( m => m.OrderanPageModule)
+  },
+  {
+    path: 'banner',
+    loadChildren: () => import('./banner/banner.module').then( m => m.BannerPageModule)
   }
 ];
 
