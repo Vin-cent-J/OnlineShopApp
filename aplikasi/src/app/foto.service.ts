@@ -40,14 +40,53 @@ export class FotoService {
     return new Blob(byteArrays, { type: tipe });
   }
 
-  uploadFoto(foto: Blob, nama: string){
+  uploadFoto(foto: Blob, nama: string, banner: boolean = false){
     const headers = new HttpHeaders({})
     const formData = new FormData();
     const fileName = `${nama}.jpg`;
     formData.append('file', foto, fileName);
     formData.append('nama', nama)
+    formData.append('isBanner', banner ? '1' : '');
     this.http.post(this.baseUrl+'OnlineShopApp/API/upload.php', formData, {headers}).subscribe(data => {
       console.log(data);
     });
+  }
+
+  ambilBanner(): Observable<any>{
+    return this.http.get(this.baseUrl+'OnlineShopApp/API/banner.php');
+  }
+
+  tambahBanner(nama: string, foto: string): Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('nama', nama);
+    body.set('foto', foto);
+    const data = body.toString();
+    return this.http.post(
+      this.baseUrl+"OnlineShopApp/API/tambahBanner.php", data, {headers}
+    );
+  }
+
+  hapusBanner(id: number): Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('id', id.toString());
+    const data = body.toString();
+    return this.http.post(
+      this.baseUrl+"OnlineShopApp/API/hapusBanner.php", data, {headers}
+    );
+  }
+
+  ubahBanner(id: number, nama: string, foto: string, fotoSekarang: string): Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('id', id.toString());
+    body.set('nama', nama);
+    body.set('foto', foto);
+    body.set('fotos', fotoSekarang);
+    const data = body.toString();
+    return this.http.post(
+      this.baseUrl+"OnlineShopApp/API/ubahBanner.php", data, {headers}
+    );
   }
 }

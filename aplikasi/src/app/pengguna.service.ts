@@ -80,7 +80,7 @@ export class PenggunaService {
     return user ? JSON.parse(user) : null;
   }
 
-  tambahAlamat(p_pid: string, alamat: string){
+  tambahAlamat(p_pid: string, alamat: string): Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('penggunas_id', p_pid);
@@ -89,7 +89,7 @@ export class PenggunaService {
     return this.http.post(this.baseUrl+"OnlineShopApp/API/tambahAlamat.php", data, {headers});
   }
 
-  ubahAlamat(id: string, alamat: string, utama: boolean){
+  ubahAlamat(id: string, alamat: string, utama: boolean): Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('id', id);

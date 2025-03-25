@@ -18,8 +18,8 @@ grid {
 
 ion-card {
   background: #fff7f0;
-  min-height: 250px;
-  max-height: 250px;
+  min-height: 25vh;
+  max-height: 25vh;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   padding: 20px;
@@ -47,4 +47,17 @@ ion-card-content {
   color: #2c2c2c;
   font-size: 1em;
   line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  ion-card{
+    min-height: 16vh;
+    max-height: 16vh;
+    padding: 10px;
+    margin: auto;
+  }
+
+  ion-card-title{
+    margin-bottom: 2px;
+  }
 }

@@ -9,20 +9,57 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-row>
-    <ion-col *ngFor="let num of [].constructor(5); let i = index">
-      <ion-card >
-        <div class="photo-upload-container">
-          <ion-button expand="block" (click)="ambilFoto(1)">
-            <ion-icon name="image-outline"></ion-icon>
-            Ambil Foto
-          </ion-button>
-          <div>
-            <img src="{{baseUrl}}/OnlineShopApp/asset/Banner_{{i+1}}.jpg" style="min-height: 36vh;">
+<ion-content class="ion-padding">
+  <ion-button (click)="bukaModalTambah()" fill="clear">
+    <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>Tambah Barang
+  </ion-button>
+  <ion-list>
+    <ion-item *ngFor="let banner of banners">
+      <ion-label>{{banner.nama}}</ion-label>
+      <ion-button fill="clear" (click)="bukaModalEdit(banner)">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="hapusBanner(banner.id)">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  
+
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="tutupModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ isEditMode ? 'Ubah' : 'Tambah' }} Banner</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="tutupModal()">Tutup</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input label="Nama banner" labelPlacement="stacked" [(ngModel)]="nama"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Foto</ion-label>
+          <div class="photo-upload-container">
+            <ion-button expand="block" (click)="ambilFoto()" [disabled]="!nama">
+              <ion-icon name="image-outline"></ion-icon>
+              Ambil Foto
+            </ion-button>
+            <div *ngIf="previewFoto" class="photo-preview">
+              <img [src]="previewFoto" alt="Preview Foto">
+            </div>
+            <div>
+              <img src="{{baseUrl}}/OnlineShopApp/asset/{{foto}}" *ngIf="!previewFoto">
+            </div>
           </div>
-        </div>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+        </ion-item>
+        <ion-button expand="full" (click)="simpanBanner()" [disabled]="!nama">
+          {{ isEditMode ? 'Ubah' : 'Tambah' }} Barang
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

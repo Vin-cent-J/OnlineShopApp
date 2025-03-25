@@ -52,6 +52,9 @@ export class KatalogPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params=>{
       this.cari = params["q"];
+      if(this.cari === undefined){
+        this.cari = '';
+      }
       this.kategoriPilihan = params["kategori"];
       this.merekPilihan = params["merek"];
       this.minHarga = params["min"];
@@ -88,8 +91,14 @@ export class KatalogPage implements OnInit {
   }
 
   filter() {
+    if(this.kategoriPilihan === "Semua"){
+      this.kategoriPilihan = "";
+    }
+    if(this.merekPilihan === "Semua"){
+      this.merekPilihan = "";
+    }
     this.katalog.cariBarang(this.cari, this.merekPilihan, this.kategoriPilihan, this.minHarga, this.maxHarga, this.halaman).subscribe((data)=>{
-      console.log(data);
+      console.log("Merk: "+this.merekPilihan);
       if(data.status != "err"){
         this.barangs = data.data;
         this.total = data.total;
@@ -99,7 +108,7 @@ export class KatalogPage implements OnInit {
 
   tambahKeranjang(idBarang: number){
     this.transaksi.tambahKeranjang(this.user.id, idBarang, this.jumlah).subscribe((data)=>{
-      console.log(data)
+
     })
   }
 

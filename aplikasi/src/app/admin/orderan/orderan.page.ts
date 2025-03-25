@@ -22,9 +22,9 @@ export class OrderanPage implements OnInit {
   statuss = "";
   pilihanStatus = [
     "Diproses",
-    "Dibatalkan",
     "Sedang Diantar",
-    "Sudah Sampai Tujuan"
+    "Sudah Sampai Tujuan",
+    "Dibatalkan"
   ];
   constructor(private transaksi: TransaksiService, private route: ActivatedRoute) { }
 
@@ -53,6 +53,7 @@ export class OrderanPage implements OnInit {
 
   order(){
     this.transaksi.ambilOrder(this.halaman).subscribe(data=>{
+      console.log(data);
       if(data.hasil != "err"){
         this.orders = data.data;
         this.filterOrder = data.data;
@@ -66,6 +67,7 @@ export class OrderanPage implements OnInit {
 
   updateStatus(){
     this.transaksi.ubahStatus(this.idOrder, this.status).subscribe(data=>{
+      console.log(this.status);
       if(data.hasil != "err"){
         this.order();
         this.isModalOpen = false;

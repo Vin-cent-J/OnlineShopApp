@@ -20,6 +20,9 @@ export class KeranjangPage implements OnInit {
 
   alamats: any[]= [];
   alamat : any = null;
+  total = 0;
+
+  isModalOpen = false;
 
   ngOnInit() {
     if(this.user != null){
@@ -51,11 +54,12 @@ export class KeranjangPage implements OnInit {
     if(this.user){
       this.transaksi.beli(this.user.id, this.alamat).subscribe((data)=>{
         if(data.hasil == "err"){
+          this.total = this.getTotal();
           this.error = data.data;
           return;
         }
-        this.keranjang = []
-        this.router.navigate(["/home"])
+        this.isModalOpen = true;
+        this.keranjang = [];
       })
     }
   }
@@ -66,5 +70,9 @@ export class KeranjangPage implements OnInit {
         this.getKeranjang();
       }
     });
+  }
+
+  tutupModal(){
+    this.isModalOpen = false;
   }
 }

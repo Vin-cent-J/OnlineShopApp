@@ -5,6 +5,7 @@ import { KatalogServiceService } from '../katalog-service.service';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { FotoService } from '../foto.service';
 register();
 
 @Component({
@@ -16,7 +17,7 @@ export class HomePage implements OnInit {
 
   baseUrl = environment.apiUrl;
 
-  constructor(private pengguna: PenggunaService, private katalog: KatalogServiceService, private router: Router, private cdr: ChangeDetectorRef) {}
+  constructor(private pengguna: PenggunaService, private katalog: KatalogServiceService, private router: Router, private fotos: FotoService, private cdr: ChangeDetectorRef) {}
 
   user: any = { id: 0, nama: '' };
   barangs: any[] = [];
@@ -30,6 +31,8 @@ export class HomePage implements OnInit {
   merekPilihan: any = null;
   minHarga: any = null;
   maxHarga: any = null;
+
+  banners: any[] = [];
 
   ngOnInit() {
     this.user = this.pengguna.ambilPengguna();
@@ -48,6 +51,7 @@ export class HomePage implements OnInit {
         this.merek = data.data.slice(0,5);
       }
     });
+    this.getBanner();
   }
 
   filter() {
@@ -94,5 +98,13 @@ export class HomePage implements OnInit {
         this.filteredItems = data.data
       }
     });
+  }
+
+  getBanner(){
+    this.fotos.ambilBanner().subscribe(data=>{
+      if(data.hasil === 'success'){
+        this.banners = data.data;
+      }
+    })
   }
 }

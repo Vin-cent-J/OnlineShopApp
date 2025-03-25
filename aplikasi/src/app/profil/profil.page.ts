@@ -26,7 +26,7 @@ export class ProfilPage implements OnInit {
   alamatError = "";
   isOpen = false;
   isEditMode = true;
-
+  idAlamat = '0';
   
   ngOnInit() {
     if(this.user != null){
@@ -35,12 +35,16 @@ export class ProfilPage implements OnInit {
           this.profil = data.data;
         }
       });
-      this.pengguna.ambilAlamat(this.user.id).subscribe(data=>{
-        if(data.hasil !== "err"){
-          this.alamats = data.data;
-        }
-      });
+      this.getAlamat();
     }
+  }
+
+  getAlamat(){
+    this.pengguna.ambilAlamat(this.user.id).subscribe(data=>{
+      if(data.hasil !== "err"){
+        this.alamats = data.data;
+      }
+    });
   }
 
   ubahProfil(){
@@ -83,6 +87,8 @@ export class ProfilPage implements OnInit {
     this.isOpen = true;
     this.isEditMode = true;
     this.alamat = alamat.alamat;
+    this.idAlamat = alamat.id;
+
   }
   bukaModalTambah(){
     this.isOpen = true;
@@ -96,10 +102,17 @@ export class ProfilPage implements OnInit {
       this.alamatError = "Alamat tidak boleh kosong.";
     }
     if(this.isEditMode){
-      
-    } else {
+      this.pengguna.ubahAlamat(this.idAlamat, this.alamat, false).subscribe(data=>{
+        if(data.hasil == "success"){
+          this.getAlamat();
+        }
+      });
+    } 
+    else {
       this.pengguna.tambahAlamat(this.user.id, this.alamat).subscribe(data => {
-        
+        if(data.hasil == "success"){
+          this.getAlamat();
+        }
       });
     }
     

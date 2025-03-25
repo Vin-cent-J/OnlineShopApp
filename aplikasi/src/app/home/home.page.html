@@ -4,13 +4,13 @@
     <ion-title slot="start"></ion-title>
     <ion-searchbar class="desktop" (keyup)="cariBarang($event)" [(ngModel)]="cari" slot="start" placeholder="Cari..."></ion-searchbar>
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/transaksi']" slot="end" *ngIf="user.id">
+      <ion-button [routerLink]="['/transaksi']" color="primary" slot="end" *ngIf="user.id">
         <ion-icon name="library-outline"></ion-icon>
       </ion-button>
-      <ion-button [routerLink]="['/keranjang']" slot="end" *ngIf="user.id">
+      <ion-button [routerLink]="['/keranjang']" color="primary" slot="end" *ngIf="user.id">
         <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
       </ion-button>
-      <ion-button [routerLink]="['/profil']" *ngIf="user.id">
+      <ion-button [routerLink]="['/profil']" color="primary" *ngIf="user.id">
         <ion-icon name="person-outline"></ion-icon>
       </ion-button>
       <ion-button [routerLink]="['/profil']" *ngIf="!user.id" color="primary">Login</ion-button>
@@ -27,22 +27,9 @@
       </div>
     </ion-card>
 
-    <!--TODO: Fungsi upload banner-->
-    <swiper-container [pagination]="{ clickable: true }" [navigation]="true" loop="true" class="swiper-banner">
-      <swiper-slide>
-        <img src="{{baseUrl}}/OnlineShopApp/asset/Banner_1.jpg" alt="Banner 1" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="{{baseUrl}}/OnlineShopApp/asset/Banner_2.jpg" alt="Banner 2" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="{{baseUrl}}/OnlineShopApp/asset/Banner_3.jpg" alt="Banner 3" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="{{baseUrl}}/OnlineShopApp/asset/Banner_4.jpg" alt="Banner 4" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="{{baseUrl}}/OnlineShopApp/asset/Banner_5.jpg" alt="Banner 5" />
+    <swiper-container [pagination]="{ clickable: true }" [navigation]="true" [loop]="true" class="swiper-banner" >
+      <swiper-slide *ngFor="let banner of banners">
+        <img class="banner" src="{{baseUrl}}/OnlineShopApp/asset/banner/{{banner.foto}}" alt="Banner 1" />
       </swiper-slide>
     </swiper-container>
 

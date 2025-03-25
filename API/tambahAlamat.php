@@ -6,7 +6,7 @@ if(isset($penggunas_id, $alamat)) {
   $utama = 0;
   $sql = "INSERT into alamats(penggunas_id, alamat, utama) values(?,?,?)";
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param("s", $penggunas_id, $alamat, $utama);
+  $stmt->bind_param("ssi", $penggunas_id, $alamat, $utama);
   $stmt->execute();
   if($stmt->affected_rows){
     echo json_encode(["hasil"=>"success", "data"=>"Berhasil menambahkan alamat"]);

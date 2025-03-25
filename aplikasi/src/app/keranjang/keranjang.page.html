@@ -47,4 +47,24 @@
       Checkout
     </ion-button>
   </div>
+
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Transfer</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="modal">
+            <p><strong>Rekening Bank:</strong></p>
+            <div>
+              <span>000000000</span>
+            </div>
+            <p><strong>Total:</strong> {{ total | currency:'Rp. ':'symbol':'1.0-0':'id-ID' }}</p>
+        </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-button expand="full" color="success" (click)="tutupModal()">Konfirmasi Pembayaran</ion-button>
+    </ng-template>
+  </ion-modal>
 </ion-content>
