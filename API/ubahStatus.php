@@ -6,7 +6,7 @@ if(isset($status, $id )) {
   $tanggal = date('Y-m-d H:i:s');
   $sql = "insert into statuss(orders_id, tanggal, status) values(?,?,?)";
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param("ssi", $id, $tanggal, $status);
+  $stmt->bind_param("sss", $id, $tanggal, $status);
   $stmt->execute();
 
   $arr = [];

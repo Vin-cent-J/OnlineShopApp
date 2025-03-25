@@ -4,6 +4,10 @@ $uploadDir = __DIR__ . '/../asset/';
 
 extract($_POST);
 
+if(isset($isBanner) && $isBanner) {
+  $uploadDir.='banner/';
+}
+
 if(!isset($nama)){
   http_response_code(400);
   echo json_encode(['hasil' => "err", 'data' => 'Tidak ada nama file.']);

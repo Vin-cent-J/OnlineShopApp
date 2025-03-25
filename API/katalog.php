@@ -36,14 +36,14 @@ if(!isset($cari)){
 $parameter = [$cari];
 $tipe = "s";
 
-if(isset($merek)){
+if(isset($merek) && $merek != ""){
   $sql .= "and m.id=? ";
   $sql1 .= "and m.id=? ";
   $parameter[] = $merek;
   $tipe
  .= "i";
 }
-if(isset($kategori)){
+if(isset($kategori) && $kategori != ""){
   $sql .= "and k.id=? ";
   $sql1 .= "and k.id=? ";
   $parameter[] = $kategori;

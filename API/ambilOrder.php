@@ -1,7 +1,7 @@
 <?php
 require_once "connect.php";
 
-$sql = "SELECT o.id as id, o.tanggal, status, nama, nomor_hp, o.alamat FROM orders o left join statuss s on o.id = s.orders_id left join penggunas p on o.penggunas_id = p.id order by o.id desc";
+$sql = "SELECT o.id as id, o.tanggal, nama, nomor_hp, o.alamat FROM orders o left join penggunas p on o.penggunas_id = p.id order by o.id desc";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $hasil = $stmt->get_result();
@@ -23,6 +23,19 @@ while ($row = $hasil->fetch_assoc()){
       $detail[] = $detailRow;
     }
     $row["detail"] = $detail;
+
+    $sql3 = "select status from statuss where orders_id = ? order by id desc limit 1";
+    $stmt3 = $conn->prepare($sql3);
+    $stmt3->bind_param("i", $id);
+    $stmt3->execute();
+    $hasil3 = $stmt3->get_result();
+
+    $status="";
+    while($row3 = $hasil3->fetch_assoc()){
+      $status=$row3['status'];
+    }
+    $row["status"] = $status;
+
     $data[] = $row;
   }
 }

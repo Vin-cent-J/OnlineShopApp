@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 extract($_POST);
 
 if(isset($penggunas_id)) {
-  $sql="select o.* from orders o inner join statuss s on o.id = s.orders_id where o.penggunas_id=? order by s.id desc";
+  $sql="select * from orders where penggunas_id = ? order by id desc";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("s", $penggunas_id); 
   
