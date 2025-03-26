@@ -83,7 +83,7 @@ export class FotoService {
     body.set('id', id.toString());
     body.set('nama', nama);
     body.set('foto', foto);
-    body.set('fotos', fotoSekarang);
+    body.set('fotoSekarang', fotoSekarang);
     const data = body.toString();
     return this.http.post(
       this.baseUrl+"OnlineShopApp/API/ubahBanner.php", data, {headers}

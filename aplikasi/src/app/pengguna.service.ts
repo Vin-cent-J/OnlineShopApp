@@ -80,22 +80,26 @@ export class PenggunaService {
     return user ? JSON.parse(user) : null;
   }
 
-  tambahAlamat(p_pid: string, alamat: string): Observable<any>{
+  tambahAlamat(p_pid: string, alamat: string, kota:string, provinsi:string): Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('penggunas_id', p_pid);
     body.set('alamat', alamat);
+    body.set('kota', kota);
+    body.set('provinsi', provinsi);
     const data = body.toString();
     return this.http.post(this.baseUrl+"OnlineShopApp/API/tambahAlamat.php", data, {headers});
   }
 
-  ubahAlamat(id: string, alamat: string, utama: boolean): Observable<any>{
+  ubahAlamat(id: string, alamat: string, utama: boolean, kota:string, provinsi:string): Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('id', id);
     body.set('alamat', alamat);
     let nilai = utama ? 1 : 0; 
     body.set('utama', nilai.toString());
+    body.set('kota', kota.toString());
+    body.set('provinsi', provinsi.toString());
     const data = body.toString();
     return this.http.post(this.baseUrl+"OnlineShopApp/API/ubahAlamat.php", data, {headers});
   }

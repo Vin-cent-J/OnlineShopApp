@@ -27,7 +27,7 @@
       </div>
     </ion-card>
 
-    <swiper-container [pagination]="{ clickable: true }" [navigation]="true" [loop]="true" class="swiper-banner" >
+    <swiper-container pagination="{ clickable: true }" navigation="true" class="swiper-banner" >
       <swiper-slide *ngFor="let banner of banners">
         <img class="banner" src="{{baseUrl}}/OnlineShopApp/asset/banner/{{banner.foto}}" alt="Banner 1" />
       </swiper-slide>

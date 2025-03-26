@@ -62,6 +62,16 @@
         <ion-item>
           <ion-input label="Alamat" labelPlacement="stacked" [(ngModel)]="alamat"></ion-input>
         </ion-item>
+        <ion-item>
+          <ion-select label="Provinsi" (ionChange)="handleChange($event)" required placeholder="{{provinsiPilihan}}">
+            <ion-select-option *ngFor="let p of provinsi" [value]="p" >{{p.nama}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-select label="Kota/Kabupaten" (ionChange)="onChange($event)" required placeholder="{{kotaPilihan}}">
+            <ion-select-option *ngFor="let k of kota" [value]="k" >{{k.nama}}</ion-select-option>
+          </ion-select>
+        </ion-item>
         <ion-button expand="full" (click)="simpanAlamat()" [disabled]="!alamat">
           {{ isEditMode ? 'Ubah' : 'Tambah' }} Alamat
         </ion-button>

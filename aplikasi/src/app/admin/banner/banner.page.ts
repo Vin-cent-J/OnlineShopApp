@@ -100,6 +100,7 @@ export class BannerPage implements OnInit {
     }
     else{
       this.fotos.ubahBanner(this.id, this.nama, this.namaFoto, this.fotoSekarang).subscribe(data=>{
+        console.log(data);
         if(data.hasil === 'success'){
           this.banner();
         }

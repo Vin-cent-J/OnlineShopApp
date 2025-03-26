@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PenggunaService } from '../pengguna.service';
 import { Router } from '@angular/router';
+import { ProvinsiService } from '../provinsi.service';
 
 @Component({
   selector: 'app-profil',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ProfilPage implements OnInit {
 
-  constructor(private pengguna: PenggunaService, private router: Router) { }
+  constructor(private pengguna: PenggunaService, private router: Router, private provinsis: ProvinsiService) { }
 
   user = this.pengguna.ambilPengguna();
   profil: any = {id:0, nama:"", alamat:"", nomor_hp: ""}
@@ -27,6 +28,11 @@ export class ProfilPage implements OnInit {
   isOpen = false;
   isEditMode = true;
   idAlamat = '0';
+  provinsi:any[] = [];
+  kota:any[] = [];
+
+  kot = ""
+  prov = ""
   
   ngOnInit() {
     if(this.user != null){
@@ -36,7 +42,23 @@ export class ProfilPage implements OnInit {
         }
       });
       this.getAlamat();
+      this.provinsis.getProvinsi().subscribe(data=>{
+        this.provinsi = data;
+      })
     }
+  }
+
+  handleChange(event: any){
+    const id=event.detail.value.id;
+    this.prov = event.detail.value.nama;
+    this.provinsis.getKota(id).subscribe(data=>{
+      this.kota = data;
+    });
+  }
+
+  onChange(event: any){
+    console.log("test")
+    this.kot = event.detail.value.nama;
   }
 
   getAlamat(){
@@ -83,11 +105,16 @@ export class ProfilPage implements OnInit {
     })
   }
 
+
+  provinsiPilihan = ""
+  kotaPilihan = ""
   bukaModalUpdate(alamat: any){
     this.isOpen = true;
     this.isEditMode = true;
     this.alamat = alamat.alamat;
     this.idAlamat = alamat.id;
+    this.provinsiPilihan = alamat.provinsi;
+    this.kotaPilihan = alamat.kota;
 
   }
   bukaModalTambah(){
@@ -96,20 +123,22 @@ export class ProfilPage implements OnInit {
   }
   tutupModal(){
     this.isOpen = false;
+    this.provinsiPilihan = "";
+    this.kotaPilihan = "";
   }
   simpanAlamat(){
     if (this.alamat.trim().length === 0) {
       this.alamatError = "Alamat tidak boleh kosong.";
     }
     if(this.isEditMode){
-      this.pengguna.ubahAlamat(this.idAlamat, this.alamat, false).subscribe(data=>{
+      this.pengguna.ubahAlamat(this.idAlamat, this.alamat, false, this.kot ,this.prov).subscribe(data=>{
         if(data.hasil == "success"){
           this.getAlamat();
         }
       });
     } 
     else {
-      this.pengguna.tambahAlamat(this.user.id, this.alamat).subscribe(data => {
+      this.pengguna.tambahAlamat(this.user.id, this.alamat, this.kot ,this.prov).subscribe(data => {
         if(data.hasil == "success"){
           this.getAlamat();
         }
