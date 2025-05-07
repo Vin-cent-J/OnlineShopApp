@@ -70,6 +70,26 @@
             </ion-item>
           </ion-list>
         </div>
+
+        <br>
+        <ion-item>
+          <ion-item>
+            <ion-label position="stacked">Foto</ion-label>
+            <div class="photo-upload-container">
+              <ion-button expand="block" (click)="ambilFoto('gallery')" disabled="{{statuss[0].status != 'Menunggu Pembayaran'}}">
+                <ion-icon name="image-outline"></ion-icon>
+                Ambil Foto
+              </ion-button>
+              <div *ngIf="previewFoto" class="photo-preview">
+                <img [src]="previewFoto" alt="Preview Foto">
+              </div>
+              <div>
+                <img src="{{baseUrl}}/OnlineShopApp/asset/{{bukti}}" *ngIf="previewFoto==''">
+              </div>
+            </div>
+          </ion-item>
+        </ion-item>
+        <ion-button expand="block" (click)="uploadBuktiPembayaran()">Upload</ion-button>
       </ion-content>
     </ng-template>
   </ion-modal>

@@ -8,6 +8,10 @@ if(isset($isBanner) && $isBanner) {
   $uploadDir.='banner/';
 }
 
+if(isset($isPembayaran) && $isPembayaran) {
+  $uploadDir.='bukti/';
+}
+
 if(!isset($nama)){
   http_response_code(400);
   echo json_encode(['hasil' => "err", 'data' => 'Tidak ada nama file.']);

@@ -33,24 +33,11 @@
   <div *ngFor="let order of filterOrder">
     <ion-card (click)="bukaModal(order)">
       <ion-card-header>
-        <ion-card-title>Order {{order.id}}</ion-card-title>
+        <ion-card-title> <span>Order {{order.id}}</span> <span style="float: right;">{{ order.tanggal }}</span></ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p><strong>Nama Customer:</strong> {{ order.nama }}</p>
-        <p><strong>No Handphone:</strong> {{order.nomor_hp}}</p>
-        <p><strong>Alamat:</strong> {{order.alamat}}</p>
         <p><strong>Status:</strong> {{ order.status }}</p>
-        <p><Strong>Tanggal:</Strong> {{ order.tanggal }}</p>
         <p><strong>Total Semua:</strong> {{ getTotal(order.detail) | currency:'Rp. ':'symbol':'1.0-0':'id-ID' }}</p>
-        <p><strong>Barang:</strong></p>
-        <div *ngFor="let barang of order.detail">
-          <p>&nbsp; Nama Barang: {{barang.barang}}</p>
-          <p>&nbsp; Jumlah: {{barang.jumlah}}</p>
-          <p>&nbsp; Harga: {{barang.harga | currency:'Rp. ':'symbol':'1.0-0':'id-ID'}}</p>
-          <p>&nbsp; Total: {{barang.jumlah * barang.harga | currency:'Rp. ':'symbol':'1.0-0':'id-ID'}}</p>
-          <p>--------</p>
-        </div>
-
       </ion-card-content>
     </ion-card>
   </div>
@@ -67,6 +54,23 @@
       </ion-header>
       
       <ion-content class="ion-padding">
+        <ion-card-content>
+          <p><strong>Nama Customer:</strong> {{ orderPilihan.nama }}</p>
+          <p><strong>No Handphone:</strong> {{orderPilihan.nomor_hp}}</p>
+          <p><strong>Alamat:</strong> {{orderPilihan.alamat}}</p>
+          <p><strong>Status:</strong> {{ orderPilihan.status }}</p>
+          <p><Strong>Tanggal:</Strong> {{ orderPilihan.tanggal }}</p>
+          <p><strong>Total Semua:</strong> {{ getTotal(orderPilihan.detail) | currency:'Rp. ':'symbol':'1.0-0':'id-ID' }}</p>
+          <p><strong>Barang:</strong></p>
+          <div *ngFor="let barang of orderPilihan.detail">
+            <p>&nbsp; Nama Barang: {{barang.barang}}</p>
+            <p>&nbsp; Jumlah: {{barang.jumlah}}</p>
+            <p>&nbsp; Harga: {{barang.harga | currency:'Rp. ':'symbol':'1.0-0':'id-ID'}}</p>
+            <p>&nbsp; Total: {{barang.jumlah * barang.harga | currency:'Rp. ':'symbol':'1.0-0':'id-ID'}}</p>
+            <p>--------</p>
+          </div>
+  
+        </ion-card-content>
         <ion-item>
           <ion-select label="Status" [(ngModel)]="status" [placeholder]="status" [disabled]="statuss == 'Dibatalkan'">
             <ion-select-option *ngFor="let status of pilihanStatus" [value]="status">

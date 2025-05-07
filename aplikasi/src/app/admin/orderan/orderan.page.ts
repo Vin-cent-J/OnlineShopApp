@@ -20,6 +20,7 @@ export class OrderanPage implements OnInit {
   statusPilihan = ""
   status = "";
   statuss = "";
+  orderPilihan: any;
   pilihanStatus = [
     "Diproses",
     "Sedang Diantar",
@@ -76,6 +77,7 @@ export class OrderanPage implements OnInit {
   }
 
   bukaModal(order: any) {
+    this.orderPilihan = order;
     this.idOrder = order.id;
     this.status = order.status;
     this.statuss = order.status;

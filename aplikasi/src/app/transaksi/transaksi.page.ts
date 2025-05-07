@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TransaksiService } from '../transaksi.service';
 import { PenggunaService } from '../pengguna.service';
+import { FotoService } from '../foto.service';
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-transaksi',
@@ -9,7 +12,7 @@ import { PenggunaService } from '../pengguna.service';
 })
 export class TransaksiPage implements OnInit {
 
-  constructor(private transaksi: TransaksiService, private pengguna: PenggunaService) { }
+  constructor(private transaksi: TransaksiService, private pengguna: PenggunaService, private fotos: FotoService) { }
 
   user: any = null;
   transaksis: any[] = [
@@ -25,19 +28,21 @@ export class TransaksiPage implements OnInit {
   alamat = "";
   statuss: any[] = [];
   barangs: any[] = [];
+  orderPilihan: any;
+  previewFoto: string|null = null;
+  namaFile: string = "";
+  bukti: string = "";
+  baseUrl = environment.apiUrl;
 
   ngOnInit() {
     this.user = this.pengguna.ambilPengguna()
     if(this.user.id){
-      console.log(this.user);
       this.transaksi.riwayat(this.user.id).subscribe((data)=>{
-        console.log(data);
         if(data.hasil=="err"){
           this.error = data.data;
           return;
         }
         this.transaksis = data.data;
-        console.log(this.transaksis);
       });
     }
   }
@@ -77,14 +82,52 @@ export class TransaksiPage implements OnInit {
   }
 
   bukaModal(order: any) {
+    this.orderPilihan = order;
     this.idOrder = order.id;
     this.statuss = order.status;
     this.alamat = order.alamat;
     this.barangs = order.barang;
+    this.bukti = order.bukti_pembayaran;
     this.isModalOpen = true;
   }
 
   tutupModal() {
     this.isModalOpen = false;
+  }
+
+  async ambilFoto(source: 'camera' | 'gallery'): Promise<void> {
+    try {
+      const image: Photo = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: source === 'camera' ? CameraSource.Camera : CameraSource.Photos
+      });
+
+      if (image && image.dataUrl) {
+        this.previewFoto = image.dataUrl;
+        const blob = this.fotos.dataURLToBlob(image.dataUrl);
+        this.namaFile = "Bukti" + "_" + Date.now();
+
+        this.fotos.uploadFoto(blob, this.namaFile, false, true);
+      } else {
+        console.warn('Tidak ada foto');
+        return
+      }
+    } catch (error) {
+      console.error('Error saat mengammbil foto', error);
+    }
+  }
+
+  uploadBuktiPembayaran() {
+    this.transaksi.ubahBukti(this.orderPilihan, this.namaFile).subscribe((data) => {
+      if (data.hasil == "err") {
+        this.error = data.data;
+        return;
+      }
+      this.tutupModal();
+      this.ngOnInit();
+    }
+    );
   }
 }

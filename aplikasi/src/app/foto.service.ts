@@ -40,13 +40,14 @@ export class FotoService {
     return new Blob(byteArrays, { type: tipe });
   }
 
-  uploadFoto(foto: Blob, nama: string, banner: boolean = false){
+  uploadFoto(foto: Blob, nama: string, banner: boolean = false, pembayaran: boolean = false){
     const headers = new HttpHeaders({})
     const formData = new FormData();
     const fileName = `${nama}.jpg`;
     formData.append('file', foto, fileName);
     formData.append('nama', nama)
     formData.append('isBanner', banner ? '1' : '');
+    formData.append('isPembayaran', pembayaran ? '1' : '');
     this.http.post(this.baseUrl+'OnlineShopApp/API/upload.php', formData, {headers}).subscribe(data => {
       console.log(data);
     });

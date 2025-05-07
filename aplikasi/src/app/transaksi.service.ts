@@ -97,5 +97,19 @@ export class TransaksiService {
     );
   }
 
+  ubahBukti(p_order: any, p_bukti: string):Observable<any>{
+    const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('id', p_order.id.toString());
+    body.set('bukti', p_bukti);
+    if(p_order.bukti_pembayaran){
+      body.set('fotoSekarang', p_order.bukti_pembayaran);
+    }
+    const data = body.toString();
+    return this.http.post(
+      this.baseUrl+"OnlineShopApp/API/ubahBukti.php", data, {headers}
+    );
+  }
+
   constructor(private http: HttpClient) { }
 }
