@@ -1,6 +1,7 @@
 import { Component, numberAttribute, OnInit } from '@angular/core';
 import { TransaksiService } from 'src/app/transaksi.service';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-orderan',
@@ -9,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class OrderanPage implements OnInit {
 
+  baseUrl = environment.apiUrl;
   total=0;
   orders: any[] = [];
   orderDicari: any[] = [];

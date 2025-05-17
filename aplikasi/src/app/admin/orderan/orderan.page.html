@@ -69,7 +69,11 @@
             <p>&nbsp; Total: {{barang.jumlah * barang.harga | currency:'Rp. ':'symbol':'1.0-0':'id-ID'}}</p>
             <p>--------</p>
           </div>
-  
+          <p>______________</p>
+          <div>
+            <strong>Bukti Pembayaran:</strong> <br>
+            <img src="{{baseUrl}}/OnlineShopApp/asset/{{orderPilihan.bukti}}">
+          </div>
         </ion-card-content>
         <ion-item>
           <ion-select label="Status" [(ngModel)]="status" [placeholder]="status" [disabled]="statuss == 'Dibatalkan'">
