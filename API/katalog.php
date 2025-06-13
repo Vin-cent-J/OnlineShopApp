@@ -13,10 +13,6 @@ if(!isset($halaman) || $halaman <= 1){
 $jumlah = 16;
 $mulai = ($halaman - 1) * $jumlah;
 
-// $hasil = $conn->query("select COUNT(*) total from barangs where tgl_hapus is null"); //TODO FIX
-// $data = $hasil->fetch_assoc();
-// $total = $data['total'];
-
 $sql1 = "select COUNT(*) total from barangs b 
 inner join mereks m on b.mereks_id = m.id 
 inner join kategoris k on b.kategoris_id = k.id 

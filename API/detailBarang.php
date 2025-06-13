@@ -22,7 +22,7 @@ if(isset($id)) {
       $arr = ["hasil"=>"success", "data"=>$row];
     }
     else{
-        $arr = ["hasil"=> "err","data"=> "Barang tidak ditermukan."];
+        $arr = ["hasil"=> "err","data"=> "Barang tidak ditemukan."];
     }
     echo json_encode($arr);
     $stmt->close();

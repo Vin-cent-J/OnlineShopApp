@@ -21,7 +21,7 @@ if(!isset($nama)){
 if (!is_dir($uploadDir)) {
   if (!mkdir($uploadDir, 0755, true)) {
     http_response_code(500);
-    echo json_encode(['hasil' => "err", 'data' => 'Failed to create upload directory.']);
+    echo json_encode(['hasil' => "err", 'data' => 'Gagal membuat direktori.']);
     exit;
   }
 }
@@ -54,7 +54,7 @@ finfo_close($finfo);
 
 if (!in_array($mimeType, $allowedMimeTypes)) {
   http_response_code(400);
-  echo json_encode(['hasil' => "err", 'data' => 'Invalid file type. Only JPEG and PNG are allowed.']);
+  echo json_encode(['hasil' => "err", 'data' => 'Tipe file tidak sesuai. Hanya gambar dengan tipe JPEG dan PNG yang diperbolehkan.']);
   exit;
 }
 

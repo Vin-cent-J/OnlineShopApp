@@ -14,7 +14,7 @@ if(isset($status, $id )) {
     $arr = ["hasil"=>"success", "data"=>"Berhasil mengubah status order."];
   }
   else{
-    $arr = ["hasil"=> "err","data"=> "Gagal mengubah status order. Eror:".$stmt->affected_rows];
+    $arr = ["hasil"=> "err","data"=> "Gagal mengubah status order. Error:".$stmt->affected_rows];
   }
   echo json_encode($arr);
   $stmt->close();

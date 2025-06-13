@@ -17,15 +17,12 @@ export class KatalogPage implements OnInit {
   baseUrl = environment.apiUrl;
 
   isFilter = true;
-
   barangs:any = [];
   kategori:any = [];
   merek:any = [];
   index = 0;
-
   halaman: number = 1;
   total = 1;
-
   cari: string = "";
   kategoriPilihan: any = null;
   merekPilihan: any = null;
