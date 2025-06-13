@@ -54,12 +54,11 @@ export class KeranjangPage implements OnInit {
     if(this.user){
       this.transaksi.beli(this.user.id, this.alamat).subscribe((data)=>{
         if(data.hasil == "err"){
-          this.total = this.getTotal();
           this.error = data.data;
           return;
         }
+        this.total = this.getTotal();
         this.isModalOpen = true;
-        this.keranjang = [];
       })
     }
   }
@@ -73,6 +72,7 @@ export class KeranjangPage implements OnInit {
   }
 
   tutupModal(){
+    this.keranjang = [];
     this.isModalOpen = false;
   }
 }

@@ -57,13 +57,6 @@ const routes: Routes = [
   { 
     path: '**', 
     redirectTo: 'home' 
-  },   {
-    path: 'update-profile',
-    loadChildren: () => import('./update-profile/update-profile.module').then( m => m.UpdateProfilePageModule)
-  },
-  {
-    path: 'pembayaran',
-    loadChildren: () => import('./pembayaran/pembayaran.module').then( m => m.PembayaranPageModule)
   },
   
 
