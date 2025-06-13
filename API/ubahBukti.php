@@ -4,7 +4,7 @@ require_once "connect.php";
 extract($_POST);
 if(isset($id, $bukti)) {
   if(isset($fotoSekarang)) {
-    unlink("/opt/lampp/htdocs/OnlineShopApp/asset/bukti/".$fotoSekarang);
+    unlink("/opt/lampp/htdocs/OnlineShopApp/asset/bukti/".$fotoSekarang.".jpg");
   }
   $sql = "UPDATE orders SET bukti_pembayaran=? WHERE id=?";
   $stmt = $conn->prepare($sql);
