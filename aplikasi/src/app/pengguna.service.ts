@@ -29,7 +29,7 @@ export class PenggunaService {
     return this.http.post(this.baseUrl+"OnlineShopApp/API/auth.php", data, {headers});
   }
 
-  register(p_id: string,p_no_hp: string, p_pass: string, p_nama: string, p_alamat: string): Observable<any>{
+  register(p_id: string,p_no_hp: string, p_pass: string, p_nama: string, p_alamat: string, p_prov: string, p_kot: string): Observable<any>{
     const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set("id", p_id);
@@ -37,6 +37,8 @@ export class PenggunaService {
     body.set('password', p_pass)
     body.set('nama', p_nama);
     body.set('alamat', p_alamat);
+    body.set('provinsi', p_prov);
+    body.set('kota', p_kot);
     const data = body.toString();
     return this.http.post(this.baseUrl+"OnlineShopApp/API/register.php", data, {headers});
   }

@@ -6,7 +6,6 @@
         <p>Isi detail pengguna untuk membuat akun</p>
       </div>
 
-      <!-- Name Field -->
       <div class="input-container">
         <ion-label class="above-label">Nama</ion-label>
         <ion-item class="input-item">
@@ -18,7 +17,6 @@
         {{ nameError }}
       </ion-text>
 
-      <!-- Phone Number Field -->
       <div class="input-container">
         <ion-label class="above-label">No Handphone</ion-label>
         <ion-item class="input-item">
@@ -36,7 +34,14 @@
         <ion-item class="input-item">
           <ion-input [(ngModel)]="alamat" type="text" required placeholder="Masukkan alamat pengiriman"></ion-input>
         </ion-item>
+        <ion-select label="Provinsi" (ionChange)="handleChange($event)" required>
+          <ion-select-option *ngFor="let p of provinsi" [value]="p" >{{p.nama}}</ion-select-option>
+        </ion-select>
+        <ion-select label="Kota/Kabupaten" (ionChange)="onChange($event)" required>
+          <ion-select-option *ngFor="let k of kota" [value]="k" >{{k.nama}}</ion-select-option>
+        </ion-select>
       </div>
+
       <ion-text *ngIf="addressError" color="danger" class="error-message">
         <ion-icon name="alert-circle-outline"></ion-icon>
         {{ addressError }}

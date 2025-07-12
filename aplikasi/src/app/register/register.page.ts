@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+import { ProvinsiService } from '../provinsi.service';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,10 @@ export class RegisterPage implements OnInit {
   alamat: string = "";
   loading: boolean = false;
   uuid: any
+  provinsi:any[] = [];
+  kota:any[] = [];
+  prov= "";
+  kot= "";
 
   passwordType: string = 'password';
 
@@ -27,9 +32,13 @@ export class RegisterPage implements OnInit {
   passwordError: string | null = null;
   addressError: string | null = null;
 
-  constructor(private pengguna: PenggunaService, private route: Router) {}
+  constructor(private pengguna: PenggunaService, private route: Router, private provinsis: ProvinsiService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.provinsis.getProvinsi().subscribe(data=>{
+      this.provinsi = data;
+    })
+  }
 
   validatePhoneNumber() {
     const phoneRegex = /^[0-9]*$/;
@@ -75,7 +84,7 @@ export class RegisterPage implements OnInit {
 
     this.loading = true;
 
-    this.pengguna.register(this.uuid, this.nohp, this.password, this.nama, this.alamat).subscribe((data)=>{
+    this.pengguna.register(this.uuid, this.nohp, this.password, this.nama, this.alamat, this.prov, this.kot).subscribe((data)=>{
       if(data.hasil === "err"){
         this.registerError = data.data
       }
@@ -84,6 +93,18 @@ export class RegisterPage implements OnInit {
         this.route.navigate(['/login']);
       }
     });
+  }
+
+  handleChange(event: any){
+    const id=event.detail.value.id;
+    this.prov = event.detail.value.nama;
+    this.provinsis.getKota(id).subscribe(data=>{
+      this.kota = data;
+    });
+  }
+
+  onChange(event: any){
+    this.kot = event.detail.value.nama;
   }
 
   togglePasswordVisibility() {

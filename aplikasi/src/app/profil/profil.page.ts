@@ -57,7 +57,6 @@ export class ProfilPage implements OnInit {
   }
 
   onChange(event: any){
-    console.log("test")
     this.kot = event.detail.value.nama;
   }
 

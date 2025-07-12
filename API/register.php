@@ -11,9 +11,9 @@ if(isset($id, $nama, $nomor_hp, $password, $alamat)) {
     $stmt->execute();
 
     $utama = 0;
-    $sql2 = "INSERT into alamats(penggunas_id, alamat, utama) values(?,?,?)";
+    $sql2 = "INSERT into alamats(penggunas_id, alamat, utama, kota, provinsi) values(?,?,?,?,?)";
     $stmt2 = $conn->prepare($sql2);
-    $stmt2->bind_param("ssi", $id, $alamat, $utama);
+    $stmt2->bind_param("ssiss", $id, $alamat, $utama, $kota, $provinsi);
     $stmt2->execute();
 
     $arr = [];
