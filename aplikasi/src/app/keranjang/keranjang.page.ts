@@ -74,5 +74,6 @@ export class KeranjangPage implements OnInit {
   tutupModal(){
     this.keranjang = [];
     this.isModalOpen = false;
+    this.router.navigate(['/transaksi']);
   }
 }
