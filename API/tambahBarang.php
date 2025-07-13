@@ -3,9 +3,9 @@ require_once "connect.php";
 
 extract($_POST);
 if(isset($nama, $stok, $harga, $deskripsi, $foto, $mereks_id, $kategoris_id)) {
-    $sql = "insert into barangs(nama, stok, harga, deskripsi, foto, mereks_id, kategoris_id) values(?, ?, ?, ?, ?, ?)";
+    $sql = "insert into barangs(nama, stok, harga, deskripsi, foto, mereks_id, kategoris_id) values(?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sidsii", $nama, $stok, $harga, $deskripsi, $foto, $mereks_id, $kategoris_id);
+    $stmt->bind_param("sidssii", $nama, $stok, $harga, $deskripsi, $foto, $mereks_id, $kategoris_id);
     $stmt->execute();
 
     $arr = [];

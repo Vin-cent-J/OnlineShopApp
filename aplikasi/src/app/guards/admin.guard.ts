@@ -15,6 +15,7 @@ export class AdminGuard implements CanActivate {
     const pengguna = this.pengguna.ambilPengguna();
     return this.pengguna.admin(pengguna.id).pipe(
       map(data => {
+        console.log(data.data);
         if (data.data == 1 || data.data == "1") {
           return true;
         } else {
