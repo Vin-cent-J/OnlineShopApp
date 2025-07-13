@@ -4,11 +4,13 @@
 - Product catalog with search and filter functionality 
 - Checkout process
 - Admin dashboard for product and order management
-- Order history tracking (TODO)
+- Order history tracking
+- Banner
 
 **Technologies:**
 - Frontend Framework: Ionic
 - API: PHP
 
 **Requirements:**
-- NPM
+- Node.js
+- XAMPP/nginx
